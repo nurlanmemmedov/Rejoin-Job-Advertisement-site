@@ -16,9 +16,9 @@ namespace Rejoin.Models
         public DateTime StartedAt { get; set; }
         public DateTime FinishedAt { get; set; }
         public string University { get; set; }
-        public int ResumeId { get; set; }
+        public int CandidateId { get; set; }
 
-        public Resume Resume { get; set; }
+        public Candidate Candidate { get; set; }
 
     }
 }

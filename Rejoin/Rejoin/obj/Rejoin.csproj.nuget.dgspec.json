@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Code\\source\\repos\\Rejoin\\Rejoin\\Rejoin.csproj": {}
+    "C:\\Users\\Code\\Desktop\\Rejoin-Job-Advertisement\\Rejoin\\Rejoin\\Rejoin.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Code\\source\\repos\\Rejoin\\Rejoin\\Rejoin.csproj": {
+    "C:\\Users\\Code\\Desktop\\Rejoin-Job-Advertisement\\Rejoin\\Rejoin\\Rejoin.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Code\\source\\repos\\Rejoin\\Rejoin\\Rejoin.csproj",
+        "projectUniqueName": "C:\\Users\\Code\\Desktop\\Rejoin-Job-Advertisement\\Rejoin\\Rejoin\\Rejoin.csproj",
         "projectName": "Rejoin",
-        "projectPath": "C:\\Users\\Code\\source\\repos\\Rejoin\\Rejoin\\Rejoin.csproj",
+        "projectPath": "C:\\Users\\Code\\Desktop\\Rejoin-Job-Advertisement\\Rejoin\\Rejoin\\Rejoin.csproj",
         "packagesPath": "C:\\Users\\Code\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Code\\source\\repos\\Rejoin\\Rejoin\\obj\\",
+        "outputPath": "C:\\Users\\Code\\Desktop\\Rejoin-Job-Advertisement\\Rejoin\\Rejoin\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
