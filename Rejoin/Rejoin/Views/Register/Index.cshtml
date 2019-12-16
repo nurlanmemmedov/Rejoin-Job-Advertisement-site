@@ -1,0 +1,97 @@
+﻿@model RegisterViewModel
+<!--Breadcrumb-->
+<section>
+    <div class="bannerimg cover-image bg-background3" data-image-src="~assets/images/banners/banner2.jpg">
+        <div class="header-text mb-0">
+            <div class="container">
+                <div class="text-center text-white">
+                    <h1 class="">Register</h1>
+                    <ol class="breadcrumb text-center">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                        <li class="breadcrumb-item active text-white" aria-current="page">Register</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Breadcrumb-->
+<!--Register-section-->
+<section class="sptb">
+    <div class="container customerpage">
+        <div class="row">
+            <div class="single-page">
+                <div class="col-lg-5 col-xl-4 col-md-6 d-block mx-auto">
+                    <div class="wrapper wrapper2">
+                        <div class="p-4 mb-5">
+                            <h4 class="text-left font-weight-semibold fs-16">Register With</h4>
+                            <div class="btn-list d-sm-flex">
+                                <a href="https://www.google.com/gmail/" class="btn btn-primary mb-sm-0"><i class="fa fa-google fa-1x mr-2"></i> Google</a>
+                                <a href="https://twitter.com/" class="btn btn-secondary mb-sm-0"><i class="fa fa-twitter fa-1x mr-2"></i> Twitter</a>
+                                <a href="https://www.facebook.com/" class="btn btn-info mb-0"><i class="fa fa-facebook fa-1x mr-2"></i> Facebook</a>
+                            </div>
+                        </div>
+                        <hr class="divider">
+
+                        <form asp-controller="register" asp-action="registeruser" method="post">
+                            <input asp-for="Fullname" placeholder="Ad Soyad">
+                            <span asp-validation-for="Fullname"></span>
+
+                            <input asp-for="Email" placeholder="E-poçt">
+                            <span asp-validation-for="Email"></span>
+
+                            <input asp-for="Password" placeholder="Şifrə">
+                            <span asp-validation-for="Password"></span>
+                            <div class="submit">
+                                <button type="submit" class="btn btn-primary btn-block">Tamamla</button>
+                            </div>
+                        </form>
+
+
+                        @*<form asp-controller="register" asp-action="registeruser" method="post">
+                            <div class="name">
+                                <input asp-for="Fullname" type="text" name="name">
+                                <label asp-validation-for="Fullname">Ad</label>
+                            </div>
+                            <div class="mail">
+                                <input asp-for="Email" type="email" name="mail">
+                                <label asp-validation-for="Email">e-poçt</label>
+                            </div>
+                            <div class="passwd">
+                                <input asp-for="Password" type="password" name="password">
+                                <label asp-validation-for="Password">şifrə</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--Register-section-->
+<!--Onlinesletter-->
+<section class="sptb bg-white border-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-xl-6 col-md-12">
+                <div class="sub-newsletter">
+                    <h3 class="mb-2"><i class="fa fa-paper-plane-o mr-2"></i> Subscribe To Our Onlinesletter</h3>
+                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                </div>
+            </div>
+            <div class="col-lg-5 col-xl-6 col-md-12">
+                <div class="input-group sub-input mt-1">
+                    <input type="text" class="form-control input-lg " placeholder="Enter your Email">
+                    <div class="input-group-append ">
+                        <button type="button" class="btn btn-primary btn-lg br-tr-3  br-br-3">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Onlinesletter-->
