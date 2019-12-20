@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@inject IAuth _auth
+@model UserType
+<!doctype html>
 <html lang="en" dir="ltr">
 
 <head>
@@ -627,24 +629,27 @@
                             </span>
                         </li>
                         <li class="d-lg-none mt-0 pb-5 mt-lg-0">
-                            <span><a class="btn btn-info ad-post mt-1" href="create-resume.html"><i class="fa fa-edit"></i> Create Resume</a></span>
+                            <span><a class="btn btn-info ad-post mt-1" asp-controller="resume" asp-action="index"><i class="fa fa-edit"></i> Create Resume</a></span>
                         </li>
                     </ul>
+                    @if(_auth.User == null || _auth.User.UserType == UserType.Company){
                     <ul class="mb-0 pr-2">
                         <li class="d-none d-lg-flex">
                             <span>
                                 <a class="btn btn-secondary ad-post mt-1" href="ad-posts.html">
-                                    <i class="fa fa-briefcase"></i> Submit a
-                                    Job
+                                    <i class="fa fa-briefcase"></i> Elan Yerləşdir
                                 </a>
                             </span>
                         </li>
                     </ul>
+                    }
+                    @if( _auth.User == null || _auth.User.UserType == UserType.Employee){
                     <ul class="mb-0 pl-2 create-resume-btn">
                         <li class="d-none d-lg-flex">
-                            <span><a class="btn btn-info ad-post mt-1" href="create-resume.html"><i class="fa fa-edit"></i> Create Resume</a></span>
+                            <span><a class="btn btn-info ad-post mt-1" asp-controller="resume" asp-action="index"><i class="fa fa-edit"></i>CV yarat</a></span>
                         </li>
                     </ul>
+                    }
                 </nav>
                 <!--/Nav-->
             </div>

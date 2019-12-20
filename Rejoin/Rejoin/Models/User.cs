@@ -27,11 +27,18 @@ namespace Rejoin.Models
         [Required]
         [MaxLength(100)]
         public string Password { get; set; }
+        [Required]
+        public UserType UserType { get; set; }
         public Candidate Candidate { get; set; }
+        public Company Company { get; set; }
         public List<JobReview> JobReviews { get; set; }
         public List<JobReviewReaction> JobReviewReactions { get; set; }
         public List<JobReviewReply> JobReviewReplies { get; set; }
         public List<JobReviewReport> JobReviewReports { get; set; }
+        public List<CompanyReview> CompanyReviews { get; set; }
+        public List<CompanyReviewReaction> CompanyReviewReactions { get; set; }
+        public List<CompanyReviewReply> CompanyReviewReplies { get; set; }
+        public List<CompanyReviewReport> CompanyReviewReports { get; set; }
 
     }
 }

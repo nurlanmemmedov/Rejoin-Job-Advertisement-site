@@ -20,7 +20,7 @@ namespace Rejoin.Models
         public int JobId { get; set; }
 
         [Required]
-        [Range(0, 10)]
+        [Range(0, 5)]
         public int Ranking { get; set; }
 
         [Required]

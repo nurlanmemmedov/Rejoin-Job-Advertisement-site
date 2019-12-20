@@ -14,18 +14,13 @@ namespace Rejoin.Models
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
-
         [Required]
         public int CompanyId { get; set; }
-
         [Required]
         public int OrderBy { get; set; }
-
-
         [Required]
         [MaxLength(50)]
         public string Url { get; set; }
-
         public Company Company { get; set; }
     }
 }

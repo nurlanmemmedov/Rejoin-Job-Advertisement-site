@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 
 /**
 * jobslist Version:V.1
@@ -8206,6 +8206,19 @@ img {
 	.container {
 		max-width: none;
 	}
+}
+.user-type{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.user-type input{
+	height: 20px;
+	padding: 5px 15px;
+	width: 100%;
+	border: solid 1px black;
+	border-radius: 3px;
+	color: black;
 }
 
 .row-cards>.col, .row-cards>[class*=col-] {

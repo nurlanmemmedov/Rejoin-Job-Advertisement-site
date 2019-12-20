@@ -55,8 +55,7 @@ namespace Rejoin.Controllers
 
             LoginViewModel data = new LoginViewModel
             {
-                Email = Login.Email,
-                Password = Login.Password
+                Email = Login.Email
             };
 
             return View("~/Views/Login/Index.cshtml", data);

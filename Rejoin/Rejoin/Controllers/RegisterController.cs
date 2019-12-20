@@ -43,7 +43,8 @@ namespace Rejoin.Controllers
                 Fullname = Register.Fullname,
                 Email = Register.Email,
                 Password = Crypto.HashPassword(Register.Password),
-                Token = Guid.NewGuid().ToString()
+                Token = Guid.NewGuid().ToString(),
+                UserType = Register.UserType
             };
 
             Response.Cookies.Append("token", user.Token, new Microsoft.AspNetCore.Http.CookieOptions

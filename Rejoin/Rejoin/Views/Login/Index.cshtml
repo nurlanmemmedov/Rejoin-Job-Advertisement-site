@@ -35,19 +35,19 @@
                             </div>
                         </div>
                         <hr class="divider">
-                        <form asp-controller="login" asp-action="loginuser" method="post" id="login" class="card-body" tabindex="500">
+                        <form asp-controller="login" asp-action="loginuser" method="post"  class="card-body" tabindex="500">
 
                             <input asp-for="Email" placeholder="E-poçt" >
-                            <span asp-validation-for="Email">E-poçt</span>
+                            <span style="color: black" asp-validation-for="Email">E-poçt</span>
 
                             <input asp-for="Password" placeholder="Şifrə">
-                            <span asp-validation-for="Password">Şifrə</span>
+                            <span style="color: black" asp-validation-for="Password">Şifrə</span>
 
                             <div class="submit">
                                 <button type="submit" class="btn btn-primary btn-block">Login</button>
                             </div>
                             <p class="mb-2"><a href="forgot.html">Forgot Password</a></p>
-                            <p class="text-dark mb-0">Don't have account?<a href="register.html" class="text-primary ml-1">Sign UP</a></p>
+                            <p class="text-dark mb-0">Hesabınız yoxdur?<a asp-controller="register" asp-action="index" class="text-primary ml-1">Qeydiyyatdan Keçin</a></p>
                         </form>
                     </div>
                 </div>

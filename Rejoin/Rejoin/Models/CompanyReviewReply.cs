@@ -2,15 +2,20 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace Rejoin.Models
 {
     public class CompanyReviewReply
     {
         public int Id { get; set; }
+        [Required]
+        [MaxLength(500)]
         public string Reply { get; set; }
+        [Required]
         public int UserId { get; set; }
-        public int JobReviewId { get; set; }
+        [Required]
+        public int CompanyReviewId { get; set; }
         public CompanyReview CompanyReview { get; set; }
         public User User { get; set; }
     }
