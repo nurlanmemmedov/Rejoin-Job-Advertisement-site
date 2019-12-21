@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rejoin.Data;
 
 namespace Rejoin.Migrations
 {
     [DbContext(typeof(RejionDBContext))]
-    partial class RejionDBContextModelSnapshot : ModelSnapshot
+    [Migration("20191221071953_UploadAddedToCompany")]
+    partial class UploadAddedToCompany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -124,6 +126,7 @@ namespace Rejoin.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("Photo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(100)")
                         .HasMaxLength(100);
 
@@ -384,12 +387,8 @@ namespace Rejoin.Migrations
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(500)")
+                    b.Property<int>("Description")
+                        .HasColumnType("int")
                         .HasMaxLength(500);
 
                     b.Property<int>("JobType")
@@ -407,13 +406,15 @@ namespace Rejoin.Migrations
                     b.Property<decimal>("MinSalary")
                         .HasColumnType("money");
 
+                    b.Property<string>("Photo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
+
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
-
-                    b.Property<int>("ViewCount")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

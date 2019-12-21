@@ -1,0 +1,62 @@
+﻿
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Şirkət məlumatlarını daxil et</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form method="post" enctype="multipart/form-data" id="companyform" >
+                <div class="row">
+
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">Şirkətin Adı</label>
+                            <input name="companyname" type="text" class="form-control" placeholder="Şirkətin Adı">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label">E-poçt</label>
+                            <input name="companyemail" type="email" class="form-control" placeholder="E-poçtAddress" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group mb-0">
+                            <label class="form-label">Telefon nömrəsi</label>
+                            <input name="companyphone" type="number" class="form-control" placeholder="Telefon nömrəsi" required>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group mb-0">
+                            <label class="form-label">Ünvan</label>
+                            <input name="companyaddress" type="text" class="form-control" placeholder="Ünvan">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group mb-0">
+                            <label class="form-label">Veb sayt</label>
+                            <input name="companywebsite" type="text" class="form-control" placeholder="Veb sayt">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-6">
+                        <div class="form-group mb-0">
+                            <label style="margin-top:24px; width: 222px; margin-left: 12px" class="custom-file-label">Şəkil yüklə</label>
+                            <input name="companyphoto" type="file" class="custom-file-input"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group text-dark">
+                            <label class="form-label text-dark">Məlumat</label>
+                            <textarea name="companyinfo" class="form-control" rows="5" placeholder="Məlumat" required></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary create-company">Təsdiqlə</button>
+                </div>
+                </form>
+        </div>
+    </div>

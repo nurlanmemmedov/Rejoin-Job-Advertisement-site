@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Http;
 
 namespace Rejoin.Models
 {
@@ -18,7 +19,6 @@ namespace Rejoin.Models
         [Required]
         [MaxLength(500)]
         public string Info { get; set; }
-        [Required]
         [MaxLength(100)]
         public string Photo { get; set; }
         [Required]
@@ -37,6 +37,9 @@ namespace Rejoin.Models
         public List<CompanySocialLink> CompanySocialLinks { get; set; }
         public List<Job> Jobs { get; set; }
         public User User { get; set; }
+        [NotMapped]
+        [Display(Name = "Şəkil yüklə")]
+        public IFormFile Upload { get; set; }
 
 
     }

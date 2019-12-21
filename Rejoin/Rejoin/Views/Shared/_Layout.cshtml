@@ -52,7 +52,6 @@
     <!-- COLOR-SKINS -->
     <link id="theme" rel="stylesheet" type="text/css" media="all" href="~/color-skins/color-skins/color10.css" />
     <link rel="stylesheet" href="~/color-skins/demo.css" />
-
 </head>
 
 <body>
@@ -632,23 +631,25 @@
                             <span><a class="btn btn-info ad-post mt-1" asp-controller="resume" asp-action="index"><i class="fa fa-edit"></i> Create Resume</a></span>
                         </li>
                     </ul>
-                    @if(_auth.User == null || _auth.User.UserType == UserType.Company){
-                    <ul class="mb-0 pr-2">
-                        <li class="d-none d-lg-flex">
-                            <span>
-                                <a class="btn btn-secondary ad-post mt-1" href="ad-posts.html">
-                                    <i class="fa fa-briefcase"></i> Elan Yerləşdir
-                                </a>
-                            </span>
-                        </li>
-                    </ul>
+                    @if (_auth.User == null || _auth.User.UserType == UserType.Company)
+                    {
+                        <ul class="mb-0 pr-2">
+                            <li class="d-none d-lg-flex">
+                                <span>
+                                    <a class="btn btn-secondary ad-post mt-1" asp-controller="submitjob" asp-action="index">
+                                        <i class="fa fa-briefcase"></i> Elan Yerləşdir
+                                    </a>
+                                </span>
+</li>
+                        </ul>
                     }
-                    @if( _auth.User == null || _auth.User.UserType == UserType.Employee){
-                    <ul class="mb-0 pl-2 create-resume-btn">
-                        <li class="d-none d-lg-flex">
-                            <span><a class="btn btn-info ad-post mt-1" asp-controller="resume" asp-action="index"><i class="fa fa-edit"></i>CV yarat</a></span>
-                        </li>
-                    </ul>
+                    @if (_auth.User == null || _auth.User.UserType == UserType.Employee)
+                    {
+                        <ul class="mb-0 pl-2 create-resume-btn">
+                            <li class="d-none d-lg-flex">
+                                <span><a class="btn btn-info ad-post mt-1" asp-controller="resume" asp-action="index"><i class="fa fa-edit"></i>CV yarat</a></span>
+                            </li>
+                        </ul>
                     }
                 </nav>
                 <!--/Nav-->
@@ -820,7 +821,7 @@
     <script src="~/plugins/counters/counterup.min.js"></script>
     <script src="~/plugins/counters/waypoints.min.js"></script>
     <script src="~/plugins/counters/numeric-counter.js"></script>
-
+    <script src="~/js/bootstrap.min.js"></script>
     <!--JQuery TouchSwipe js-->
     <script src="~/js/jquery.touchSwipe.min.js"></script>
 
@@ -849,6 +850,9 @@
 
     <!-- Custom Js-->
     <script src="~/js/custom.js"></script>
+    <script src="~/js/JavaScript.js">
+       
+    </script>
 </body>
 
 <!-- Mirrored from www.spruko.com/demo/rejoin/html/index4.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 09:31:08 GMT -->
