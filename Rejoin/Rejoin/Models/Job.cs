@@ -29,6 +29,8 @@ namespace Rejoin.Models
         [Required]
         public int ViewCount { get; set; }
         [Required]
+        public int LikeCount { get; set; }
+        [Required]
         [MaxLength(200)]
         public string Address { get; set; }
         [Required]
@@ -38,10 +40,10 @@ namespace Rejoin.Models
         public JobType JobType { get; set; }
         [Required]
         [Column(TypeName = "money")]
-        public decimal MinSalary { get; set; }
+        public int MinSalary { get; set; }
         [Required]
         [Column(TypeName = "money")]
-        public decimal MaxSalary { get; set; }
+        public int MaxSalary { get; set; }
         [Required]
         public int MaxExperience { get; set; }
         [Required]

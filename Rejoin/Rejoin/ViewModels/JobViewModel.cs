@@ -26,16 +26,22 @@ namespace Rejoin.ViewModels
         public JobType JobType { get; set; }
         [Required]
         [Column(TypeName = "money")]
-        public decimal MinSalary { get; set; }
+        public int MinSalary { get; set; }
         [Required]
         [Column(TypeName = "money")]
-        public decimal MaxSalary { get; set; }
+        public int MaxSalary { get; set; }
         [Required]
         public int MaxExperience { get; set; }
         [Required]
         public int MinExperience { get; set; }
         [Required]
         public int CategoryId { get; set; }
+        [Required]
+        public int CompanyId { get; set; }
+        [Required]
+        public DateTime CreatedAt{ get; set; }
+        public Company Company { get; set; }
+
         public Category Category { get; set; }
         public List<JobReview> JobReviews { get; set; }
     }

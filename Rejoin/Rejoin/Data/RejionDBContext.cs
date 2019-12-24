@@ -30,5 +30,6 @@ namespace Rejoin.Data
         public DbSet<JobReviewReaction> JobReviewReactions { get; set; }
         public DbSet<JobReviewReply> JobReviewReplies { get; set; }
         public DbSet<JobReviewReport> JobReviewReports { get; set; }
+        public DbSet<Apply> Applies { get; set; }
     }
 }

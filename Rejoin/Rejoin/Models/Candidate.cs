@@ -41,7 +41,6 @@ namespace Rejoin.Models
 
         public User User { get; set; }
 
-
         [NotMapped]
         [Display(Name = "Şəkil yüklə")]
         public IFormFile Upload { get; set; }

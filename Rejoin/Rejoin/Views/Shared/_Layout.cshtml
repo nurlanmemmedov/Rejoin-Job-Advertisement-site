@@ -157,23 +157,23 @@
                             <div class="clearfix">
                                 <ul class="socials">
                                     <li>
-                                        <a class="social-icon" href="#"><i class="fa fa-facebook"></i></a>
+                                        <a class="social-icon" href="#"><i class="fab fa-facebook"></i></a>
                                     </li>
                                     <li>
-                                        <a class="social-icon" href="#"><i class="fa fa-twitter"></i></a>
+                                        <a class="social-icon" href="#"><i class="fab fa-twitter"></i></a>
                                     </li>
                                     <li>
-                                        <a class="social-icon" href="#"><i class="fa fa-linkedin"></i></a>
+                                        <a class="social-icon" href="#"><i class="fab fa-linkedin"></i></a>
                                     </li>
                                     <li>
-                                        <a class="social-icon" href="#"><i class="fa fa-google-plus"></i></a>
+                                        <a class="social-icon" href="#"><i class="fab fa-google-plus"></i></a>
                                     </li>
                                 </ul>
                             </div>
                             <div class="clearfix">
                                 <ul class="contact border-left">
                                     <li class="d-lg-none">
-                                        <a href="#" class="callnumber"><span><i class="fa fa-phone mr-1"></i>: +425 345 8765</span></a>
+                                        <a href="#" class="callnumber"><span><i class="fab fa-phone mr-1"></i>: +425 345 8765</span></a>
                                     </li>
                                     <li class="select-country">
                                         <select class="form-control select2-flag-search" data-placeholder="Select Country">
@@ -636,18 +636,18 @@
                         <ul class="mb-0 pr-2">
                             <li class="d-none d-lg-flex">
                                 <span>
-                                    <a class="btn btn-secondary ad-post mt-1" asp-controller="submitjob" asp-action="index">
+                                    <a class="btn btn-secondary ad-post post-job mt-1" asp-controller="submitjob" asp-action="index">
                                         <i class="fa fa-briefcase"></i> Elan Yerləşdir
                                     </a>
                                 </span>
-</li>
+                            </li>
                         </ul>
                     }
                     @if (_auth.User == null || _auth.User.UserType == UserType.Employee)
                     {
                         <ul class="mb-0 pl-2 create-resume-btn">
                             <li class="d-none d-lg-flex">
-                                <span><a class="btn btn-info ad-post mt-1" asp-controller="resume" asp-action="index"><i class="fa fa-edit"></i>CV yarat</a></span>
+                                <span><a class="btn btn-info  mt-1" asp-controller="resume" asp-action="index"><i class="fa fa-edit"></i>CV yarat</a></span>
                             </li>
                         </ul>
                     }
@@ -850,9 +850,11 @@
 
     <!-- Custom Js-->
     <script src="~/js/custom.js"></script>
+    <!-- FontAwesome -->
     <script src="~/js/JavaScript.js">
-       
     </script>
+    <script src="https://kit.fontawesome.com/3da3c9c8f9.js" crossorigin="anonymous"></script>
+
 </body>
 
 <!-- Mirrored from www.spruko.com/demo/rejoin/html/index4.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 09:31:08 GMT -->

@@ -67,7 +67,7 @@ namespace Rejoin.Controllers
         public IActionResult CreateJob(JobViewModel jobViewModel)
         {
            
-            int views = 0;
+            
 
             if (ModelState.IsValid)
             {
@@ -76,7 +76,8 @@ namespace Rejoin.Controllers
                     Title = jobViewModel.Title,
                     City = jobViewModel.City,
                     CreatedAt = DateTime.Now,
-                    ViewCount = views,
+                    ViewCount = 0,
+                    LikeCount = 0,
                     Address = jobViewModel.Address,
                     Description = jobViewModel.Description,
                     JobType = jobViewModel.JobType,

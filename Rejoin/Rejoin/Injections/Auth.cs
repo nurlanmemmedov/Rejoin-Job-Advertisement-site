@@ -45,6 +45,7 @@ namespace Rejoin.Injections
                                     .Include("CompanyReviewReplies")
                                     .Include("CompanyReviewReports")
                                     .Include("Company")
+                                    .Include("Candidate")
                                     .FirstOrDefault(c => c.Token == token);
 
                 if (user == null)
