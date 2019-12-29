@@ -38,36 +38,13 @@ namespace Rejoin.Controllers
          
             return View();
         }
-        [HttpPost]
 
-        public JsonResult CreateCompany(Company company)
-        {
-            string uniqueFileName = string.Empty;
-            if (company.Upload != null)
-            {
-                string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + company.Upload.FileName;
-                string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
-                company.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
-            }
-            company.UserId = _auth.User.Id;
-            company.Photo = uniqueFileName;
-            _context.Companies.Add(company);
-            _context.SaveChanges();
-            return Json(new
-            {
-                status = "OK",
-                code = 200,
-                message = "added product",
-                data = company
-            });
-        }
+
+     
 
         [HttpPost]
         public IActionResult CreateJob(JobViewModel jobViewModel)
         {
-           
-            
 
             if (ModelState.IsValid)
             {

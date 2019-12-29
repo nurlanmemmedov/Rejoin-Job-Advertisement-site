@@ -47,6 +47,8 @@ namespace Rejoin.Injections
                                     .Include("Company")
                                     .Include("Candidate")
                                     .FirstOrDefault(c => c.Token == token);
+                user.Candidate = _context.Candidates.Include("Educations").Include("Experiences").FirstOrDefault(c => c.UserId == user.Id);
+                user.Company = _context.Companies.FirstOrDefault(c => c.UserId == user.Id);
 
                 if (user == null)
                 {
@@ -56,6 +58,7 @@ namespace Rejoin.Injections
                 return user;
             }
         }
+
 
     }
 }

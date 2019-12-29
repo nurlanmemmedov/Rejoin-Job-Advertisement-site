@@ -28,19 +28,21 @@ namespace Rejoin.Controllers
         public IActionResult LoginUser(LoginViewModel Login)
         {
 
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
 
                 User user = _context.Users.FirstOrDefault(u => u.Email == Login.Email);
 
-                if(user != null)
+                if (user != null)
                 {
-                    if(Crypto.VerifyHashedPassword(user.Password, Login.Password)){
+                    if (Crypto.VerifyHashedPassword(user.Password, Login.Password))
+                    {
                         user.Token = Guid.NewGuid().ToString();
                         _context.SaveChanges();
 
                         Response.Cookies.Append("token", user.Token, new Microsoft.AspNetCore.Http.CookieOptions
                         {
-                            Expires =  DateTime.Now.AddYears(1),
+                            Expires = DateTime.Now.AddYears(1),
                             HttpOnly = true
                         });
 
@@ -48,17 +50,10 @@ namespace Rejoin.Controllers
                     }
                 }
 
-
-
                 ModelState.AddModelError("Password", "e-poçt və ya şifrə yanlışdır");
             }
 
-            LoginViewModel data = new LoginViewModel
-            {
-                Email = Login.Email
-            };
-
-            return View("~/Views/Login/Index.cshtml", data);
+            return View("~/Views/Login/Index.cshtml");
         }
     }
 }

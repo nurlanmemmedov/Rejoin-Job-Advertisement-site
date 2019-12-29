@@ -593,7 +593,7 @@
                             <a href="#">My Dashboard <span class="fa fa-caret-down m-0"></span></a>
                             <ul class="sub-menu">
                                 <li>
-                                    <a href="mydash.html">My Dashboard</a>
+                                    <a asp-controller="companydashboard" asp-action="index">My Dashboard</a>
                                 </li>
                                 <li>
                                     <a href="myjobs.html">My Jobs</a>
@@ -631,7 +631,7 @@
                             <span><a class="btn btn-info ad-post mt-1" asp-controller="resume" asp-action="index"><i class="fa fa-edit"></i> Create Resume</a></span>
                         </li>
                     </ul>
-                    @if (_auth.User == null || _auth.User.UserType == UserType.Company)
+                    @if (_auth.User == null)
                     {
                         <ul class="mb-0 pr-2">
                             <li class="d-none d-lg-flex">
@@ -642,15 +642,60 @@
                                 </span>
                             </li>
                         </ul>
-                    }
-                    @if (_auth.User == null || _auth.User.UserType == UserType.Employee)
-                    {
                         <ul class="mb-0 pl-2 create-resume-btn">
                             <li class="d-none d-lg-flex">
                                 <span><a class="btn btn-info  mt-1" asp-controller="resume" asp-action="index"><i class="fa fa-edit"></i>CV yarat</a></span>
                             </li>
                         </ul>
                     }
+                    else if (_auth.User != null && _auth.User.UserType == UserType.Company)
+                    {
+                        if (_auth.User.Company == null)
+                        {
+                            <ul class="mb-0 pr-2">
+                                <li class="d-none d-lg-flex">
+                                    <span>
+                                        <a class="btn btn-secondary ad-post post-job mt-1">
+                                            <i class="fa fa-briefcase"></i> Elan Yerləşdir
+                                        </a>
+                                    </span>
+                                </li>
+                            </ul>
+                        }
+                        else
+                        {
+                            <ul class="mb-0 pr-2">
+                                <li class="d-none d-lg-flex">
+                                    <span>
+                                        <a class="btn btn-secondary ad-post mt-1 " asp-controller="submitjob" asp-action="index">
+                                            <i class="fa fa-briefcase"></i> Elan Yerləşdir
+                                        </a>
+                                    </span>
+                                </li>
+                            </ul>
+                        }
+                    }
+                    else if (_auth.User != null && _auth.User.UserType == UserType.Employee)
+                    {
+                        if (_auth.User.Candidate != null)
+                        {
+                            <ul class="mb-0 pl-2 create-resume-btn">
+                                <li class="d-none d-lg-flex">
+                                    <span><a class="btn btn-info  mt-1" asp-controller="resume" asp-action="index"><i class="fa fa-edit"></i>CV-ni redaktə et</a></span>
+                                </li>
+                            </ul>
+
+                        }
+                        else
+                        {
+                            <ul class="mb-0 pl-2 create-resume-btn">
+                                <li class="d-none d-lg-flex">
+                                    <span><a class="btn btn-info  mt-1" asp-controller="resume" asp-action="index"><i class="fa fa-edit"></i>CV yarat</a></span>
+                                </li>
+                            </ul>
+                        }
+                    }
+
                 </nav>
                 <!--/Nav-->
             </div>

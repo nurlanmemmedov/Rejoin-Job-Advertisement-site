@@ -260,3 +260,5 @@ C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreap
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.pdb
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\JobDetails\Index.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ApplyJob.cshtml.g.cs
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\CompanyDashboard\Index.cshtml.g.cs
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\CompanyJobs\Index.cshtml.g.cs

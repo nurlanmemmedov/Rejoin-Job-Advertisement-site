@@ -21,6 +21,8 @@ namespace Rejoin.Models
         [Required]
         [MaxLength(50)]
         public string Title { get; set; }
+        //[Required]
+        //public bool isActive { get; set; }
         [Required]
         [MaxLength(50)]
         public string City { get; set; }

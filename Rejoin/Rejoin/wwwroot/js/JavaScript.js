@@ -1,10 +1,10 @@
 ﻿$(document).ready(function () {
-    $(".post-job").click(function (e) {
-        e.preventDefault();
 
-        let FormUrl = $(this).attr("href");
+    
+
+    $(".post-job").click(function (e) {
         $.ajax({
-            url: FormUrl,
+            url: "/SubmitJob/Index",
             type: "get",
             dataType: "html",
 
@@ -13,6 +13,7 @@
                 $('#companyModal').modal('show');
             }
         })
+    
     })
 
     $(".btn-apply").click(function (e) {
@@ -38,16 +39,16 @@
         e.preventDefault();
         var files = $("input[name=companyphoto]")[0].files;
         var formdata = new FormData();
-        formdata.append("Name", $("input[name=companyname]").val())
-        formdata.append("Email", $("input[name=companyemail]").val())
-        formdata.append("Phone", $("input[name=companyphone]").val())
-        formdata.append("Location", $("input[name=companyaddress]").val())
-        formdata.append("Website", $("input[name=companywebsite]").val())
-        formdata.append("Info", $("textarea[name=companyinfo]").val())
-        formdata.append("Upload", files[0], files[0].name)
+        formdata.append("Name", $("input[name=companyname]").val());
+        formdata.append("Email", $("input[name=companyemail]").val());
+        formdata.append("Phone", $("input[name=companyphone]").val());
+        formdata.append("Location", $("input[name=companyaddress]").val());
+        formdata.append("Website", $("input[name=companywebsite]").val());
+        formdata.append("Info", $("textarea[name=companyinfo]").val());
+        formdata.append("Upload", files[0], files[0].name);
 
         $.ajax({
-            url: "/SubmitJob/CreateCompany",
+            url: "/CompanyDashboard/CreateCompany",
             type: "post",
             dataType: "json",
             data: formdata,
@@ -56,12 +57,12 @@
             beforeSend: function () {
             },
             success: function (response) {
-
             },
             error: function (error) {
-
             },
             complete: function () {
+                $('#companyModal').modal('hide');
+                location.reload();
             }
         })
     })

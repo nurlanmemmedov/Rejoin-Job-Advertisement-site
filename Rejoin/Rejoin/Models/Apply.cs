@@ -13,6 +13,8 @@ namespace Rejoin.Models
         [Required]
         public string WhyYou { get; set; }
         [Required]
+        public DateTime AppliedAt { get; set; }
+        [Required]
         public int JobId { get; set; }
         [Required]
         public int UserId { get; set; }

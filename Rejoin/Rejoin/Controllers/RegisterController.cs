@@ -28,34 +28,35 @@ namespace Rejoin.Controllers
         public IActionResult RegisterUser(RegisterViewModel Register)
         {
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View("~/Views/Register/index.cshtml");
-            }
+                if (!_context.Users.Any(u => u.Email == Register.Email))
+                {
+                    var user = new User
+                    {
+                        Fullname = Register.Fullname,
+                        Email = Register.Email,
+                        Password = Crypto.HashPassword(Register.Password),
+                        Token = Guid.NewGuid().ToString(),
+                        UserType = Register.UserType
+                    };
 
-            if (_context.Users.Any(u => u.Email == Register.Email))
-            {
+                    Response.Cookies.Append("token", user.Token, new Microsoft.AspNetCore.Http.CookieOptions
+                    {
+                        Expires = DateTime.Now.AddYears(1),
+                        HttpOnly = true
+                    });
+
+                    _context.Users.Add(user);
+                    _context.SaveChanges();
+                    return RedirectToAction("index", "home");
+                }
                 ModelState.AddModelError("Email", "Bu e-poçt artıq qeydiyyatdan keçib");
             }
 
-            var user = new User
-            {
-                Fullname = Register.Fullname,
-                Email = Register.Email,
-                Password = Crypto.HashPassword(Register.Password),
-                Token = Guid.NewGuid().ToString(),
-                UserType = Register.UserType
-            };
+            return View("~/Views/Register/index.cshtml");
 
-            Response.Cookies.Append("token", user.Token, new Microsoft.AspNetCore.Http.CookieOptions
-            {
-                Expires = DateTime.Now.AddYears(1),
-                HttpOnly = true
-            });
 
-            _context.Users.Add(user);
-            _context.SaveChanges();
-            return RedirectToAction("index", "home");
         }
     }
 }

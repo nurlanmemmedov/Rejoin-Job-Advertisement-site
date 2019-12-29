@@ -31,6 +31,7 @@ namespace Rejoin.Controllers
 
             apply.UserId = _auth.User.Id;
             apply.JobId = 4;
+            apply.AppliedAt = DateTime.Now;
             _context.Applies.Add(apply);
             _context.SaveChanges();
            
