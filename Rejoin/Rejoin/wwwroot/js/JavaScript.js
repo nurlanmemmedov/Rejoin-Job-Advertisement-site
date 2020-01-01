@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-
+  
     
 
     $(".post-job").click(function (e) {
@@ -94,7 +94,7 @@
     $(document).on("click", ".apply-job", function (e) {
         var Applydata = new FormData();
         Applydata.append("WhyYou", $("textarea[name=why-you]").val())
-        Applydata.append("JobId", $(".apply-job").name)
+        Applydata.append("JobId", $("#apply-job").attr('name'))
 
 
         $.ajax({

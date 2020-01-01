@@ -21,8 +21,8 @@ namespace Rejoin.Models
         [Required]
         [MaxLength(50)]
         public string Title { get; set; }
-        //[Required]
-        //public bool isActive { get; set; }
+        [Required]
+        public bool isActive { get; set; }
         [Required]
         [MaxLength(50)]
         public string City { get; set; }
@@ -57,6 +57,7 @@ namespace Rejoin.Models
         public Category Category { get; set; }
         public Company Company { get; set; }
         public List<JobReview> JobReviews { get; set; }
+        public List<Apply> Applies { get; set; }
 
     }
 }

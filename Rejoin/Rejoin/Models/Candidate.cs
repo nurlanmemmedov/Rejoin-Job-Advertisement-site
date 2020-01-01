@@ -36,6 +36,7 @@ namespace Rejoin.Models
         public int UserId { get; set; }
 
         public List<Experience> Experiences { get; set; }
+        public List<Apply> Applies { get; set; }
 
         public List<Education> Educations { get; set; }
 
@@ -43,6 +44,7 @@ namespace Rejoin.Models
 
         [NotMapped]
         [Display(Name = "Şəkil yüklə")]
+
         public IFormFile Upload { get; set; }
 
     }

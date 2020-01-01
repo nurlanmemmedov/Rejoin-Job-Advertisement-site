@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Rejoin.Data;
 
 namespace Rejoin.Migrations
 {
     [DbContext(typeof(RejionDBContext))]
-    partial class RejionDBContextModelSnapshot : ModelSnapshot
+    [Migration("20200101104309_BugFixedAtUserAndJob")]
+    partial class BugFixedAtUserAndJob
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,10 +31,10 @@ namespace Rejoin.Migrations
                     b.Property<DateTime>("AppliedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CandidateId")
+                    b.Property<int>("JobId")
                         .HasColumnType("int");
 
-                    b.Property<int>("JobId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<string>("WhyYou")
@@ -41,9 +43,9 @@ namespace Rejoin.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CandidateId");
-
                     b.HasIndex("JobId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Applies");
                 });
@@ -610,15 +612,15 @@ namespace Rejoin.Migrations
 
             modelBuilder.Entity("Rejoin.Models.Apply", b =>
                 {
-                    b.HasOne("Rejoin.Models.Candidate", "Candidate")
-                        .WithMany("Applies")
-                        .HasForeignKey("CandidateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Rejoin.Models.Job", "Job")
                         .WithMany("Applies")
                         .HasForeignKey("JobId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Rejoin.Models.User", "User")
+                        .WithMany("Applies")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

@@ -117,20 +117,20 @@
                                             {
                                                 <p class="text-danger">İşə müraciət etmək üçün qeydiyyatdan keçin və ya daxil olun</p>
                                             }
-                                            else if (Auth.User.Candidate == null)
+                                            else if (Auth.User.UserType == UserType.Company)
+                                            {
+                                                <p class="text-danger">Şirkətlər işə müraciət edə bilməzlər</p>
+                                            }
+                                            else if (Auth.User.UserType == UserType.Employee && Auth.User.Candidate == null)
                                             {
                                                 <p class="text-danger">İşə müraciət etmək üçün ilk öncə CV yaratmalısınız</p>
                                             }
-                                            else if (Auth.User.UserType == UserType.Employee)
+                                            else if (Auth.User.UserType == UserType.Employee && Auth.User.Candidate != null)
                                             {
                                                 <div class="icons">
                                                     <a asp-controller="applyjob" asp-action="index" asp-route-jobid="@job.Id" class="btn btn-info icons btn-apply" data-toggle="modal" data-target="#apply"><i class="fa fa-check mr-1"></i> Müraciət et</a>
                                                     <a href="#" class="btn btn-primary icons" data-toggle="modal" data-target="#contact"><i class="si si-phone mr-1"></i> Əlaqəyə keç</a>
                                                 </div>
-                                            }
-                                            else
-                                            {
-                                                <p class="text-danger">Şirkətlər işə müraciət edə bilməzlər</p>
                                             }
 
                                         </div>

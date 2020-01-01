@@ -24,8 +24,13 @@ namespace Rejoin.Controllers
             _context = context;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int? JobId)
         {
+            if(JobId != null)
+            {
+                Job job = _context.Jobs.Find(JobId);
+                ViewBag.Job = job;
+            }
             ViewBag.Categories = _context.Categories.ToList();
             if (_auth.User == null)
             {
@@ -63,13 +68,62 @@ namespace Rejoin.Controllers
                     MaxExperience = jobViewModel.MaxExperience,
                     MinExperience = jobViewModel.MinExperience,
                     CategoryId = 1,
-                    CompanyId = _auth.User.Company.Id
+                    CompanyId = _auth.User.Company.Id,
+                    isActive = true
                 };
                 _context.Jobs.Add(job);
                 _context.SaveChanges();
                 return RedirectToAction("index", "home");
             }
-            return Ok("sehvsen qaqa");
+            return RedirectToAction("~Views/SubmitJob/Index.cshtml");
+
+        }
+
+
+
+        [HttpPost]
+        public IActionResult EditJob(JobViewModel jobViewModel, int? JobId)
+        {
+
+            if (ModelState.IsValid)
+            {
+                Job job = _context.Jobs.FirstOrDefault(j => j.Id == JobId);
+
+                job.Title = jobViewModel.Title;
+                job.City = jobViewModel.City;
+                job.CreatedAt = DateTime.Now;
+                job.ViewCount = 0;
+                job.LikeCount = 0;
+                job.Address = jobViewModel.Address;
+                job.Description = jobViewModel.Description;
+                job.JobType = jobViewModel.JobType;
+                job.MinSalary = jobViewModel.MinSalary;
+                job.MaxSalary = jobViewModel.MaxSalary;
+                job.MaxExperience = jobViewModel.MaxExperience;
+                job.MinExperience = jobViewModel.MinExperience;
+                job.CategoryId = 1;
+                job.CompanyId = _auth.User.Company.Id;
+                job.isActive = true;
+                _context.SaveChanges();
+                return RedirectToAction("index", "CompanyJobs");
+            }
+            return RedirectToAction("~Views/SubmitJob/index.cshtml");
+
+        }
+
+        public IActionResult ChangeStatus(int JobId)
+        {
+            Job job = _context.Jobs.FirstOrDefault(j => j.Id == JobId);
+            if(job.isActive == true)
+            {
+                job.isActive = false;
+            }
+            else
+            {
+                job.isActive = true;
+            }
+            _context.SaveChanges();
+            return RedirectToAction("index", "companyjobs");
         }
 
     }

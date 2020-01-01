@@ -1,0 +1,194 @@
+﻿<!--Sliders Section-->
+<div>
+    <div class="cover-image sptb-1 bg-background" data-image-src="../assets/images/banners/banner1.jpg">
+        <div class="header-text1 mb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-10 col-lg-12 col-md-12 d-block mx-auto">
+                        <div class="text-center text-white ">
+                            <h1 class=""><span class="font-weight-semibold">16,25,365</span> Jobs Available In Hyderabad</h1>
+                        </div>
+                        <div class="search-background bg-transparent">
+                            <div class="form row no-gutters ">
+                                <div class="form-group  col-xl-4 col-lg-3 col-md-12 mb-0 bg-white ">
+                                    <input type="text" class="form-control input-lg br-tr-md-0 br-br-md-0" id="text4" placeholder="Enter Your Keywords">
+                                </div>
+                                <div class="form-group  col-xl-3 col-lg-3 col-md-12 mb-0 bg-white">
+                                    <input type="text" class="form-control input-lg br-md-0" id="text5" placeholder="Select Location">
+                                    <span><img src="https://www.spruko.com/demo/rejoin/assets/images/svg/gps.svg" class="location-gps"></span>
+                                </div>
+                                <div class="form-group col-xl-3 col-lg-3 col-md-12 select2-lg  mb-0 bg-white">
+                                    <select class="form-control select2-show-search  border-bottom-0" data-placeholder="Select Category">
+                                        <optgroup label="Categories">
+                                            <option>All Categories</option>
+                                            <option value="1">Accountant</option>
+                                            <option value="2">IT Software</option>
+                                            <option value="3">Banking</option>
+                                            <option value="4">Finaces</option>
+                                            <option value="5">Cook/Chef</option>
+                                            <option value="6">Driveing</option>
+                                            <option value="7">HR Recruiter</option>
+                                            <option value="8">IT Hardware</option>
+                                            <option value="9">Sales</option>
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="col-xl-2 col-lg-3 col-md-12 mb-0">
+                                    <a href="#" class="btn btn-lg btn-block btn-secondary br-tl-md-0 br-bl-md-0">Search Here</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /header-text -->
+    </div>
+</div>
+<!--/Sliders Section-->
+<!--Breadcrumb-->
+<div class="bg-white border-bottom">
+    <div class="container">
+        <div class="page-header">
+            <h4 class="page-title">Candidate list</h4>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Candidate list</li>
+            </ol>
+        </div>
+    </div>
+</div>
+<!--/Breadcrumb-->
+<!--Job listing-->
+<section class="sptb">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12">
+                <div class="card item2-gl ">
+                    <div class=" mb-0">
+                        <div class="">
+                            <div class="p-5 bg-white item2-gl-nav d-flex">
+                                <h6 class="mb-0 mt-3">Showing <b>1 to 10</b> of 30 Entries</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--Job lists-->
+                @foreach (ApplyViewModel item in ViewBag.Applies)
+                {
+                    <div class="card card-listing overflow-hidden">
+                        <div class="power-ribbon power-ribbon-top-left text-warning"><span class="bg-warning"><i class="fa fa-bolt"></i></span></div>
+                        <div class="card-header pt-5 pb-4">
+                            <div class="d-flex">
+                                <span class="avatar avatar-md  d-block brround cover-image mr-4" data-image-src="~images"></span>
+                                <div>
+                                    <a href="company-details.html" class="font-weight-semibold fs-18 text-body">Rubin Carmody</a><br>
+                                    <a href="#"><small>Last activity 11-06-2019</small></a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="hide-details">
+                            <div class="p-5">
+                                <div class="row">
+                                    <div class="col-xl-12 col-md-12">
+                                        <div class="table-responsive d-flex">
+                                            <table class="table row table-borderless w-100 m-0 text-nowrap d-flex col-lg-8">
+                                                <tbody class="col-lg-6 col-xl-6 p-0">
+                                                    <tr>
+                                                        <td class="w-150"><span class="font-weight-semibold">Sənəti</span></td>
+                                                        <td><span>:</span></td>
+                                                        <td><span>@item.Candidate.Profession</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="w-150"><span class="font-weight-semibold">Təcrübə</span></td>
+                                                        <td><span>:</span></td>
+                                                        <td><span>@item.Candidate.ExperienceTime il</span></td>
+                                                    </tr>
+
+                                                    <tr class="mt-2">
+                                                        <td class="w-150"><span class="font-weight-semibold">Təhsil</span></td>
+                                                        <td><span>:</span></td>
+                                                        <td class="d-flex flex-wrap">
+                                                            @foreach (var edu in @item.Candidate.Educations)
+                                                            {
+                                                                <span>@edu.University, @edu.Qualification ,@edu.StartedAt-@edu.FinishedAt</span>
+
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="w-150"><span class="font-weight-semibold">Təcrübələri</span></td>
+                                                        <td><span>:</span></td>
+                                                        <td class="d-flex flex-wrap">
+                                                            @foreach (var exp in @item.Candidate.Experiences)
+                                                            {
+                                                                <span>@exp.CompanyName, @exp.Position ,@exp.StartedAt-@exp.FinishedAt</span>
+
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                <tbody class="col-lg-6 col-xl-6 p-0">
+                                                    <tr>
+                                                        <td class="w-150"><span class="font-weight-semibold">E-poçt</span></td>
+                                                        <td><span>:</span></td>
+                                                        <td><span>@item.Candidate.Email</span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="w-150"><span class="font-weight-semibold">Telefon</span></td>
+                                                        <td><span>:</span></td>
+                                                        <td><span>@item.Candidate.Phone</span></td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+                                            <div class="col-lg-4 col-xl-4 p-0">
+                                                <h5>Niyə mən</h5>
+                                                <p>@item.WhyYou</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                }
+
+                <!--Job lists-->
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--/Job Listings-->
+<!-- Onlinesletter-->
+<section class="sptb bg-white border-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 col-xl-6 col-md-12">
+                <div class="sub-newsletter">
+                    <h3 class="mb-2"><i class="fa fa-paper-plane-o mr-2"></i> Subscribe To Our Onlinesletter</h3>
+                    <p class="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+                </div>
+            </div>
+            <div class="col-lg-5 col-xl-6 col-md-12">
+                <div class="input-group sub-input mt-1">
+                    <input type="text" class="form-control input-lg " placeholder="Enter your Email">
+                    <div class="input-group-append ">
+                        <button type="button" class="btn btn-primary btn-lg br-tr-3  br-br-3">
+                            Subscribe
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--/Onlinesletter-->
+
+@section scripts{
+    <script src="~/js/jquery.showmore.js"></script>
+    <script src="~/js/showmore.js"></script>
+}

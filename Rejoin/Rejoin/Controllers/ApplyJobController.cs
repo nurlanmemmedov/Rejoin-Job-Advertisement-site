@@ -29,8 +29,8 @@ namespace Rejoin.Controllers
         public JsonResult Apply(Apply apply)
         {
 
-            apply.UserId = _auth.User.Id;
-            apply.JobId = 4;
+            apply.CandidateId = _auth.User.Candidate.Id;
+           
             apply.AppliedAt = DateTime.Now;
             _context.Applies.Add(apply);
             _context.SaveChanges();
