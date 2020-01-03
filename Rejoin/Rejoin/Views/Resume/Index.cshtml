@@ -1,7 +1,4 @@
-﻿@model CreateResumeViewModel
-@inject IAuth _auth
-
-
+﻿@inject IAuth _auth
 <!--Sliders Section-->
 
 <section>
@@ -35,34 +32,34 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-3 mb-4 mb-lg-0">
-                                    <input asp-for="Resume.Upload" type="file" class="dropify" data-default-file="~/images/22f094fa-b54b-488c-89ea-0c9d30f80526_Screenshot (1).png" data-height="180" />
+                                    <input name="resume-input-img" type="file" class="dropify" data-height="180" />
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label asp-validation-for="Name" class="form-label text-dark">Name</label>
-                                                <input value="@_auth.User.Candidate.Name" asp-for="Resume.Name" type="text" class="form-control" placeholder="Your Name" required>
+                                                <label class="form-label text-dark">Name</label>
+                                                <input value="@_auth.User.Candidate.Name" name="resume-input-name" type="text" class="form-control" placeholder="Your Name" required>
                                             </div>
                                             <div class="form-group">
                                                 <label asp-validation-for="Profession" class="form-label text-dark">Job Profession</label>
-                                                <input value="@_auth.User.Candidate.Profession" asp-for="Resume.Profession" type="text" class="form-control" placeholder="Job Profession" required>
+                                                <input value="@_auth.User.Candidate.Profession" name="resume-input-profession" type="text" class="form-control" placeholder="Job Profession" required>
                                             </div>
                                             <div class="form-group mb-md-0">
                                                 <label asp-validation-for="Email" class="form-label text-dark">Email</label>
-                                                <input value="@_auth.User.Candidate.Email" asp-for="Resume.Email" type="email" class="form-control" placeholder="Email" required>
+                                                <input value="@_auth.User.Candidate.Email" name="resume-input-email" type="email" class="form-control" placeholder="Email" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label asp-validation-for="Lastname" class="form-label text-dark">Last Name</label>
-                                                <input value="@_auth.User.Candidate.Lastname" asp-for="Resume.Lastname" type="text" class="form-control" placeholder="last Name" required>
+                                                <input value="@_auth.User.Candidate.Lastname" name="resume-input-lastname" type="text" class="form-control" placeholder="last Name" required>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label text-dark">Experience</label>
                                                 <div class="row gutters-xs">
                                                     <div class="col-6">
-                                                        <select asp-for="Resume.ExperienceTime" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                                        <select name="resume-input-exp" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
                                                             <option value="@_auth.User.Candidate.ExperienceTime" selected> @_auth.User.Candidate.ExperienceTime</option>
                                                             <option value="0">0</option>
                                                             <option value="1">1</option>
@@ -82,8 +79,8 @@
                                                 </div>
                                             </div>
                                             <div class="form-group mb-0">
-                                                <label asp-validation-for="Resume.Phone" class="form-label text-dark">Phone Number</label>
-                                                <input value="@_auth.User.Candidate.Phone" asp-for="Resume.Phone" type="text" class="form-control" placeholder="Your Number" required>
+                                                <label class="form-label text-dark">Phone Number</label>
+                                                <input value="@_auth.User.Candidate.Phone" name="resume-input-phone" type="text" class="form-control" placeholder="Your Number" required>
                                             </div>
                                         </div>
                                     </div>
@@ -93,27 +90,28 @@
                     </div>
                     @foreach (var item in _auth.User.Candidate.Educations)
                     {
-                        <div class="card">
+                        <div class="card card-edu">
                             <div class="card-header ">
                                 <h3 class="card-title">Education</h3>
+
                                 <div class="card-options">
-                                    <a class="btn btn-light btn-sm" href="#"><i class="fa fa-plus"></i> Add Another</a>
+                                    <a class="btn btn-light btn-sm remove-edu" href="#"><i class="fas fa-minus-circle"></i> Sil</a>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label asp-validation-for="Education.SchoolName" class="form-label text-dark">School Name</label>
-                                    <input value="@item.SchoolName" asp-for="Education.SchoolName" type="text" class="form-control" placeholder="School Name" required>
+                                    <label class="form-label text-dark">School Name</label>
+                                    <input value="@item.SchoolName" name="resume-edu-school" type="text" class="form-control" placeholder="School Name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-validation-for="Education.Qualification" class="form-label text-dark">Qualification</label>
-                                    <input value="@item.Qualification" asp-for="Education.Qualification" type="text" class="form-control" placeholder="Qualification" required>
+                                    <label class="form-label text-dark">Qualification</label>
+                                    <input value="@item.Qualification" name="resume-edu-quality" type="text" class="form-control" placeholder="Qualification" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label text-dark">Period</label>
                                     <div class="row gutters-xs">
                                         <div class="col-6">
-                                            <select asp-for="Education.StartedAt" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                            <select name="resume-edu-since" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
                                                 <option value="@item.StartedAt" selected>@item.FinishedAt</option>
                                                 <option value="0">Since</option>
                                                 <option value="2019">2019</option>
@@ -149,7 +147,7 @@
                                             </select>
                                         </div>
                                         <div class="col-6">
-                                            <select asp-for="Education.FinishedAt" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                            <select name="resume-edu-till" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
                                                 <option value="@item.FinishedAt" selected>@item.FinishedAt</option>
                                                 <option value="0">Untill</option>
                                                 <option value="2019">2019</option>
@@ -188,7 +186,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label text-dark">Board</label>
-                                    <select asp-for="Education.University" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                    <select name="resume-edu-uni" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
                                         <option value="@item.University" selected>@item.University</option>
                                         <option value="University">University</option>
                                         <option value="Mitchel Knights University">Mitchel Knights University</option>
@@ -205,30 +203,35 @@
                         </div>
 
                     }
-                   
-                    @foreach (var item in @_auth.User.Candidate.Experiences)
+                    <div class="card-options">
+                        <a class="btn btn-primary btn-sm add-another-edu" href="#"><i class="fa fa-plus"></i> Təhsil əlavə et</a>
+                    </div>
+
+                    @foreach (var item in _auth.User.Candidate.Experiences)
                     {
-                        <div class="card">
+                        <div class="card card-exp">
                             <div class="card-header ">
                                 <h3 class="card-title">Working Experience</h3>
+
                                 <div class="card-options">
-                                    <a class="btn btn-light btn-sm" href="#"><i class="fa fa-plus"></i> Add Another</a>
+                                    <a class="btn btn-light btn-sm remove-exp" href="#"><i class="fas fa-minus-circle"></i> Sil</a>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label asp-validation-for="Experience.CompanyName" class="form-label text-dark">Company Name</label>
-                                    <input value="@item.CompanyName" asp-for="Experience.CompanyName" type="text" class="form-control" placeholder="Company Name" required>
+                                    <label class="form-label text-dark">Company Name</label>
+                                    <input value="@item.CompanyName" name="resume-exp-company" type="text" class="form-control" placeholder="Company Name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label asp-validation-for="Experience.Position" class="form-label text-dark">Position</label>
-                                    <input value="@item.Position" asp-for="Experience.Position" type="text" class="form-control" placeholder="Position" required>
+                                    <label class="form-label text-dark">Position</label>
+                                    <input value="@item.Position" name="resume-exp-position" type="text" class="form-control" placeholder="Position" required>
                                 </div>
                                 <div class="form-group">
                                     <label class="form-label text-dark">Period</label>
                                     <div class="row gutters-xs">
                                         <div class="col-6">
-                                            <select asp-for="Experience.StartedAt" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                            <select name="resume-exp-since" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                                <option value="@item.StartedAt" selected>@item.StartedAt</option>
                                                 <option value="0">Since</option>
                                                 <option value="2019">2019</option>
                                                 <option value="2018">2018</option>
@@ -263,7 +266,8 @@
                                             </select>
                                         </div>
                                         <div class="col-6">
-                                            <select asp-for="Experience.FinishedAt" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                            <select name="resume-exp-till" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                                <option value="@item.FinishedAt" selected>@item.FinishedAt</option>
                                                 <option value="0">Untill</option>
                                                 <option value="2019">2019</option>
                                                 <option value="2018">2018</option>
@@ -301,20 +305,24 @@
                                 </div>
                             </div>
                         </div>
+
                     }
+                    <div class="card-options">
+                        <a class="btn btn-primary btn-sm add-another-exp" href="#"><i class="fa fa-plus"></i>Təcrübə əlavə et</a>
+                    </div>
                     <div class="card">
                         <div class="card-header ">
                             <h3 class="card-title">Personal Skills</h3>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label asp-validation-for="Resume.PersonalSkill" class="form-label">Write Personal Skills <span class="form-label-small">56/100</span></label>
-                                <input value="@_auth.User.Candidate.PersonalSkill" asp-for="Resume.PersonalSkill" class="form-control" placeholder="text" />
+                                <label class="form-label">Write Personal Skills <span class="form-label-small">56/100</span></label>
+                                <input value="@_auth.User.Candidate.PersonalSkill" name="resume-input-personal" class="form-control" placeholder="text" />
                             </div>
                         </div>
                     </div>
                     <div class="float-right mb-4 mb-lg-0">
-                        <button class="btn btn-success w-150" type="submit">Redaktə et</button>
+                        <button class="btn btn-success w-150 edit-resume" type="submit">Redaktə et</button>
                     </div>
                 </form>
                 <div class="col-lg-4 col-md-12">
@@ -424,7 +432,7 @@ else
     <section class="sptb">
         <div class="container">
             <div class="row">
-                <form class="col-lg-8 col-md-12 col-md-12" asp-controller="resume" asp-action="createresume" method="post" enctype="multipart/form-data">
+                <div class="col-lg-8 col-md-12 col-md-12">
                     <div class="card dropify-image-avatar">
                         <div class="card-header ">
                             <h3 class="card-title">Personal Data</h3>
@@ -432,34 +440,34 @@ else
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-lg-3 mb-4 mb-lg-0">
-                                    <input asp-for="Resume.Upload" type="file" class="dropify" data-default-file="~/images/users/avatar.png" data-height="180" />
+                                    <input name="resume-input-img" type="file" class="dropify" data-default-file="~/images/users/avatar.png" data-height="180" />
                                 </div>
                                 <div class="col-lg-9">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label asp-validation-for="Name" class="form-label text-dark">Name</label>
-                                                <input asp-for="Resume.Name" type="text" class="form-control" placeholder="Your Name" required>
+                                                <label class="form-label text-dark">Name</label>
+                                                <input name="resume-input-name" type="text" class="form-control" placeholder="Your Name" required>
                                             </div>
                                             <div class="form-group">
-                                                <label asp-validation-for="Profession" class="form-label text-dark">Job Profession</label>
-                                                <input asp-for="Resume.Profession" type="text" class="form-control" placeholder="Job Profession" required>
+                                                <label class="form-label text-dark">Job Profession</label>
+                                                <input name="resume-input-profession" type="text" class="form-control" placeholder="Job Profession" required>
                                             </div>
                                             <div class="form-group mb-md-0">
-                                                <label asp-validation-for="Email" class="form-label text-dark">Email</label>
-                                                <input asp-for="Resume.Email" type="email" class="form-control" placeholder="Email" required>
+                                                <label class="form-label text-dark">Email</label>
+                                                <input name="resume-input-email" type="email" class="form-control" placeholder="Email" required>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label asp-validation-for="Lastname" class="form-label text-dark">Last Name</label>
-                                                <input asp-for="Resume.Lastname" type="text" class="form-control" placeholder="last Name" required>
+                                                <label class="form-label text-dark">Last Name</label>
+                                                <input name="resume-input-lastname" type="text" class="form-control" placeholder="last Name" required>
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label text-dark">Experience</label>
                                                 <div class="row gutters-xs">
                                                     <div class="col-6">
-                                                        <select asp-for="Resume.ExperienceTime" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                                        <select name="resume-input-exp" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
                                                             <option value="0">Year</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
@@ -478,8 +486,8 @@ else
                                                 </div>
                                             </div>
                                             <div class="form-group mb-0">
-                                                <label asp-validation-for="Resume.Phone" class="form-label text-dark">Phone Number</label>
-                                                <input asp-for="Resume.Phone" type="text" class="form-control" placeholder="Your Number" required>
+                                                <label class="form-label text-dark">Phone Number</label>
+                                                <input name="resume-input-phone" type="text" class="form-control" placeholder="Your Number" required>
                                             </div>
                                         </div>
                                     </div>
@@ -487,27 +495,28 @@ else
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card card-edu">
                         <div class="card-header ">
                             <h3 class="card-title">Education</h3>
+
                             <div class="card-options">
-                                <a class="btn btn-light btn-sm" href="#"><i class="fa fa-plus"></i> Add Another</a>
+                                <a class="btn btn-light btn-sm remove-edu" href="#"><i class="fas fa-minus-circle"></i>Sil</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label asp-validation-for="Education.SchoolName" class="form-label text-dark">School Name</label>
-                                <input asp-for="Education.SchoolName" type="text" class="form-control" placeholder="School Name" required>
+                                <label class="form-label text-dark">School Name</label>
+                                <input name="resume-edu-school" type="text" class="form-control" placeholder="School Name" required>
                             </div>
                             <div class="form-group">
-                                <label asp-validation-for="Education.Qualification" class="form-label text-dark">Qualification</label>
-                                <input asp-for="Education.Qualification" type="text" class="form-control" placeholder="Qualification" required>
+                                <label class="form-label text-dark">Qualification</label>
+                                <input name="resume-edu-quality" type="text" class="form-control" placeholder="Qualification" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label text-dark">Period</label>
                                 <div class="row gutters-xs">
                                     <div class="col-6">
-                                        <select asp-for="Education.StartedAt" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                        <select name="resume-edu-since" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
                                             <option value="0">Since</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
@@ -542,7 +551,7 @@ else
                                         </select>
                                     </div>
                                     <div class="col-6">
-                                        <select asp-for="Education.FinishedAt" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                        <select name="resume-edu-till" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
                                             <option value="0">Untill</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
@@ -580,7 +589,7 @@ else
                             </div>
                             <div class="form-group">
                                 <label class="form-label text-dark">Board</label>
-                                <select asp-for="Education.University" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                <select name="resume-edu-uni" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
                                     <option value="University">University</option>
                                     <option value="Mitchel Knights University">Mitchel Knights University</option>
                                     <option value="Stephaine Dear University">Stephaine Dear University</option>
@@ -594,27 +603,33 @@ else
                             </div>
                         </div>
                     </div>
-                    <div class="card">
+
+                    <div class="card-options">
+                        <a class="btn btn-primary btn-sm add-another-edu" href="#"><i class="fas fa-minus-circle"></i>Təhsil əlavə et</a>
+                    </div>
+
+                    <div class="card card-exp">
                         <div class="card-header ">
                             <h3 class="card-title">Working Experience</h3>
+
                             <div class="card-options">
-                                <a class="btn btn-light btn-sm" href="#"><i class="fa fa-plus"></i> Add Another</a>
+                                <a class="btn btn-light btn-sm remove-exp" href="#"><i class="fa fa-plus"></i> Sil</a>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label asp-validation-for="Experience.CompanyName" class="form-label text-dark">Company Name</label>
-                                <input asp-for="Experience.CompanyName" type="text" class="form-control" placeholder="Company Name" required>
+                                <label class="form-label text-dark">Company Name</label>
+                                <input name="resume-exp-company" type="text" class="form-control" placeholder="Company Name" required>
                             </div>
                             <div class="form-group">
-                                <label asp-validation-for="Experience.Position" class="form-label text-dark">Position</label>
-                                <input asp-for="Experience.Position" type="text" class="form-control" placeholder="Position" required>
+                                <label class="form-label text-dark">Position</label>
+                                <input name="resume-exp-position" type="text" class="form-control" placeholder="Position" required>
                             </div>
                             <div class="form-group">
                                 <label class="form-label text-dark">Period</label>
                                 <div class="row gutters-xs">
                                     <div class="col-6">
-                                        <select asp-for="Experience.StartedAt" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                        <select name="resume-exp-since" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
                                             <option value="0">Since</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
@@ -649,7 +664,7 @@ else
                                         </select>
                                     </div>
                                     <div class="col-6">
-                                        <select asp-for="Experience.FinishedAt" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
+                                        <select name="resume-exp-till" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
                                             <option value="0">Untill</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
@@ -687,56 +702,26 @@ else
                             </div>
                         </div>
                     </div>
-                    <div class="card">
-                        <div class="card-header ">
-                            <h3 class="card-title">Professional Skills</h3>
-                            <div class="card-options">
-                                <a class="btn btn-light btn-sm" href="#"><i class="fa fa-plus"></i> Add Another</a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label">Professional Skills</label>
-                                <select class="form-control select2-no-search" data-placeholder="Choose Browser" multiple>
-                                    <option value="Java">Java</option>
-                                    <option value="C">C</option>
-                                    <option value="C++">C++</option>
-                                    <option value="Core Java">Core Java</option>
-                                    <option value="Advanced Java">Advanced Java</option>
-                                    <option value="Bootstrap">Bootstrap</option>
-                                    <option value="HTML" selected>HTML</option>
-                                    <option value="CSS">CSS</option>
-                                    <option value="Jquery">Jquery</option>
-                                    <option value="Angular">Angular</option>
-                                    <option value=".net">.net</option>
-                                    <option value="php">php</option>
-                                    <option value="phython">phython</option>
-                                    <option value="React js">React js</option>
-                                    <option value="Wordpress">Wordpress</option>
-                                    <option value="Angular js">Angular js</option>
-                                    <option value="Sap">Sap</option>
-                                    <option value="Java Script">Java Script</option>
-                                    <option value="HTML 5">HTML 5</option>
-                                    <option value="CSS 3">CSS 3</option>
-                                </select>
-                            </div>
-                        </div>
+
+                    <div class="card-options">
+                        <a class="btn btn-primary btn-sm add-another-exp" href="#"><i class="fa fa-plus"></i> Təcrübə Əlavə et</a>
                     </div>
+
                     <div class="card">
                         <div class="card-header ">
                             <h3 class="card-title">Personal Skills</h3>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label asp-validation-for="Resume.PersonalSkill" class="form-label">Write Personal Skills <span class="form-label-small">56/100</span></label>
-                                <input asp-for="Resume.PersonalSkill" class="form-control" placeholder="text" />
+                                <label class="form-label">Write Personal Skills <span class="form-label-small">56/100</span></label>
+                                <input name="resume-input-personal" class="form-control" placeholder="text" />
                             </div>
                         </div>
                     </div>
                     <div class="float-right mb-4 mb-lg-0">
-                        <button class="btn btn-success w-150" type="submit">Finish</button>
+                        <button class="btn btn-success w-150 finish-resume">Finish</button>
                     </div>
-                </form>
+                </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="card">
                         <div class="card-header">

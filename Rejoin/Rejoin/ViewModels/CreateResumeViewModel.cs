@@ -11,9 +11,7 @@ namespace Rejoin.ViewModels
 
     public class CreateResumeViewModel
     {
-        public ResumeViewModel Resume { get; set; }
-        public EducationViewModel Education { get; set; }
-        public ExperienceViewModel Experience { get; set; }
+        public List<EducationViewModel> Educations { get; set; }
 
     }
     public class ResumeViewModel

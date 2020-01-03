@@ -244,8 +244,6 @@ C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreap
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.RazorCoreGenerate.cache
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
-C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Login\Index.cshtml.g.cs
-C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Register\Index.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Resume\Index.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CreateCompany.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
@@ -263,3 +261,6 @@ C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreap
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\CompanyDashboard\Index.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\CompanyJobs\Index.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\AppliedCandidates\Index.cshtml.g.cs
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\SearchJob\Index.cshtml.g.cs
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs

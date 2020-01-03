@@ -34,7 +34,7 @@ namespace Rejoin.Controllers
             ViewBag.Categories = _context.Categories.ToList();
             if (_auth.User == null)
             {
-                return RedirectToAction("index", "register");
+                return RedirectToAction("register", "account");
             }
             if (_context.Companies.FirstOrDefault(c => c.UserId == _auth.User.Id) == null)
             {

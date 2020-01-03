@@ -32,116 +32,281 @@ namespace Rejoin.Controllers
         {
             if (_auth.User == null)
             {
-                return RedirectToAction("index", "register");
+                return RedirectToAction("register", "account");
             }
             return View();
         }
 
         [HttpPost]
-        public IActionResult CreateResume(CreateResumeViewModel createResume)
+        public JsonResult CreateResume(ResumeViewModel model)
         {
-            if (ModelState.IsValid)
+            string uniqueFileName = string.Empty;
+            if (model.Upload != null)
+            {
+                string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Upload.FileName;
+                string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
+                model.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
+            }
+
+            Candidate candidate = new Candidate
+            {
+                Name = model.Name,
+                Lastname = model.Lastname,
+                Email = model.Email,
+                Phone = model.Phone,
+                Profession = model.Profession,
+                ExperienceTime = model.ExperienceTime,
+                UserId = _auth.User.Id,
+                PersonalSkill = model.PersonalSkill,
+                Photo = uniqueFileName
+            };
+
+            _context.Candidates.Add(candidate);
+            _context.SaveChanges();
+
+            for (var i = 0; i < model.Experiences.Count; i++)
             {
 
-                string uniqueFileName = string.Empty;
-                if (createResume.Resume.Upload != null)
-                {
-                    string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + createResume.Resume.Upload.FileName;
-                    string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    createResume.Resume.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
-                }
-                Candidate candidate = new Candidate
-                {
-                    Name = createResume.Resume.Name,
-                    Lastname = createResume.Resume.Lastname,
-                    Profession = createResume.Resume.Profession,
-                    ExperienceTime = createResume.Resume.ExperienceTime,
-                    Email = createResume.Resume.Email,
-                    Phone = createResume.Resume.Phone,
-                    PersonalSkill = createResume.Resume.PersonalSkill,
-                    UserId = _auth.User.Id,
-                    Photo = uniqueFileName
-                };
-                //if (_context.Candidates.FirstOrDefault(c => c.UserId == candidate.UserId) == null)
-                //{
-                _context.Candidates.Add(candidate);
-                _context.SaveChanges();
-                Education education = new Education
-                {
-                    SchoolName = createResume.Education.SchoolName,
-                    Qualification = createResume.Education.Qualification,
-                    StartedAt = createResume.Education.StartedAt,
-                    FinishedAt = createResume.Education.FinishedAt,
-                    University = createResume.Education.University,
-                    CandidateId = candidate.Id
-                };
                 Experience experience = new Experience
                 {
-                    CompanyName = createResume.Experience.CompanyName,
-                    Position = createResume.Experience.Position,
-                    StartedAt = createResume.Experience.StartedAt,
-                    FinishedAt = createResume.Experience.FinishedAt,
-                    CandidateId = candidate.Id
+                    CompanyName = model.Experiences[i].CompanyName,
+                    StartedAt = model.Experiences[i].StartedAt,
+                    FinishedAt = model.Experiences[i].FinishedAt,
+                    CandidateId = candidate.Id,
+                    Position = model.Experiences[i].Position,
                 };
                 _context.Experiences.Add(experience);
+                _context.SaveChanges();
+            }
+
+            for (var i = 0; i < model.Educations.Count; i++)
+            {
+                Education education = new Education
+                {
+                    SchoolName = model.Educations[i].SchoolName,
+                    StartedAt = model.Educations[i].StartedAt,
+                    FinishedAt = model.Educations[i].FinishedAt,
+                    CandidateId = candidate.Id,
+                    University = model.Educations[i].University,
+                    Qualification = model.Educations[i].Qualification
+                };
                 _context.Educations.Add(education);
                 _context.SaveChanges();
-                return RedirectToAction("index", "home");
-
             }
-            return RedirectToAction("~Views/Resume/index.cshtml");
+
+            return Json(new
+            {
+                status = "OK",
+                code = 200,
+                message = "added product",
+                data = model,
+                redirectUrl = Url.Action("Index", "Home"),
+                isRedirect = true
+            });
+
         }
 
         [HttpPost]
-        public IActionResult EditResume(CreateResumeViewModel createResume)
+        public JsonResult EditResume(ResumeViewModel model)
         {
-            if (ModelState.IsValid)
+            string uniqueFileName = string.Empty;
+            if (model.Upload != null)
             {
+                string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Upload.FileName;
+                string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
+                model.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
+            }
 
-                string uniqueFileName = string.Empty;
-                if (createResume.Resume.Upload != null)
+            Candidate candidate = _context.Candidates.Find(_auth.User.Candidate.Id);
+
+            candidate.Name = model.Name;
+            candidate.Lastname = model.Lastname;
+            candidate.Email = model.Email;
+            candidate.Phone = model.Phone;
+            candidate.Profession = model.Profession;
+            candidate.ExperienceTime = model.ExperienceTime;
+            candidate.UserId = _auth.User.Id;
+            candidate.PersonalSkill = model.PersonalSkill;
+            candidate.Photo = uniqueFileName;
+            _context.SaveChanges();
+
+
+            var experiences = _context.Experiences.Where(e => e.CandidateId == _auth.User.Candidate.Id).ToList();
+
+            if (model.Experiences.Count == experiences.Count)
+            {
+                for (var j = 0; j < experiences.Count; j++)
                 {
-                    string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + createResume.Resume.Upload.FileName;
-                    string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    createResume.Resume.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
+                    experiences[j].CompanyName = model.Experiences[j].CompanyName;
+                    experiences[j].StartedAt = model.Experiences[j].StartedAt;
+                    experiences[j].FinishedAt = model.Experiences[j].FinishedAt;
+                    experiences[j].CandidateId = candidate.Id;
+                    experiences[j].Position = model.Experiences[j].Position;
                 }
-                Candidate candidate = _context.Candidates.FirstOrDefault(c => c.Id == _auth.User.Candidate.Id);
-
-                candidate.Name = createResume.Resume.Name;
-                candidate.Lastname = createResume.Resume.Lastname;
-                candidate.Profession = createResume.Resume.Profession;
-                candidate.ExperienceTime = createResume.Resume.ExperienceTime;
-                candidate.Email = createResume.Resume.Email;
-                candidate.Phone = createResume.Resume.Phone;
-                candidate.PersonalSkill = createResume.Resume.PersonalSkill;
-                candidate.UserId = _auth.User.Id;
-                candidate.Photo = uniqueFileName;
-
-                _context.SaveChanges();
-
-
-                Education education = _context.Educations.FirstOrDefault(e => e.CandidateId == candidate.Id);
-                education.SchoolName = createResume.Education.SchoolName;
-                education.Qualification = createResume.Education.Qualification;
-                education.StartedAt = createResume.Education.StartedAt;
-                education.FinishedAt = createResume.Education.FinishedAt;
-                education.University = createResume.Education.University;
-                education.CandidateId = candidate.Id;
-
-                Experience experience = _context.Experiences.FirstOrDefault(e => e.CandidateId == candidate.Id);
-                experience.CompanyName = createResume.Experience.CompanyName;
-                experience.Position = createResume.Experience.Position;
-                experience.StartedAt = createResume.Experience.StartedAt;
-                experience.FinishedAt = createResume.Experience.FinishedAt;
-                experience.CandidateId = candidate.Id;
-
-                _context.SaveChanges();
-                return RedirectToAction("index", "home");
+            }
+            else if (model.Experiences.Count > experiences.Count)
+            {
+                for (var j = 0; j < experiences.Count; j++)
+                {
+                    experiences[j].CompanyName = model.Experiences[j].CompanyName;
+                    experiences[j].StartedAt = model.Experiences[j].StartedAt;
+                    experiences[j].FinishedAt = model.Experiences[j].FinishedAt;
+                    experiences[j].Position = model.Experiences[j].Position;
+                }
+                for (var k = experiences.Count; k < model.Experiences.Count; k++)
+                {
+                    Experience experience = new Experience
+                    {
+                        CompanyName = model.Experiences[k].CompanyName,
+                        StartedAt = model.Experiences[k].StartedAt,
+                        FinishedAt = model.Experiences[k].FinishedAt,
+                        CandidateId = candidate.Id,
+                        Position = model.Experiences[k].Position
+                    };
+                    _context.Experiences.Add(experience);
+                }
 
             }
-            return RedirectToAction("~Views/Resume/index.cshtml");
+            else if (experiences.Count > model.Experiences.Count)
+            {
+                for (var j = 0; j < model.Experiences.Count; j++)
+                {
+                    experiences[j].CompanyName = model.Experiences[j].CompanyName;
+                    experiences[j].StartedAt = model.Experiences[j].StartedAt;
+                    experiences[j].FinishedAt = model.Experiences[j].FinishedAt;
+                    experiences[j].CandidateId = candidate.Id;
+                    experiences[j].Position = model.Experiences[j].Position;
+                }
+                for (var t = model.Experiences.Count; t < experiences.Count; t++)
+                {
+                    _context.Experiences.Remove(experiences[t]);
+                }
+
+            }
+
+            var educations = _context.Educations.Where(e => e.CandidateId == _auth.User.Candidate.Id).ToList();
+
+            if (model.Educations.Count == educations.Count)
+            {
+                for (var j = 0; j < educations.Count; j++)
+                {
+                    educations[j].SchoolName = model.Educations[j].SchoolName;
+                    educations[j].StartedAt = model.Educations[j].StartedAt;
+                    educations[j].FinishedAt = model.Educations[j].FinishedAt;
+                    educations[j].CandidateId = candidate.Id;
+                    educations[j].Qualification = model.Educations[j].Qualification;
+                    educations[j].University = model.Educations[j].University;
+                }
+            }
+            else if (model.Educations.Count > educations.Count)
+            {
+                for (var j = 0; j < educations.Count; j++)
+                {
+                    educations[j].SchoolName = model.Educations[j].SchoolName;
+                    educations[j].StartedAt = model.Educations[j].StartedAt;
+                    educations[j].FinishedAt = model.Educations[j].FinishedAt;
+                    educations[j].Qualification = model.Educations[j].Qualification;
+                    educations[j].University = model.Educations[j].University;
+                }
+                for (var k = educations.Count; k < model.Educations.Count; k++)
+                {
+                    Education education = new Education
+                    {
+                        SchoolName = model.Educations[k].SchoolName,
+                        StartedAt = model.Educations[k].StartedAt,
+                        FinishedAt = model.Educations[k].FinishedAt,
+                        CandidateId = candidate.Id,
+                        Qualification = model.Educations[k].Qualification,
+                        University = model.Educations[k].University,
+                    };
+                    _context.Add(education);
+                }
+
+            }
+            else if(educations.Count > model.Educations.Count)
+            {
+                for (var j = 0; j < model.Educations.Count; j++)
+                {
+                    educations[j].SchoolName = model.Educations[j].SchoolName;
+                    educations[j].StartedAt = model.Educations[j].StartedAt;
+                    educations[j].FinishedAt = model.Educations[j].FinishedAt;
+                    educations[j].CandidateId = candidate.Id;
+                    educations[j].Qualification = model.Educations[j].Qualification;
+                    educations[j].University = model.Educations[j].University;
+                }
+                for (var t = model.Educations.Count; t<educations.Count; t++)
+                {
+                    _context.Educations.Remove(educations[t]);
+                }
+
+            }
+
+            _context.SaveChanges();
+
+            return Json(new
+            {
+                status = "OK",
+                code = 200,
+                message = "added product",
+                data = model,
+                redirectUrl = Url.Action("Index", "Home"),
+                isRedirect = true
+            });
+
         }
+
+
+        //[HttpPost]
+        //public IActionResult EditResume(CreateResumeViewModel createResume)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        string uniqueFileName = string.Empty;
+        //        if (createResume.Resume.Upload != null)
+        //        {
+        //            string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+        //            uniqueFileName = Guid.NewGuid().ToString() + "_" + createResume.Resume.Upload.FileName;
+        //            string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
+        //            createResume.Resume.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
+        //        }
+        //        Candidate candidate = _context.Candidates.FirstOrDefault(c => c.Id == _auth.User.Candidate.Id);
+
+        //        candidate.Name = createResume.Resume.Name;
+        //        candidate.Lastname = createResume.Resume.Lastname;
+        //        candidate.Profession = createResume.Resume.Profession;
+        //        candidate.ExperienceTime = createResume.Resume.ExperienceTime;
+        //        candidate.Email = createResume.Resume.Email;
+        //        candidate.Phone = createResume.Resume.Phone;
+        //        candidate.PersonalSkill = createResume.Resume.PersonalSkill;
+        //        candidate.UserId = _auth.User.Id;
+        //        candidate.Photo = uniqueFileName;
+
+        //        _context.SaveChanges();
+
+
+        //        Education education = _context.Educations.FirstOrDefault(e => e.CandidateId == candidate.Id);
+        //        education.SchoolName = createResume.Education.SchoolName;
+        //        education.Qualification = createResume.Education.Qualification;
+        //        education.StartedAt = createResume.Education.StartedAt;
+        //        education.FinishedAt = createResume.Education.FinishedAt;
+        //        education.University = createResume.Education.University;
+        //        education.CandidateId = candidate.Id;
+
+        //        Experience experience = _context.Experiences.FirstOrDefault(e => e.CandidateId == candidate.Id);
+        //        experience.CompanyName = createResume.Experience.CompanyName;
+        //        experience.Position = createResume.Experience.Position;
+        //        experience.StartedAt = createResume.Experience.StartedAt;
+        //        experience.FinishedAt = createResume.Experience.FinishedAt;
+        //        experience.CandidateId = candidate.Id;
+
+        //        _context.SaveChanges();
+        //        return RedirectToAction("index", "home");
+
+        //    }
+        //    return RedirectToAction("~Views/Resume/index.cshtml");
+        //}
     }
 }

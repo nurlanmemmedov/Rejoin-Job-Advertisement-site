@@ -18,6 +18,8 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
 
+
+
     <!-- Title -->
     <title>rejoin - Job board html template</title>
 
@@ -362,30 +364,14 @@
                         <div class="top-bar-right">
                             <ul class="custom">
                                 <li>
-                                    <a href="register.html" class=""><i class="fa fa-user mr-1"></i> <span>Register</span></a>
+                                    <a asp-controller="account" asp-action="register" class=""><i class="fa fa-user mr-1"></i> <span>Register</span></a>
                                 </li>
                                 <li>
-                                    <a href="login.html" class=""><i class="fa fa-sign-in mr-1"></i> <span>Login</span></a>
+                                    <a asp-controller="account" asp-action="login" class=""><i class="fa fa-sign-in mr-1"></i> <span>Login</span></a>
                                 </li>
                                 <li class="dropdown">
-                                    <a href="#" class="" data-toggle="dropdown"><i class="fa fa-home mr-1"></i><span> My Dashboard</span></a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a href="mydash.html" class="dropdown-item">
-                                            <i class="dropdown-icon icon icon-user"></i> My Profile
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="dropdown-icon icon icon-speech"></i> Inbox
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="dropdown-icon icon icon-bell"></i> Notifications
-                                        </a>
-                                        <a href="mydash.html" class="dropdown-item">
-                                            <i class="dropdown-icon  icon icon-settings"></i> Account Settings
-                                        </a>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="dropdown-icon icon icon-power"></i> Log out
-                                        </a>
-                                    </div>
+                                
+                                    <a asp-controller="account" asp-action="logout"  > <i class="icon icon-power"></i> <span>Çıxış </span></a>
                                 </li>
                                 <li>
                                     <a href="login.html" class=""><i class="fa fa-black-tie mr-1"></i> <span>For Employer</span></a>
@@ -488,7 +474,7 @@
                                             <ul class="col link-list">
                                                 <li class="title">Job List pages</li>
                                                 <li><a href="jobs-list.html">Jobs List</a></li>
-                                                <li><a href="jobs-list-right.html">Jobs List Right</a></li>
+                                                <li><a asp-controller="searchjob" asp-action="index">Jobs List Right</a></li>
                                                 <li><a href="jobs-list-map.html">Jobs Map list</a></li>
                                                 <li><a href="jobs-list-map2.html">Jobs Map list 02</a></li>
                                                 <li><a href="jobs-list-map3.html">Jobs Map style 03</a></li>
@@ -537,8 +523,8 @@
                                                 <li><a href="404.html">404 Error</a></li>
                                                 <li><a href="500.html">500 Error</a></li>
                                                 <li><a href="404-inline.html">Inline Error</a></li>
-                                                <li><a asp-action="index" asp-controller="register">Register</a></li>
-                                                <li><a asp-action="index" asp-controller="login">Login</a></li>
+                                                <li><a asp-action="register" asp-controller="account">Register</a></li>
+                                                <li><a asp-action="login" asp-controller="account">Login</a></li>
                                                 <li><a href="login-2.html">Login 02</a></li>
                                                 <li><a href="forgot.html">Forgot Password</a></li>
                                                 <li><a href="lockscreen.html">Lock Screen</a></li>
@@ -902,6 +888,9 @@
         <script src="~/js/JavaScript.js">
         </script>
         <script src="https://kit.fontawesome.com/3da3c9c8f9.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
 
 </body>
 
