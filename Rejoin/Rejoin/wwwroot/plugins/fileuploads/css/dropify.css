@@ -1,4 +1,4 @@
-/*!
+﻿/*!
  * =============================================================
  * dropify v0.2.2 - Override your input files with style.
  * https://github.com/JeremyFagis/dropify
@@ -386,8 +386,8 @@
             transform: rotateZ(0deg); } }
 			
 .dropify-image-avatar .dropify-wrapper{
-	width:150px !important;
-	height:150px !important;
+	width:235px !important;
+	height:224px !important;
 	margin-bottom:20px;
 }
 .dropify-image-avatar  .dropify-wrapper .dropify-preview .dropify-infos{

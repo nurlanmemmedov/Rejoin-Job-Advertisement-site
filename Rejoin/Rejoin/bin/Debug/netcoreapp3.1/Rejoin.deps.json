@@ -31,6 +31,8 @@
           "Microsoft.EntityFrameworkCore.SqlServer": "3.0.0",
           "Microsoft.Extensions.Logging.Debug": "3.1.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.1.0",
+          "SmartBreadcrumbs": "3.0.0",
+          "bootstrap": "4.1.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -321,6 +323,12 @@
           "Rejoin.dll": {}
         }
       },
+      "bootstrap/4.1.0": {
+        "dependencies": {
+          "jQuery": "3.0.0",
+          "popper.js": "1.14.0"
+        }
+      },
       "CryptoHelper/3.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": "2.0.0"
@@ -335,6 +343,7 @@
           "lib/netstandard2.0/CryptoHelper.dll": {}
         }
       },
+      "jQuery/3.0.0": {},
       "Microsoft.AspNetCore.Cryptography.Internal/2.0.0": {},
       "Microsoft.AspNetCore.Cryptography.KeyDerivation/2.0.0": {
         "dependencies": {
@@ -1052,6 +1061,7 @@
           "lib/netstandard1.6/NuGet.Frameworks.dll": {}
         }
       },
+      "popper.js/1.14.0": {},
       "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.fedora.23-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
       "runtime.fedora.24-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {},
@@ -1132,6 +1142,17 @@
             "assetType": "native",
             "fileVersion": "4.6.25512.1"
           }
+        }
+      },
+      "SmartBreadcrumbs/3.0.0": {
+        "runtime": {
+          "lib/netcoreapp3.0/SmartBreadcrumbs.dll": {
+            "assemblyVersion": "3.0.0.0",
+            "fileVersion": "3.0.0.0"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.0/SmartBreadcrumbs.dll": {}
         }
       },
       "System.AppContext/4.3.0": {
@@ -3754,12 +3775,26 @@
       "serviceable": false,
       "sha512": ""
     },
+    "bootstrap/4.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-MpThvC2aO+DVfGP76J4TBIZ23pwyIkcGp2miNvQITqjNoGwLtGfY7pRU1u33Ot/7DU20LY2Ur6ZYlM0KGtCglg==",
+      "path": "bootstrap/4.1.0",
+      "hashPath": "bootstrap.4.1.0.nupkg.sha512"
+    },
     "CryptoHelper/3.0.0": {
       "type": "package",
       "serviceable": true,
       "sha512": "sha512-CUCXoKUZ1XQSU5+TL2p5BkA6hSLHF4aBaSRNbxzTLQ6MPf1PEBLI1AH636ptL5iz0gYVieWWZu43Qn5j49LE/A==",
       "path": "cryptohelper/3.0.0",
       "hashPath": "cryptohelper.3.0.0.nupkg.sha512"
+    },
+    "jQuery/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-xFfntV19HzCtKdJWOp/XT9PUY3SslokTDDLFJZdBug36j1XVhw1+vPQ/n7Gd5y+jdpesn5B1m1yn1qIUq57jlA==",
+      "path": "jquery/3.0.0",
+      "hashPath": "jquery.3.0.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Cryptography.Internal/2.0.0": {
       "type": "package",
@@ -4118,6 +4153,13 @@
       "path": "nuget.frameworks/4.7.0",
       "hashPath": "nuget.frameworks.4.7.0.nupkg.sha512"
     },
+    "popper.js/1.14.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SPxZdXknelgQ015wey7GMZvsVdt/SyEmHYORhEp5k/uF9MUk9DPtkn+6dR98fud2hVWJjZm9KKr474+r7WQt+A==",
+      "path": "popper.js/1.14.0",
+      "hashPath": "popper.js.1.14.0.nupkg.sha512"
+    },
     "runtime.debian.8-x64.runtime.native.System.Security.Cryptography.OpenSsl/4.3.0": {
       "type": "package",
       "serviceable": true,
@@ -4257,6 +4299,13 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "SmartBreadcrumbs/3.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-6lYfQ/foOMwK33TqrcbTBcpcSnPFThceQUN2gmT5QgSFbUC6t92VZBhiWIys+54UwadpSzMcFxnXwNzumhSBdg==",
+      "path": "smartbreadcrumbs/3.0.0",
+      "hashPath": "smartbreadcrumbs.3.0.0.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

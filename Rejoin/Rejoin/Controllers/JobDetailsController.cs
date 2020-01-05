@@ -23,7 +23,10 @@ namespace Rejoin.Controllers
             Job job = _context.Jobs.Include("JobReviews").Include("Company").Include("Category").FirstOrDefault(j => j.Id == JobId);
             job.ViewCount++;
             _context.SaveChanges();
+            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.All = _context.Jobs.ToList();
             ViewBag.Job = job;
+            ViewBag.RelatedJobs = _context.Jobs.Include("Company").Where(j => j.CategoryId == job.CategoryId && j.Id != job.Id).ToList();
             return View();
         }
     }

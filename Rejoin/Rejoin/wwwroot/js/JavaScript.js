@@ -37,7 +37,9 @@
         resumedata.append("phone", $("input[name=resume-input-phone]").val());
         resumedata.append("personalSkill", $("input[name=resume-input-personal]").val());
         resumedata.append("experienceTime", $("select[name=resume-input-exp] option:selected").text());
-        resumedata.append("Upload", photos[0], photos[0].name);
+        if (photos.length > 0) {
+            resumedata.append("Upload", photos[0], photos[0].name);
+        }
 
         for (let i = 0; i < experiences.length; i++) {
             resumedata.append("experiences[" + i + "].CompanyName", experiences[i].CompanyName);
@@ -117,7 +119,9 @@
         EditedResumedata.append("phone", $("input[name=resume-input-phone]").val());
         EditedResumedata.append("personalSkill", $("input[name=resume-input-personal]").val());
         EditedResumedata.append("experienceTime", $("select[name=resume-input-exp] option:selected").text());
-        EditedResumedata.append("Upload", editphotos[0], editphotos[0].name);
+        if (editphotos.length > 0) {
+            EditedResumedata.append("Upload", editphotos[0], editphotos[0].name);
+        }
 
         for (let i = 0; i < experiences.length; i++) {
             EditedResumedata.append("experiences[" + i + "].CompanyName", experiences[i].CompanyName);
@@ -199,7 +203,9 @@
         formdata.append("Location", $("input[name=companyaddress]").val());
         formdata.append("Website", $("input[name=companywebsite]").val());
         formdata.append("Info", $("textarea[name=companyinfo]").val());
-        formdata.append("Upload", files[0], files[0].name);
+        if (files.length>0) {
+            formdata.append("Upload", files[0], files[0].name);
+        }
 
         $.ajax({
             url: "/CompanyDashboard/CreateCompany",
@@ -210,13 +216,20 @@
             contentType: false,
             beforeSend: function () {
             },
+            success: function (data, textStatus, xhr) {
+                console.log(xhr.status);
+            },
             success: function (response) {
-            },
-            error: function (error) {
-            },
-            complete: function () {
+
+                toastr.success(response.message, 'Şirkət profili yaradıldı artıq iş elanı verə bilərsiniz', { timeOut: 900 });
                 $('#companyModal').modal('hide');
                 location.reload();
+            },
+            error: function (error) {
+                toastr.error(error.message, 'məlumatları düzgün doldurduğunuzdan əmin olun', { timeOut: 900 });
+            },
+            complete: function () {
+              
             }
         })
     })
@@ -235,7 +248,6 @@
             beforeSend: function () {
             },
             success: function (response) {
-
             },
             error: function (error) {
 
@@ -261,7 +273,7 @@
             beforeSend: function () {
             },
             success: function (response) {
-
+                toastr.success(response.message, 'İş müraciətiniz tamamlandı', { timeOut: 900 });
             },
             error: function (error) {
 
@@ -274,29 +286,45 @@
 
     $(".add-another-edu").click((e) => {
 
-        $(".add-another-edu").parent().before(` <div class="card card-edu">
+        $(".add-another-edu").parent().before(`     <div class="card card-edu">
                         <div class="card-header ">
-                            <h3 class="card-title">Education</h3>
-                
-                        <div class="card-options">
-                                    <a class="btn btn-light btn-sm remove-edu" href="#"><i class="fas fa-minus-circle"></i> Sil</a>
-                        </div>
+                            <h3 class="card-title">Təhsili</h3>
+
+                            <div class="card-options">
+                                <a class="btn btn-light btn-sm remove-edu" href="#"><i class="fas fa-minus-circle"></i>Sil</a>
+                            </div>
                         </div>
                         <div class="card-body">
-                            <div class="form-group">
-                                <label  class="form-label text-dark">School Name</label>
-                                <input name="resume-edu-school" type="text" class="form-control" placeholder="School Name" required>
+                            <div class="row">
+                                <div class="form-group col-lg-6 col-md-12" style="padding-right:4px !important">
+                                    <label class="form-label text-dark">Məktəb</label>
+                                    <input name="resume-edu-school" type="text" class="form-control" placeholder="Məktəb adı" required>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-12" style="padding-left:4px !important">
+                                    <label class="form-label text-dark">İxtisas</label>
+
+                                    <input name="resume-edu-quality" type="text" class="form-control" placeholder="İxtisas" required>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label text-dark">Qualification</label>
-                                <input  name="resume-edu-quality" type="text" class="form-control" placeholder="Qualification" required>
+                                <label class="form-label text-dark">Universitet</label>
+                                <select name="resume-edu-uni" class="form-control custom-select select2-show-search" data-placeholder="Universitet seç">
+                                    <option value="Universitet">Universitet</option>
+                                    <option value="Bakı Dövlət Universiteti">Bakı Dövlət Universiteti</option>
+                                    <option value="Azərbaycan Dövlət Neft və Sənaye Universiteti">Azərbaycan Dövlət Neft və Sənaye Universiteti</option>
+                                    <option value="Azərbaycan Dövlət İqtisad Universiteti">Azərbaycan Dövlət İqtisad Universiteti</option>
+                                    <option value="Bakı Ali Neft Məktəbi">Bakı Ali Neft Məktəbi</option>
+                                    <option value="Azərbaycan Dövlət Dillər Universiteti">Azərbaycan Dövlət Dillər Universiteti</option>
+                                    <option value="Azərbaycan Dövlət Texniki Universiteti">Azərbaycan Dövlət Texniki Universiteti</option>
+                                    <option value="Azərbaycan Dövlət Memarlıq və İnşaat Universiteti">Azərbaycan Dövlət Memarlıq və İnşaat Universiteti</option>
+                                </select>
                             </div>
                             <div class="form-group">
-                                <label class="form-label text-dark">Period</label>
                                 <div class="row gutters-xs">
                                     <div class="col-6">
-                                        <select name="resume-edu-since" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
-                                            <option value="0">Since</option>
+                                        <label class="form-label text-dark">Başlama tarixi</label>
+                                        <select name="resume-edu-since" class="form-control custom-select select2-show-search" data-placeholder="Başlama tarixi seç">
+                                            <option value="0">Başlama tarixi</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
@@ -330,8 +358,9 @@
                                         </select>
                                     </div>
                                     <div class="col-6">
-                                        <select name="resume-edu-till" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
-                                            <option value="0">Untill</option>
+                                        <label class="form-label text-dark">Bitiş tarixi</label>
+                                        <select name="resume-edu-till" class="form-control custom-select select2-show-search" data-placeholder="Bitiş tarixi seç">
+                                            <option value="0">Bitiş tarixi</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
@@ -366,20 +395,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="form-label text-dark">Board</label>
-                                <select name="resume-edu-uni" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
-                                    <option value="University">University</option>
-                                    <option value="Mitchel Knights University">Mitchel Knights University</option>
-                                    <option value="Stephaine Dear University">Stephaine Dear University</option>
-                                    <option value="Jasmin Garay University">Jasmin Garay University</option>
-                                    <option value="Janetta Leister University">Janetta Leister University</option>
-                                    <option value="Alethia Barberio University">Alethia Barberio University</option>
-                                    <option value="Basil Bard University">Basil Bard University</option>
-                                    <option value="Ella Boeke University">Ella Boeke University</option>
-                                    <option value="Setsuko Speece University">Setsuko Speece University</option>
-                                </select>
-                            </div>
+
                         </div>
                     </div>`);
         removingEdu();
@@ -388,29 +404,31 @@
 
 
     $(".add-another-exp").click((e) => {
-        $(".add-another-exp").parent().before(`   <div class="card card-exp">
+        $(".add-another-exp").parent().before(` <div class="card card-exp">
                         <div class="card-header ">
-                            <h3 class="card-title">Working Experience</h3>
-                        <div class="card-options">
-                                    <a class="btn btn-light btn-sm remove-exp" href="#"><i class="fas fa-minus-circle"></i> Sil</a>
-                        </div>
-                        </div>
+                            <h3 class="card-title">İş təcrübəsi</h3>
 
+                            <div class="card-options">
+                                <a class="btn btn-light btn-sm remove-exp" href="#"><i class="fa fa-plus"></i> Sil</a>
+                            </div>
+                        </div>
                         <div class="card-body">
-                            <div class="form-group">
-                                <label class="form-label text-dark">Company Name</label>
-                                <input  name="resume-exp-company" type="text" class="form-control" placeholder="Company Name" required>
+                            <div class="row">
+                                <div class="form-group col-lg-6 col-md-12" style="padding-right:4px !important">
+                                    <label class="form-label text-dark">Şirkət adı</label>
+                                    <input name="resume-exp-company" type="text" class="form-control" placeholder="Şirkət adı" required>
+                                </div>
+                                <div class="form-group col-lg-6 col-md-12" style="padding-left:4px !important">
+                                    <label class="form-label text-dark">Pozisiya</label>
+                                    <input name="resume-exp-position" type="text" class="form-control" placeholder="Pozisiya" required>
+                                </div>
                             </div>
                             <div class="form-group">
-                                <label class="form-label text-dark">Position</label>
-                                <input name="resume-exp-position" type="text" class="form-control" placeholder="Position" required>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label text-dark">Period</label>
                                 <div class="row gutters-xs">
                                     <div class="col-6">
-                                        <select name="resume-exp-since" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
-                                            <option value="0">Since</option>
+                                        <label class="form-label text-dark">Başlama tarixi</label>
+                                        <select name="resume-exp-since" class="form-control custom-select select2-show-search" data-placeholder="Başlama tarixi seç">
+                                            <option value="0">Başlama tarixi</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
@@ -444,8 +462,9 @@
                                         </select>
                                     </div>
                                     <div class="col-6">
-                                        <select name="resume-exp-till" class="form-control custom-select select2-show-search" data-placeholder="Choose one (with searchbox)">
-                                            <option value="0">Untill</option>
+                                        <label class="form-label text-dark">Bitiş tarixi</label>
+                                        <select name="resume-exp-till" class="form-control custom-select select2-show-search" data-placeholder="Bitiş tarixi seç">
+                                            <option value="0">Bitiş tarixi</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
@@ -483,7 +502,7 @@
                         </div>
                     </div>`);
         removingExp()
-        })
+    })
 
 
 

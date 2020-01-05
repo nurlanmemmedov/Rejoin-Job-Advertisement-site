@@ -10,35 +10,35 @@ namespace Rejoin.ViewModels
 {
     public class JobViewModel
     {
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
+        [MaxLength(50, ErrorMessage = "Maksimum 50 xarakter ola bilər")]
         public string Title { get; set; }
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
+        [MaxLength(50, ErrorMessage = "Maksimum 50 xarakter ola bilər")]
         public string City { get; set; }
-        [Required]
-        [MaxLength(200)]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
+        [MaxLength(200, ErrorMessage = "Maksimum 50 xarakter ola bilər")]
         public string Address { get; set; }
-        [Required]
-        [MaxLength(500)]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
+        [MaxLength(500, ErrorMessage = "Maksimum 50 xarakter ola bilər")]
         public string Description { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
         public JobType JobType { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
         [Column(TypeName = "money")]
         public int MinSalary { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
         [Column(TypeName = "money")]
         public int MaxSalary { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
         public int MaxExperience { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
         public int MinExperience { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
         public int CategoryId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
         public int CompanyId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
         public DateTime CreatedAt{ get; set; }
         public Company Company { get; set; }
 

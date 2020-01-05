@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Rejoin.ViewModels;
 using Rejoin.Models;
 using Rejoin.Injections;
-
-
 using Rejoin.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;

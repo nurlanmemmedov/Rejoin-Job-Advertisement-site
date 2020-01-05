@@ -1,4 +1,5 @@
-﻿@inject IRelativeTime relativeTime
+﻿@model SearchViewModel
+@inject IRelativeTime relativeTime
 
 @{
     ViewData["Title"] = "Home Page";
@@ -24,38 +25,33 @@
                 <div class="col-xl-8 col-lg-8 col-md-8 d-block mx-auto">
                     <div class="input-field">
                         <div class="text-center text-white  mb-5 ">
-                            <h1 class="mb-1">Find Best Job</h1>
-                            <p class="d-none d-md-block">It is a long established fact that a reader will be distracted by the readable.</p>
+                            <h1 class="mb-1">Sənin üçün ən yaxşı işi tap</h1>
+                            <p class="d-none d-md-block">səhifəmizdəki işlərdən özün üçün ən uyğunlarını gör</p>
                         </div>
                         <div class="search-background bg-transparent">
-                            <div class="form row no-gutters ">
+                            <form class="form row no-gutters "  method="post" enctype="multipart/form-data" asp-controller="searchjob" asp-action="index">
                                 <div class="form-group  col-xl-4 col-lg-3 col-md-12 mb-0 bg-white ">
-                                    <input type="text" class="form-control input-lg br-tr-md-0 br-br-md-0" id="text4" placeholder="Search Jobs">
+                                    <input asp-for="KeyWord" type="text" class="form-control input-lg br-tr-md-0 br-br-md-0" id="text4" placeholder="İş adı yaz">
                                 </div>
                                 <div class="form-group  col-xl-3 col-lg-3 col-md-12 mb-0 bg-white">
-                                    <input type="text" class="form-control input-lg br-md-0" id="text5" placeholder="Select Location">
+                                    <input asp-for="Location" type="text" class="form-control input-lg br-md-0" id="text5" placeholder="Ərazi adı yaz">
                                     <span><img src="https://www.spruko.com/demo/rejoin/assets/images/svg/gps.svg" class="location-gps"></span>
                                 </div>
                                 <div class="form-group col-xl-3 col-lg-3 col-md-12 select2-lg  mb-0 bg-white">
-                                    <select class="form-control select2-show-search  border-bottom-0" data-placeholder="Select Category">
-                                        <optgroup label="Categories">
-                                            <option>All Categories</option>
-                                            <option value="1">Accountant</option>
-                                            <option value="2">IT Software</option>
-                                            <option value="3">Banking</option>
-                                            <option value="4">Finaces</option>
-                                            <option value="5">Cook/Chef</option>
-                                            <option value="6">Driveing</option>
-                                            <option value="7">HR Recruiter</option>
-                                            <option value="8">IT Hardware</option>
-                                            <option value="9">Sales</option>
+                                    <select class="form-control select2-show-search  border-bottom-0" data-placeholder="Kateqoriya seç">
+                                        <optgroup label="Kateqoriyalar">
+                                            <option value="0">Bütün Kateqoriyalar</option>
+                                            @foreach (Category item in ViewBag.Categories)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+                                            }
                                         </optgroup>
                                     </select>
                                 </div>
                                 <div class="col-xl-2 col-lg-3 col-md-12 mb-0">
-                                    <a href="#" class="btn btn-lg btn-block btn-secondary br-tl-md-0 br-bl-md-0"><i class="fa fa-search mr-1"></i>Search</a>
+                                    <button class="btn btn-lg btn-block btn-secondary br-tl-md-0 br-bl-md-0"><i class="fa fa-search mr-1"></i>Axtarış et</button>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>

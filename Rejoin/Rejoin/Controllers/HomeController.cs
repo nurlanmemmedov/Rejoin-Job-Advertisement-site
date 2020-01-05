@@ -25,6 +25,7 @@ namespace Rejoin.Controllers
         public IActionResult Index()
         {
             ViewBag.Jobs = _context.Jobs.Include("Company").ToList();
+            ViewBag.Categories = _context.Categories.ToList();
             return View();
         }
     }

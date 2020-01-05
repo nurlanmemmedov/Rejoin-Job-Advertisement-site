@@ -234,7 +234,6 @@ C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\bin\Debug\netcoreap
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.csprojAssemblyReference.cache
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\staticwebassets\Rejoin.StaticWebAssets.Manifest.cache
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\staticwebassets\Rejoin.StaticWebAssets.xml
-C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.RazorAssemblyInfo.cache
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.RazorAssemblyInfo.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.AssemblyInfoInputs.cache
@@ -243,7 +242,6 @@ C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreap
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.TagHelpers.output.cache
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.RazorCoreGenerate.cache
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Resume\Index.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CreateCompany.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
@@ -264,3 +262,9 @@ C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreap
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\SearchJob\Index.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Account\Login.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Account\Register.cshtml.g.cs
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_LocationView.cshtml.g.cs
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\bin\Debug\netcoreapp3.1\SmartBreadcrumbs.dll
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CompanyPanel.cshtml.g.cs
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SearchJob.cshtml.g.cs

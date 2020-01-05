@@ -10,6 +10,7 @@ namespace Rejoin.ViewModels
     public class ApplyViewModel
     {
         [Required]
+
         public string WhyYou { get; set; }
         [Required]
         public DateTime AppliedAt { get; set; }

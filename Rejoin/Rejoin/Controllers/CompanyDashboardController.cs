@@ -31,25 +31,28 @@ namespace Rejoin.Controllers
         [HttpPost]
         public JsonResult CreateCompany(Company company)
         {
-            string uniqueFileName = string.Empty;
-            if (company.Upload != null)
-            {
-                string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + company.Upload.FileName;
-                string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
-                company.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
-            }
-            company.UserId = _auth.User.Id;
-            company.Photo = uniqueFileName;
-            _context.Companies.Add(company);
-            _context.SaveChanges();
-            return Json(new
-            {
-                status = "OK",
-                code = 200,
-                message = "added product",
-                data = company
-            });
+           
+                string uniqueFileName = string.Empty;
+                if (company.Upload != null)
+                {
+                    string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+                    uniqueFileName = Guid.NewGuid().ToString() + "_" + company.Upload.FileName;
+                    string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    company.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
+                }
+                company.UserId = _auth.User.Id;
+                company.Photo = uniqueFileName;
+                _context.Companies.Add(company);
+                _context.SaveChanges();
+                return Json(new
+                {
+                    status = "OK",
+                    code = 200,
+                    message = "Şirkət profili yaradıldı",
+                    data = company
+                });
+
+        
         }
 
         [HttpPost]
@@ -57,29 +60,31 @@ namespace Rejoin.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = string.Empty;
-                if (model.Upload != null)
-                {
-                    string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Upload.FileName;
-                    string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    model.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
-                }
-                Company company = new Company
-                {
-                    Name = model.Name,
-                    Email = model.Email,
-                    Website = model.Website,
-                    Phone = model.Phone,
-                    Location = model.Location,
-                    UserId = _auth.User.Id,
-                    Info = model.Info,
-                    Photo = uniqueFileName
-                };
+                
+                    string uniqueFileName = string.Empty;
+                    if (model.Upload != null)
+                    {
+                        string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
+                        uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Upload.FileName;
+                        string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
+                        model.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
+                    }
+                    Company company = new Company
+                    {
+                        Name = model.Name,
+                        Email = model.Email,
+                        Website = model.Website,
+                        Phone = model.Phone,
+                        Location = model.Location,
+                        UserId = _auth.User.Id,
+                        Info = model.Info,
+                        Photo = uniqueFileName
+                    };
 
-                _context.Companies.Add(company);
-                _context.SaveChanges();
-                return RedirectToAction("index", "companydashboard");
+                    _context.Companies.Add(company);
+                    _context.SaveChanges();
+                    return RedirectToAction("index", "companydashboard");
+  
             }
             return View("~/Views/CompanyDashboard/index.cshtml");
         }
@@ -88,6 +93,7 @@ namespace Rejoin.Controllers
         {
             if (ModelState.IsValid)
             {
+                Company company = _context.Companies.FirstOrDefault(c => c.UserId == _auth.User.Id);
                 string uniqueFileName = string.Empty;
                 if (model.Upload != null)
                 {
@@ -95,8 +101,8 @@ namespace Rejoin.Controllers
                     uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Upload.FileName;
                     string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
                     model.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
+                    company.Photo = uniqueFileName;
                 }
-                Company company = _context.Companies.FirstOrDefault(c => c.UserId == _auth.User.Id);
 
                 company.Name = model.Name;
                 company.Email = model.Email;
@@ -105,13 +111,11 @@ namespace Rejoin.Controllers
                 company.Location = model.Location;
                 company.UserId = _auth.User.Id;
                 company.Info = model.Info;
-                company.Photo = uniqueFileName;
 
-
-                
                 _context.SaveChanges();
                 return RedirectToAction("index", "companydashboard");
             }
+
             return View("~/Views/CompanyDashboard/index.cshtml");
         }
     }

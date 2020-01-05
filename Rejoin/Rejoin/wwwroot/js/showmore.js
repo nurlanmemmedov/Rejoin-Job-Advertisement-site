@@ -1,30 +1,30 @@
-(function($) {
+﻿(function($) {
     "use strict";
 	$('#container').showmore({
 		closedHeight: 250,
-		buttonTextMore: 'Show more',
-		buttonTextLess: 'Close',
+		buttonTextMore: 'Daha çox göstər',
+		buttonTextLess: 'Daha az göstər',
 		buttonCssClass: 'showmore-button',
 		animationSpeed: 0.5
 	});
 	$('#container1').showmore({
 		closedHeight: 315,
-		buttonTextMore: 'Show more',
-		buttonTextLess: 'Close',
+		buttonTextMore: 'Daha çox göstər',
+		buttonTextLess: 'Daha az göstər',
 		buttonCssClass: 'showmore-button',
 		animationSpeed: 0.5
 	});
 	$('#container2').showmore({
 		closedHeight: 280,
-		buttonTextMore: 'Show more',
-		buttonTextLess: 'Close',
+		buttonTextMore: 'Daha çox göstər',
+		buttonTextLess: 'Daha az göstər',
 		buttonCssClass: 'showmore-button',
 		animationSpeed: 0.5
 	});
 	$('.hide-details').showmore({
 		closedHeight: 137,
-		buttonTextMore: 'Show more',
-		buttonTextLess: 'Close',
+		buttonTextMore: 'Daha çox göstər',
+		buttonTextLess: 'Daha az göstər',
 		buttonCssClass: 'showmore-button1',
 		animationSpeed: 0.5
 	});

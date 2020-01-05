@@ -75,7 +75,8 @@ namespace Rejoin.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("index", "home");
             }
-            return RedirectToAction("~Views/SubmitJob/Index.cshtml");
+            ViewBag.Categories = _context.Categories.ToList();
+            return View("~/Views/SubmitJob/Index.cshtml");
 
         }
 
@@ -107,7 +108,8 @@ namespace Rejoin.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("index", "CompanyJobs");
             }
-            return RedirectToAction("~Views/SubmitJob/index.cshtml");
+            ViewBag.Categories = _context.Categories.ToList();
+            return View("~/Views/SubmitJob/Index.cshtml");
 
         }
 

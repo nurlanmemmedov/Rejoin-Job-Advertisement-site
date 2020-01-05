@@ -11,6 +11,7 @@ namespace Rejoin.Models
     {
         public int Id { get; set; }
         [Required]
+        [MaxLength(300, ErrorMessage = "Maksimum 50 xarakter ola bilər")]
         public string WhyYou { get; set; }
         [Required]
         public DateTime AppliedAt { get; set; }

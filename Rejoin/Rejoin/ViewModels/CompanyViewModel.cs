@@ -12,27 +12,27 @@ namespace Rejoin.ViewModels
     {
 
 
-        [Required]
-        [MaxLength(50)]
-        public string Name { get; set; } = "sjdsj";
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
+        [MaxLength(50, ErrorMessage = "Maksimum 50 xarakter ola bilər")]
+        public string Name { get; set; }
         [Required]
         public int UserId { get; set; }
-        [Required]
-        [MaxLength(500)]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
+        [MaxLength(500, ErrorMessage = "Maksimum 500 xarakter ola bilər")]
         public string Info { get; set; }
-        [MaxLength(100)]
+        [MaxLength(500, ErrorMessage = "Maksimum 500 xarakter ola bilər")]
         public string Photo { get; set; }
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
+        [MaxLength(50, ErrorMessage = "Maksimum 500 xarakter ola bilər")]
         public string Website { get; set; }
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
+        [MaxLength(50, ErrorMessage = "Maksimum 500 xarakter ola bilər")]
         public string Phone { get; set; }
-        [Required]
-        [MaxLength(50)]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
+        [MaxLength(50, ErrorMessage = "Maksimum 500 xarakter ola bilər")]
         public string Email { get; set; }
-        [Required]
-        [MaxLength(200)]
+        [Required(ErrorMessage = "Bu hissə məcburidir")]
+        [MaxLength(200, ErrorMessage = "Maksimum 500 xarakter ola bilər")]
         public string Location { get; set; }
         public List<CompanyReview> CompanyReviews { get; set; }
         public List<CompanySocialLink> CompanySocialLinks { get; set; }

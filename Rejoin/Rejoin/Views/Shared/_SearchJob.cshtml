@@ -1,0 +1,44 @@
+﻿@model SearchViewModel
+@inject IRelativeTime relativeTime
+<div>
+    <div class="cover-image sptb-1 bg-background" data-image-src="~/images/banners/banner1.jpg">
+        <div class="header-text1 mb-0">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-10 col-lg-12 col-md-12 d-block mx-auto">
+                        <div class="text-center text-white ">
+                            <h1 class="mb-5"><span class="font-weight-bold">@ViewBag.All.Count</span> aktiv iş üzərindən axtarış et</h1>
+                        </div>
+                        <div class="search-background bg-transparent">
+                            <form class="form row no-gutters " method="post" enctype="multipart/form-data" asp-controller="searchjob" asp-action="index">
+                                <div class="form-group  col-xl-4 col-lg-3 col-md-12 mb-0 bg-white ">
+                                    <input asp-for="KeyWord" type="text" class="form-control input-lg br-tr-md-0 br-br-md-0" id="text4" placeholder="İş adı yaz">
+                                </div>
+                                <div class="form-group  col-xl-3 col-lg-3 col-md-12 mb-0 bg-white">
+                                    <input asp-for="Location" type="text" class="form-control input-lg br-md-0" id="text5" placeholder="Ərazi adı yaz">
+                                    <span><img src="https://www.spruko.com/demo/rejoin/assets/images/svg/gps.svg" class="location-gps"></span>
+                                </div>
+                                <div class="form-group col-xl-3 col-lg-3 col-md-12 select2-lg  mb-0 bg-white">
+                                    <select asp-for="CategoryId" class="form-control select2-show-search  border-bottom-0" data-placeholder="kateqoriya seç">
+                                        <optgroup label="Kateqoriyalar">
+                                            <option value="0">Bütün Kateqoriyalar</option>
+                                            @foreach (Category item in ViewBag.Categories)
+                                            {
+                                                <option value="@item.Id">@item.Name</option>
+
+                                            }
+
+                                        </optgroup>
+                                    </select>
+                                </div>
+                                <div class="col-xl-2 col-lg-3 col-md-12 mb-0">
+                                    <button class="btn btn-lg btn-block btn-secondary br-tl-md-0 br-bl-md-0" type="submit">Axtarış et</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /header-text -->
+    </div>
+</div>
