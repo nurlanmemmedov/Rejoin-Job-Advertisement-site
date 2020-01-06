@@ -36,6 +36,18 @@ namespace Rejoin.Controllers
             }
             ViewBag.Applies = applies;
 
+            BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
+            {
+                Title = "Müraciətlər",
+                Parents = new Dictionary<string, List<string>>()
+                {
+                    { "Ana səhifə", new List<string>() { "home", "index" } },
+                    { "Profilim", new List<string>() { "companydashboard", "index" } },
+                    { "Ana səhifə", new List<string>() { "companyjobs", "index" } },
+                }
+            };
+            ViewBag.BreadCrumb = breadCrumb;
+
             return View();
         }
     }

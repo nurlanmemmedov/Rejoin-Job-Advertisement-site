@@ -43,6 +43,5 @@ namespace Rejoin.ViewModels
         public Company Company { get; set; }
 
         public Category Category { get; set; }
-        public List<JobReview> JobReviews { get; set; }
     }
 }

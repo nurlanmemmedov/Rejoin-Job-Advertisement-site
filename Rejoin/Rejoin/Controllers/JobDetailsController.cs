@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Rejoin.Data;
 using Rejoin.Models;
-using Rejoin.ViewModels;
 
 
 namespace Rejoin.Controllers

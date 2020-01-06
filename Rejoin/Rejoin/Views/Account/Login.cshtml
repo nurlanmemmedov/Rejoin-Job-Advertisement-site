@@ -1,21 +1,7 @@
 ﻿@model LoginViewModel
 
 <!--Sliders Section-->
-<section>
-    <div class="bannerimg cover-image bg-background3" data-image-src="~assets/images/banners/banner2.jpg">
-        <div class="header-text mb-0">
-            <div class="container">
-                <div class="text-center text-white">
-                    <h1 class="">Daxil ol</h1>
-                    <ol class="breadcrumb text-center">
-                        <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Ana səhifə</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">Daxil ol</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<partial name="_BreadCrumb" />
 <!--/Sliders Section-->
 <!--Login-Section-->
 <section class="sptb">
@@ -40,7 +26,6 @@
                             <div class="submit">
                                 <button type="submit" class="btn btn-primary btn-block">Login</button>
                             </div>
-                            <p class="mb-2"><a href="forgot.html">Forgot Password</a></p>
                             <p class="text-dark mb-0">Hesabınız yoxdur?<a asp-controller="account" asp-action="register" class="text-primary ml-1">Qeydiyyatdan Keçin</a></p>
                         </form>
                     </div>

@@ -34,7 +34,6 @@ namespace Rejoin.ViewModels
         [Required(ErrorMessage = "Bu hissə məcburidir")]
         [MaxLength(200, ErrorMessage = "Maksimum 500 xarakter ola bilər")]
         public string Location { get; set; }
-        public List<CompanyReview> CompanyReviews { get; set; }
         public List<CompanySocialLink> CompanySocialLinks { get; set; }
         public List<Job> Jobs { get; set; }
         public User User { get; set; }

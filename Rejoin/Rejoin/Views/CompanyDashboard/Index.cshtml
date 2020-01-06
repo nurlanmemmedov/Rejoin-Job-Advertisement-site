@@ -1,21 +1,7 @@
 ﻿@model CompanyViewModel
 @inject IAuth _auth
 	<!--Breadcrumb-->
-<section>
-    <div class="bannerimg cover-image bg-background3" data-image-src="~/images/banners/banner2.jpg">
-        <div class="header-text mb-0">
-            <div class="container">
-                <div class="text-center text-white">
-                    <h1 class="">Profilim</h1>
-                    <ol class="breadcrumb text-center">
-                        <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Ana səhifə</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">Profilim</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<partial name="_BreadCrumb" />
 <!--Breadcrumb-->
 <!--User Dashboard-->
 <section class="sptb">

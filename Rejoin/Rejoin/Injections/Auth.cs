@@ -36,14 +36,7 @@ namespace Rejoin.Injections
                     return null;
                 }
 
-                User user = _context.Users.Include("JobReviews")
-                                    .Include("JobReviewReactions")
-                                    .Include("JobReviewReplies")
-                                    .Include("JobReviewReports")
-                                    .Include("CompanyReviews")
-                                    .Include("CompanyReviewReactions")
-                                    .Include("CompanyReviewReplies")
-                                    .Include("CompanyReviewReports")
+                User user = _context.Users
                                     .Include("Company")
                                     .Include("Candidate")
                                     .FirstOrDefault(c => c.Token == token);

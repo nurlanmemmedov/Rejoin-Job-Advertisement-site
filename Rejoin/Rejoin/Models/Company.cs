@@ -33,7 +33,6 @@ namespace Rejoin.Models
         [Required]
         [MaxLength(200)]
         public string Location { get; set; }
-        public List<CompanyReview> CompanyReviews { get; set; }
         public List<CompanySocialLink> CompanySocialLinks { get; set; }
         public List<Job> Jobs { get; set; }
         public User User { get; set; }

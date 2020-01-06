@@ -268,3 +268,5 @@ C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreap
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Rejoin.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_CompanyPanel.cshtml.g.cs
 C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_SearchJob.cshtml.g.cs
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_BreadCrumb.cshtml.g.cs
+C:\Users\Code\Desktop\Rejoin-Job-Advertisement\Rejoin\Rejoin\obj\Debug\netcoreapp3.1\Razor\Views\ContactUs\Index.cshtml.g.cs

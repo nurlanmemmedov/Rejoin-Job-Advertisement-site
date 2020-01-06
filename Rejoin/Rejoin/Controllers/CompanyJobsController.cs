@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Rejoin.Data;
 using Rejoin.Injections;
+using Rejoin.ViewModels;
 
 namespace Rejoin.Controllers
 {
@@ -20,6 +21,16 @@ namespace Rejoin.Controllers
         }
         public IActionResult Index()
         {
+            BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
+            {
+                Title = "Elanlarım",
+                Parents = new Dictionary<string, List<string>>()
+                {
+                    { "Ana səhifə", new List<string>() { "home", "index" } },
+                    { "Profilim", new List<string>() { "companydashboard", "index" } },
+                }
+            };
+            ViewBag.BreadCrumb = breadCrumb;
             ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.CompanyId == _auth.User.Company.Id).ToList();
             return View();
         }

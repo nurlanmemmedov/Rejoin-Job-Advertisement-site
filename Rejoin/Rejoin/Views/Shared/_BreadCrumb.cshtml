@@ -1,0 +1,17 @@
+﻿@model BreadCrumbViewModel
+<section>
+    <div class="bannerimg cover-image bg-background3" data-image-src="~/images/banners/banner2.jpg">
+        <div class="header-text mb-0">
+            <div class="text-center text-white">
+                <h1 class="">@ViewBag.BreadCrumb.Title</h1>
+                <ol class="breadcrumb text-center">
+                    @foreach (var item in ViewBag.BreadCrumb.Parents)
+                    {
+                        <li class="breadcrumb-item"><a asp-controller="@item.Value[0]" asp-action="@item.Value[1]">@item.Key</a></li>
+                    }
+                    <li class="breadcrumb-item active text-white" aria-current="page">@ViewBag.BreadCrumb.Title</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,20 +1,6 @@
 ﻿@inject IAuth _auth
 	<!--Breadcrumb-->
-<section>
-    <div class="bannerimg cover-image bg-background3" data-image-src="~/images/banners/banner2.jpg">
-        <div class="header-text mb-0">
-            <div class="container">
-                <div class="text-center text-white">
-                    <h1 class="">Profilim</h1>
-                    <ol class="breadcrumb text-center">
-                        <li class="breadcrumb-item"><a asp-controller="home" asp-action="index">Ana səhifə</a></li>
-                        <li class="breadcrumb-item active text-white" aria-current="page">CV</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    <partial name="_BreadCrumb" />
 <!--Breadcrumb-->
 <!--Job posts-section-->
 @if (_auth.User.Candidate != null)
@@ -239,7 +225,6 @@
                                             <label class="form-label text-dark">Başlama tarixi</label>
                                             <select name="resume-exp-since" class="form-control custom-select select2-show-search" data-placeholder="Başlama tarixi">
                                                 <option value="@item.StartedAt" selected>@item.StartedAt</option>
-                                                <option value="0">Başlama tarixi</option>
                                                 <option value="2019">2019</option>
                                                 <option value="2018">2018</option>
                                                 <option value="2017">2017</option>
@@ -276,7 +261,6 @@
                                             <label class="form-label text-dark">Bitiş tarixi</label>
                                             <select name="resume-exp-till" class="form-control custom-select select2-show-search" data-placeholder="Bitiş tarixi">
                                                 <option value="@item.FinishedAt" selected>@item.FinishedAt</option>
-                                                <option value="0">Bitiş tarixi</option>
                                                 <option value="2019">2019</option>
                                                 <option value="2018">2018</option>
                                                 <option value="2017">2017</option>
@@ -379,7 +363,7 @@ else
                                                 <div class="row gutters-xs">
                                                     <div class="col-12">
                                                         <select name="resume-input-exp" class="form-control custom-select select2-show-search" data-placeholder="Təcrübə seç">
-                                                            <option value="0">İl</option>
+                                                            <option value="0">0</option>
                                                             <option value="1">1</option>
                                                             <option value="2">2</option>
                                                             <option value="3">3</option>
@@ -430,7 +414,6 @@ else
                             <div class="form-group">
                                 <label class="form-label text-dark">Universitet</label>
                                 <select name="resume-edu-uni" class="form-control custom-select select2-show-search" data-placeholder="Universitet seç">
-                                    <option value="Universitet">Universitet</option>
                                     <option value="Bakı Dövlət Universiteti">Bakı Dövlət Universiteti</option>
                                     <option value="Azərbaycan Dövlət Neft və Sənaye Universiteti">Azərbaycan Dövlət Neft və Sənaye Universiteti</option>
                                     <option value="Azərbaycan Dövlət İqtisad Universiteti">Azərbaycan Dövlət İqtisad Universiteti</option>
@@ -547,7 +530,6 @@ else
                                     <div class="col-6">
                                         <label class="form-label text-dark">Başlama tarixi</label>
                                         <select name="resume-exp-since" class="form-control custom-select select2-show-search" data-placeholder="Başlama tarixi seç">
-                                            <option value="0">Başlama tarixi</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
@@ -583,7 +565,6 @@ else
                                     <div class="col-6">
                                         <label class="form-label text-dark">Bitiş tarixi</label>
                                         <select name="resume-exp-till" class="form-control custom-select select2-show-search" data-placeholder="Bitiş tarixi seç">
-                                            <option value="0">Bitiş tarixi</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
@@ -648,25 +629,10 @@ else
 <section class="sptb bg-white">
     <div class="container">
         <div class="section-title center-block text-center">
-            <h2>How It Works?</h2>
-            <p>Mauris ut cursus nunc. Morbi eleifend, ligula at consectetur vehicula</p>
+            <h2>Saytda nələr var?</h2>
+            <p>Saytımız şirkətlərin öz elanlarını yerləşdirməsi , işçilərini daha asan tapması və insanların daha asan iş tapması üçün yaradılıb</p>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="">
-                    <div class="mb-lg-0 mb-4">
-                        <div class="service-card text-center">
-                            <div class="bg-light icon-bg  icon-service text-purple">
-                                <img src="https://www.spruko.com/demo/rejoin/assets/images/svgs/jobs/find.svg" alt="img">
-                            </div>
-                            <div class="servic-data mt-3">
-                                <h4 class="font-weight-semibold mb-2">Find Candidates</h4>
-                                <p class="text-muted mb-0">Nam libero tempore, cum soluta nobis est eligendi cumque facere possimus</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="">
                     <div class="mb-lg-0 mb-4">
@@ -675,8 +641,8 @@ else
                                 <img src="https://www.spruko.com/demo/rejoin/assets/images/svgs/jobs/pay.svg" alt="img">
                             </div>
                             <div class="servic-data mt-3">
-                                <h4 class="font-weight-semibold mb-2">Pay Online</h4>
-                                <p class="text-muted mb-0">Nam libero tempore, cum soluta nobis est eligendi cumque facere possimus</p>
+                                <h4 class="font-weight-semibold mb-2">İş elanı ver</h4>
+                                <p class="text-muted mb-0">İş məlumatlarını daxil et və ödənişsiz olaraq saytımıza yerləşdir</p>
                             </div>
                         </div>
                     </div>
@@ -687,11 +653,11 @@ else
                     <div class="mb-lg-0 mb-4">
                         <div class="service-card text-center">
                             <div class="bg-light icon-bg  icon-service text-purple">
-                                <img src="https://www.spruko.com/demo/rejoin/assets/images/svgs/jobs/hire.svg" alt="img">
+                                <img src="https://www.spruko.com/demo/rejoin/assets/images/svgs/jobs/find.svg" alt="img">
                             </div>
                             <div class="servic-data mt-3">
-                                <h4 class="font-weight-semibold mb-2">Hire Candidate</h4>
-                                <p class="text-muted mb-0">Nam libero tempore, cum soluta nobis est eligendi cumque facere possimus</p>
+                                <h4 class="font-weight-semibold mb-2">İşçi tap</h4>
+                                <p class="text-muted mb-0">Elanına müraciət edənləri gör və ən yaxşısını seç</p>
                             </div>
                         </div>
                     </div>
@@ -702,16 +668,32 @@ else
                     <div class="">
                         <div class="service-card text-center">
                             <div class="bg-light icon-bg  icon-service text-purple">
-                                <img src="https://www.spruko.com/demo/rejoin/assets/images/svgs/jobs/work.svg" alt="img">
+                                <img src="https://www.spruko.com/demo/rejoin/assets/images/svgs/jobs/hire.svg" alt="img">
                             </div>
                             <div class="servic-data mt-3">
-                                <h4 class="font-weight-semibold mb-2">Work</h4>
-                                <p class="text-muted mb-0">Nam libero tempore, cum soluta nobis est eligendi cumque facere possimus</p>
+                                <h4 class="font-weight-semibold mb-2">Axtarış et</h4>
+                                <p class="text-muted mb-0">Saytımızdakı minlərlə iş üzərindən axtarış et və sənə uyğun olanını tap</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="">
+                    <div class="mb-lg-0 mb-4">
+                        <div class="service-card text-center">
+                            <div class="bg-light icon-bg  icon-service text-purple">
+                                <img src="https://www.spruko.com/demo/rejoin/assets/images/svgs/jobs/work.svg" alt="img">
+                            </div>
+                            <div class="servic-data mt-3">
+                                <h4 class="font-weight-semibold mb-2">İş tap</h4>
+                                <p class="text-muted mb-0">sənə ən uyğun olan işin məlumatlarını gör və işə müraciət et</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </section>

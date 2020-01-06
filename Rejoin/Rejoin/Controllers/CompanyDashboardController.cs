@@ -25,6 +25,15 @@ namespace Rejoin.Controllers
         }
         public IActionResult Index()
         {
+            BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
+            {
+                Title = "Profilim",
+                Parents = new Dictionary<string, List<string>>()
+                {
+                    { "Ana səhifə", new List<string>() { "home", "index" } },
+                }
+            };
+            ViewBag.BreadCrumb = breadCrumb;
             return View();
         }
 

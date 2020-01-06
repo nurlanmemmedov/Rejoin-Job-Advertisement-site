@@ -31,8 +31,6 @@ namespace Rejoin.Models
         [Required]
         public int ViewCount { get; set; }
         [Required]
-        public int LikeCount { get; set; }
-        [Required]
         [MaxLength(200)]
         public string Address { get; set; }
         [Required]
@@ -56,7 +54,6 @@ namespace Rejoin.Models
         public int CompanyId { get; set; }
         public Category Category { get; set; }
         public Company Company { get; set; }
-        public List<JobReview> JobReviews { get; set; }
         public List<Apply> Applies { get; set; }
 
     }

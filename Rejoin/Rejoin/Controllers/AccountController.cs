@@ -27,6 +27,15 @@ namespace Rejoin.Controllers
 
         public IActionResult Login()
         {
+            BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
+            {
+                Title = "Daxil ol",
+                Parents = new Dictionary<string, List<string>>()
+                    {
+                        { "Ana səhifə", new List<string>() { "home", "index" } },
+                    }
+            };
+            ViewBag.BreadCrumb = breadCrumb;
             return View();
         }
 
@@ -58,6 +67,15 @@ namespace Rejoin.Controllers
 
                 ModelState.AddModelError("Password", "e-poçt və ya şifrə yanlışdır");
             }
+            BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
+            {
+                Title = "Daxil ol",
+                Parents = new Dictionary<string, List<string>>()
+                    {
+                        { "Ana səhifə", new List<string>() { "home", "index" } },
+                    }
+            };
+            ViewBag.BreadCrumb = breadCrumb;
 
             return View("~/Views/Account/Login.cshtml");
         }
@@ -65,6 +83,15 @@ namespace Rejoin.Controllers
 
         public IActionResult Register()
         {
+            BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
+            {
+                Title = "Qeydiyyatdan keç",
+                Parents = new Dictionary<string, List<string>>()
+                    {
+                        { "Ana səhifə", new List<string>() { "home", "index" } },
+                    }
+            };
+            ViewBag.BreadCrumb = breadCrumb;
             return View();
         }
 
@@ -97,7 +124,15 @@ namespace Rejoin.Controllers
                 }
                 ModelState.AddModelError("Email", "Bu e-poçt artıq qeydiyyatdan keçib");
             }
-
+            BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
+            {
+                Title = "Qeydiyyatdan keç",
+                Parents = new Dictionary<string, List<string>>()
+                    {
+                        { "Ana səhifə", new List<string>() { "home", "index" } },
+                    }
+            };
+            ViewBag.BreadCrumb = breadCrumb;
             return View("~/Views/Account/Register.cshtml");
 
 
@@ -112,7 +147,7 @@ namespace Rejoin.Controllers
 
             Response.Cookies.Delete("token");
 
-            return RedirectToAction("index" ,"home");
+            return RedirectToAction("login" ,"account");
         }
     }
 }

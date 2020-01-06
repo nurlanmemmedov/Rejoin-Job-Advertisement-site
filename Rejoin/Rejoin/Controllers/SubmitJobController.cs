@@ -26,11 +26,36 @@ namespace Rejoin.Controllers
 
         public IActionResult Index(int? JobId)
         {
-            if(JobId != null)
+            if (JobId != null)
             {
                 Job job = _context.Jobs.Find(JobId);
                 ViewBag.Job = job;
+             
+                BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
+                {
+                    Title = "Elanı redaktə et",
+                    Parents = new Dictionary<string, List<string>>()
+                    {
+                         { "Ana səhifə", new List<string>() { "home", "index" } },
+                         { "Profilim", new List<string>() { "companydashboard", "index" } },
+                         { "Elanlarım", new List<string>() { "companyjobs", "index" } },
+                    }
+                };
+                ViewBag.BreadCrumb = breadCrumb;
             }
+            else
+            {
+                BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
+                {
+                    Title = "İş elanı ver",
+                    Parents = new Dictionary<string, List<string>>()
+                    {
+                        { "Ana səhifə", new List<string>() { "home", "index" } },
+                    }
+                };
+                ViewBag.BreadCrumb = breadCrumb;
+            }
+
             ViewBag.Categories = _context.Categories.ToList();
             if (_auth.User == null)
             {
@@ -40,12 +65,13 @@ namespace Rejoin.Controllers
             {
                 return PartialView("~/Views/Shared/_CreateCompany.cshtml");
             }
-         
+
+
             return View();
         }
 
 
-     
+
 
         [HttpPost]
         public IActionResult CreateJob(JobViewModel jobViewModel)
@@ -59,7 +85,6 @@ namespace Rejoin.Controllers
                     City = jobViewModel.City,
                     CreatedAt = DateTime.Now,
                     ViewCount = 0,
-                    LikeCount = 0,
                     Address = jobViewModel.Address,
                     Description = jobViewModel.Description,
                     JobType = jobViewModel.JobType,
@@ -94,7 +119,6 @@ namespace Rejoin.Controllers
                 job.City = jobViewModel.City;
                 job.CreatedAt = DateTime.Now;
                 job.ViewCount = 0;
-                job.LikeCount = 0;
                 job.Address = jobViewModel.Address;
                 job.Description = jobViewModel.Description;
                 job.JobType = jobViewModel.JobType;
@@ -116,7 +140,7 @@ namespace Rejoin.Controllers
         public IActionResult ChangeStatus(int JobId)
         {
             Job job = _context.Jobs.FirstOrDefault(j => j.Id == JobId);
-            if(job.isActive == true)
+            if (job.isActive == true)
             {
                 job.isActive = false;
             }
