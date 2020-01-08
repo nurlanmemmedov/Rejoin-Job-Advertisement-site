@@ -47,6 +47,7 @@ namespace Rejoin
 
             services.AddTransient<IAuth, Auth>();
             services.AddTransient<IRelativeTime, RelativeTime>();
+            services.AddTransient<IFileManager, FileManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

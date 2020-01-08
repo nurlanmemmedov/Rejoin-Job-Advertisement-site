@@ -16,7 +16,7 @@ namespace Rejoin.Controllers
         }
         public IActionResult Index(int JobId)
         {
-            Job job = _context.Jobs.Include("JobReviews").Include("Company").Include("Category").FirstOrDefault(j => j.Id == JobId);
+            Job job = _context.Jobs.Include("Company").Include("Category").FirstOrDefault(j => j.Id == JobId);
             job.ViewCount++;
             _context.SaveChanges();
             ViewBag.Categories = _context.Categories.ToList();

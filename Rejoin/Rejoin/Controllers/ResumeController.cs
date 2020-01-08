@@ -18,12 +18,13 @@ namespace Rejoin.Controllers
         private readonly RejionDBContext _context;
         private readonly IAuth _auth;
         private readonly IWebHostEnvironment _env;
-
-        public ResumeController(RejionDBContext context, IAuth auth, IWebHostEnvironment env)
+        private readonly IFileManager _fileManager;
+        public ResumeController(RejionDBContext context, IAuth auth, IWebHostEnvironment env, IFileManager fileManager)
         {
             _context = context;
             _auth = auth;
             _env = env;
+            _fileManager = fileManager;
         }
 
         public IActionResult Index()
@@ -47,27 +48,35 @@ namespace Rejoin.Controllers
         [HttpPost]
         public JsonResult CreateResume(ResumeViewModel model)
         {
-            string uniqueFileName = string.Empty;
+            Candidate candidate = new Candidate();
             if (model.Upload != null)
             {
-                string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Upload.FileName;
-                string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
-                model.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
+                try
+                {
+                    candidate.Photo = _fileManager.Upload(model.Upload);
+
+                }
+                catch (Exception e)
+                {
+                    return Json(new
+                    {
+                        status = "OK",
+                        StatusCode = 500,
+                        message = "melumatlar yanlisdir",
+                        data = candidate.Photo
+                    });
+                }
             }
 
-            Candidate candidate = new Candidate
-            {
-                Name = model.Name,
-                Lastname = model.Lastname,
-                Email = model.Email,
-                Phone = model.Phone,
-                Profession = model.Profession,
-                ExperienceTime = model.ExperienceTime,
-                UserId = _auth.User.Id,
-                PersonalSkill = model.PersonalSkill,
-                Photo = uniqueFileName
-            };
+
+            candidate.Name = model.Name;
+            candidate.Lastname = model.Lastname;
+            candidate.Email = model.Email;
+            candidate.Phone = model.Phone;
+            candidate.Profession = model.Profession;
+            candidate.ExperienceTime = model.ExperienceTime;
+            candidate.UserId = _auth.User.Id;
+            candidate.PersonalSkill = model.PersonalSkill;
 
             _context.Candidates.Add(candidate);
             _context.SaveChanges();
@@ -106,7 +115,7 @@ namespace Rejoin.Controllers
             {
                 status = "OK",
                 code = 200,
-                message = "added product",
+                message = "added Cv",
                 data = model,
                 redirectUrl = Url.Action("Index", "Home"),
                 isRedirect = true
@@ -117,16 +126,28 @@ namespace Rejoin.Controllers
         [HttpPost]
         public JsonResult EditResume(ResumeViewModel model)
         {
-            string uniqueFileName = string.Empty;
-            if (model.Upload != null)
-            {
-                string uploadsFolder = Path.Combine(_env.WebRootPath, "images");
-                uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Upload.FileName;
-                string FilePath = Path.Combine(uploadsFolder, uniqueFileName);
-                model.Upload.CopyTo(new FileStream(FilePath, FileMode.Create));
-            }
+            
 
             Candidate candidate = _context.Candidates.Find(_auth.User.Candidate.Id);
+
+            if (model.Upload != null)
+            {
+                try
+                {
+                    candidate.Photo = _fileManager.Upload(model.Upload);
+
+                }
+                catch (Exception e)
+                {
+                    return Json(new
+                    {
+                        status = "OK",
+                        StatusCode = 500,
+                        message = "melumatlar yanlisdir",
+                        data = candidate.Photo
+                    });
+                }
+            }
 
             candidate.Name = model.Name;
             candidate.Lastname = model.Lastname;
@@ -136,7 +157,6 @@ namespace Rejoin.Controllers
             candidate.ExperienceTime = model.ExperienceTime;
             candidate.UserId = _auth.User.Id;
             candidate.PersonalSkill = model.PersonalSkill;
-            candidate.Photo = uniqueFileName;
             _context.SaveChanges();
 
 

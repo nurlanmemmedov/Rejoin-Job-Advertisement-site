@@ -1,4 +1,5 @@
 ﻿$(document).ready(function () {
+
     removingExp();
     removingEdu();
     $(document).on("click", ".finish-resume", function (e) {
@@ -65,19 +66,24 @@
             processData: false,
             contentType: false,
             beforeSend: function () {
+                $("#global-loader").show();
             },
             success: function (response) {
-
-                toastr.success(response.message, 'CV niz əlavə olundu', { timeOut: 600 });
-                if (response.isRedirect) {
-                    window.location.href = response.redirectUrl;
+                if (response.statusCode === 500) {
+                    $.notify("Məlumatları düzgün daxil etdiyinizdən əmin olun", { timeOut: 1000 });
+                } else {
+                    $.notify('CV niz yaradıldı', "success", { timeOut: 1000 });
+                    if (response.isRedirect) {
+                        window.location.href = response.redirectUrl;
+                    }
                 }
+
             },
             error: function (error) {
-                toastr.error(response.message, 'məlumatları düzgün doldurduğunuzdan əmin olun', { timeOut: 600 });
+                $.notify("Məlumatları düzgün daxil etdiyinizdən əmin olun", { timeOut: 1000 });
             },
             complete: function () {
-
+                $("#global-loader").hide();
             }
         })
     })
@@ -146,23 +152,30 @@
             data: EditedResumedata,
             processData: false,
             contentType: false,
+
             beforeSend: function () {
+                $("#global-loader").show();
             },
             success: function (response) {
-
-                toastr.success(response.message, 'CV redaktə olundu', { timeOut: 600 });
-                if (response.isRedirect) {
-                    window.location.href = response.redirectUrl;
+                if (response.statusCode === 500) {
+                    $.notify("Məlumatları düzgün daxil etdiyinizdən əmin olun", { timeOut: 1000 });
+                } else {
+                    $.notify('CV niz redaktə olundu', "success", { timeOut: 1000 });
+                    if (response.isRedirect) {
+                        window.location.href = response.redirectUrl;
+                    }
                 }
+
             },
             error: function (error) {
-                toastr.error(error.message, 'məlumatları düzgün doldurduğunuzdan əmin olun', { timeOut: 600 });
+                $.notify("Məlumatları düzgün daxil etdiyinizdən əmin olun", { timeOut: 1000 });
             },
             complete: function () {
-
+                $("#global-loader").hide();
             }
         })
     })
+
     $(".post-job").click(function (e) {
         $.ajax({
             url: "/SubmitJob/Index",
@@ -203,7 +216,7 @@
         formdata.append("Location", $("input[name=companyaddress]").val());
         formdata.append("Website", $("input[name=companywebsite]").val());
         formdata.append("Info", $("textarea[name=companyinfo]").val());
-        if (files.length>0) {
+        if (files.length > 0) {
             formdata.append("Upload", files[0], files[0].name);
         }
 
@@ -215,47 +228,27 @@
             processData: false,
             contentType: false,
             beforeSend: function () {
+                $("#global-loader").show();
             },
-            success: function (data, textStatus, xhr) {
-                console.log(xhr.status);
-            },
-            success: function (response) {
 
-                toastr.success(response.message, 'Şirkət profili yaradıldı artıq iş elanı verə bilərsiniz', { timeOut: 900 });
-                $('#companyModal').modal('hide');
-                location.reload();
+            success: function (response) {
+                if (response.statusCode === 500) {
+                    $.notify("Məlumatları düzgün daxil etdiyinizdən əmin olun", { timeOut: 1000 });
+                } else {
+                    $.notify('Şirkət profili yaradıldı artıq iş elanı verə bilərsiniz', "success", { timeOut: 900 });
+                    location.reload()
+                }
+
             },
             error: function (error) {
-                toastr.error(error.message, 'məlumatları düzgün doldurduğunuzdan əmin olun', { timeOut: 900 });
+                $.notify("Məlumatları düzgün daxil etdiyinizdən əmin olun", { timeOut: 1000 });
             },
             complete: function () {
-              
+                $("#global-loader").hide();
             }
         })
     })
 
-    $(document).on("click", ".send-reply", function (e) {
-        e.preventDefault();
-        var formdata = new FormData();
-        formdata.append("Comment", $("textarea[name=comment-message]").val())
-        $.ajax({
-            url: "/WriteComment/JobReview",
-            type: "post",
-            dataType: "json",
-            data: formdata,
-            processData: false,
-            contentType: false,
-            beforeSend: function () {
-            },
-            success: function (response) {
-            },
-            error: function (error) {
-
-            },
-            complete: function () {
-            }
-        })
-    })
 
     $(document).on("click", ".apply-job", function (e) {
         var Applydata = new FormData();
@@ -271,14 +264,17 @@
             processData: false,
             contentType: false,
             beforeSend: function () {
+                $("#global-loader").show();
             },
             success: function (response) {
-                toastr.success(response.message, 'İş müraciətiniz tamamlandı', { timeOut: 900 });
+                $.notify('İş müraciətiniz tamamlandı', "success", { timeOut: 1000 });
+                $('#applyModal').modal('hide');
             },
             error: function (error) {
-
+                $.notify("Məlumatları düzgün daxil etdiyinizdən əmin olun", { timeOut: 1000 });
             },
             complete: function () {
+                $("#global-loader").hide();
             }
         })
     })

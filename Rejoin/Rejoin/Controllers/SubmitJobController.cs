@@ -70,9 +70,6 @@ namespace Rejoin.Controllers
             return View();
         }
 
-
-
-
         [HttpPost]
         public IActionResult CreateJob(JobViewModel jobViewModel)
         {
@@ -100,12 +97,21 @@ namespace Rejoin.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("index", "home");
             }
+
+            BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
+            {
+                Title = "İş elanı ver",
+                Parents = new Dictionary<string, List<string>>()
+                    {
+                        { "Ana səhifə", new List<string>() { "home", "index" } },
+                    }
+            };
+            ViewBag.BreadCrumb = breadCrumb;
+
             ViewBag.Categories = _context.Categories.ToList();
             return View("~/Views/SubmitJob/Index.cshtml");
 
         }
-
-
 
         [HttpPost]
         public IActionResult EditJob(JobViewModel jobViewModel, int? JobId)
@@ -117,8 +123,6 @@ namespace Rejoin.Controllers
 
                 job.Title = jobViewModel.Title;
                 job.City = jobViewModel.City;
-                job.CreatedAt = DateTime.Now;
-                job.ViewCount = 0;
                 job.Address = jobViewModel.Address;
                 job.Description = jobViewModel.Description;
                 job.JobType = jobViewModel.JobType;
@@ -126,16 +130,31 @@ namespace Rejoin.Controllers
                 job.MaxSalary = jobViewModel.MaxSalary;
                 job.MaxExperience = jobViewModel.MaxExperience;
                 job.MinExperience = jobViewModel.MinExperience;
-                job.CategoryId = 1;
+                job.CategoryId = jobViewModel.CategoryId;
                 job.CompanyId = _auth.User.Company.Id;
                 job.isActive = true;
+
                 _context.SaveChanges();
                 return RedirectToAction("index", "CompanyJobs");
             }
             ViewBag.Categories = _context.Categories.ToList();
+
+            BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
+            {
+                Title = "Elanı redaktə et",
+                Parents = new Dictionary<string, List<string>>()
+                    {
+                         { "Ana səhifə", new List<string>() { "home", "index" } },
+                         { "Profilim", new List<string>() { "companydashboard", "index" } },
+                         { "Elanlarım", new List<string>() { "companyjobs", "index" } },
+                    }
+            };
+            ViewBag.BreadCrumb = breadCrumb;
+
             return View("~/Views/SubmitJob/Index.cshtml");
 
         }
+
 
         public IActionResult ChangeStatus(int JobId)
         {

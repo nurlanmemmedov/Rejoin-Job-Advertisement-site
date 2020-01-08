@@ -10,7 +10,7 @@
                             <h1 class="mb-5"><span class="font-weight-bold">@ViewBag.All.Count</span> aktiv iş üzərindən axtarış et</h1>
                         </div>
                         <div class="search-background bg-transparent">
-                            <form class="form row no-gutters " method="post" enctype="multipart/form-data" asp-controller="searchjob" asp-action="index">
+                            <form class="form row no-gutters " method="get" enctype="multipart/form-data" asp-controller="searchjob" asp-action="index">
                                 <div class="form-group  col-xl-4 col-lg-3 col-md-12 mb-0 bg-white ">
                                     <input asp-for="KeyWord" type="text" class="form-control input-lg br-tr-md-0 br-br-md-0" id="text4" placeholder="İş adı yaz">
                                 </div>
