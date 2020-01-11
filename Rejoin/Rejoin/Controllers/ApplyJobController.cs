@@ -9,12 +9,12 @@ using Rejoin.Injections;
 
 namespace Rejoin.Controllers
 {
-    public class ApplyJobController : Controller
+    public class ApplyJobController : BaseController
     {
         private readonly RejionDBContext _context;
         private readonly IAuth _auth;
 
-        public ApplyJobController(RejionDBContext context, IAuth auth)
+        public ApplyJobController(RejionDBContext context, IAuth auth):base(context)
         {
             _context = context;
             _auth = auth;

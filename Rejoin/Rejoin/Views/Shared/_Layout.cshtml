@@ -224,7 +224,7 @@
                     </a>
                 </div>
                 <div class="desktoplogo-1">
-                    <a href="index.html" class="d-flex">
+                    <a asp-controller="home" asp-action="index" class="d-flex">
                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="404.000000pt" height="361.000000pt" viewBox="0 0 404.000000 361.000000"
                              preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,361.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -247,7 +247,7 @@
                         <li>
                             <a asp-action="index" asp-controller="home">Ana səhifə </a>
                         </li>
-                        <li><a href="about.html"> Haqqımızda </a></li>
+                        <li><a asp-controller="about" asp-action="index"> Haqqımızda </a></li>
                         <li><a asp-controller="searchjob" asp-action="index">İşlərin siyahısı</a></li>
                         <li><a asp-controller="contactus" asp-action="index"> Əlaqə <span class="horizontal-arrow"></span></a></li>
 
@@ -344,72 +344,47 @@
             <div class="footer-main">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-2 col-md-12">
-                            <h6>Job Categories</h6>
+                        <div class="col-lg-4 col-md-12">
+                            <h6>İş kateqoriyaları</h6>
                             <hr class="deep-purple  accent-2 mb-4 mt-0 d-inline-block mx-auto">
                             <ul class="list-unstyled mb-0">
-                                <li><a href="#">Developement</a></li>
-                                <li><a href="#">Designing</a></li>
-                                <li><a href="#">Marketing</a></li>
-                                <li><a href="#">Others</a></li>
+                                @for (var i = 0; i < ViewBag.FooterCategories.Count; i++)
+                                {
+                                    if (i < 5)
+                                    {
+                                        <li><a asp-action="index" asp-controller="searchjob" asp-route-CategoryId="@ViewBag.FooterCategories[i].Id">@ViewBag.FooterCategories[i].Name</a></li>
+                                    }
+                                }
+                                <li><a>Başqaları</a></li>
                             </ul>
                         </div>
-                        <div class="col-lg-2 col-md-12">
-                            <h6>Job Type</h6>
+                        <div class="col-lg-4 col-md-12">
+                            <h6>İş tipləri Type</h6>
                             <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto">
                             <ul class="list-unstyled mb-0">
-                                <li><a href="#">Work from home</a></li>
-                                <li><a href="#">Internship</a></li>
-                                <li><a href="#">Part time</a></li>
-                                <li><a href="#">Full time</a></li>
+                                <li><a>Evdən işlə</a></li>
+                                <li><a>Internship</a></li>
+                                <li><a>Part time</a></li>
+                                <li><a>Full time</a></li>
                             </ul>
                         </div>
-                        <div class="col-lg-2 col-md-12">
-                            <h6>Resources</h6>
-                            <hr class="deep-purple  accent-2 mb-4 mt-0 d-inline-block mx-auto">
+                        <div class="col-lg-4 col-md-12">
+                            <h6>Əsas səhifələr</h6>
+                            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto">
                             <ul class="list-unstyled mb-0">
-                                <li><a href="#">Support</a></li>
-                                <li><a href="#">FAQ</a></li>
-                                <li><a href="#">Terms of Service</a></li>
-                                <li><a href="#">Contact Details</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-3 col-md-12">
-                            <h6>Popular Ads</h6>
-                            <hr class="deep-purple  accent-2 mb-4 mt-0 d-inline-block mx-auto">
-                            <ul class="list-unstyled mb-0">
-                                <li><a href="#"><i class="fa fa-caret-right text-white-50"></i> Educational college Ads</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right text-white-50"></i> Free Lancer for Web Developer</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right text-white-50"></i> Searching for Developer</a></li>
-                                <li><a href="#"><i class="fa fa-caret-right text-white-50"></i> BPO Online In Bangalore</a></li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-3 col-md-12">
-                            <h6 class="mb-2">Subscribe</h6>
-                            <hr class="deep-purple  accent-2 mb-4 mt-0 d-inline-block mx-auto">
-                            <div class="input-group w-100">
-                                <input type="text" class="form-control " placeholder="Email">
-                                <div class="input-group-append ">
-                                    <button type="button" class="btn btn-primary "> Subscribe </button>
-                                </div>
-                            </div>
-                            <h6 class="mb-2 mt-5">Payments</h6>
-                            <hr class="deep-purple  accent-2 mb-4 mt-0 d-inline-block mx-auto">
-                            <ul class="payments mb-0">
+                                <li><a asp-controller="home" asp-action="index">Ana səhifə</a></li>
+                                <li><a asp-controller="about" asp-action="index">Haqqımızda</a></li>
                                 <li>
-                                    <a href="javascript:;" class="payments-icon"><i class="fa fa-cc-amex" aria-hidden="true"></i></a>
+                                    <a asp-controller="searchjob" asp-action="index">İşlərin siyahısı</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" class="payments-icon"><i class="fa fa-cc-visa" aria-hidden="true"></i></a>
+                                    <a asp-controller="contactus" asp-action="index">Əlaqə</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" class="payments-icon"><i class="fa fa-credit-card-alt" aria-hidden="true"></i></a>
+                                    <a asp-controller="account" asp-action="register">Qeydiyyatdan keç</a>
                                 </li>
                                 <li>
-                                    <a href="javascript:;" class="payments-icon"><i class="fa fa-cc-mastercard" aria-hidden="true"></i></a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;" class="payments-icon"><i class="fa fa-cc-paypal" aria-hidden="true"></i></a>
+                                    <a asp-controller="account" asp-action="login">Daxil ol</a>
                                 </li>
                             </ul>
                         </div>
@@ -419,31 +394,8 @@
             <div class="text-white-50 border-top p-0">
                 <div class="container">
                     <div class="row d-flex">
-                        <div class="col-lg-8 col-sm-12  mt-2 mb-2 text-left ">
-                            Copyright © 2019 <a href="index.html" class="fs-14 text-white">rejoin</a>. Designed by <a href="spruko.html"
-                                                                                                                      class="fs-14 text-white">Spruko</a> All rights reserved.
-                        </div>
-                        <div class="col-lg-4 col-sm-12 ml-auto mb-2 mt-2 d-none d-lg-block">
-                            <ul class="social mb-0">
-                                <li>
-                                    <a class="social-icon" href="#"><i class="fa fa-facebook"></i></a>
-                                </li>
-                                <li>
-                                    <a class="social-icon" href="#"><i class="fa fa-twitter"></i></a>
-                                </li>
-                                <li>
-                                    <a class="social-icon" href="#"><i class="fa fa-rss"></i></a>
-                                </li>
-                                <li>
-                                    <a class="social-icon" href="#"><i class="fa fa-youtube"></i></a>
-                                </li>
-                                <li>
-                                    <a class="social-icon" href="#"><i class="fa fa-linkedin"></i></a>
-                                </li>
-                                <li>
-                                    <a class="social-icon" href="#"><i class="fa fa-google-plus"></i></a>
-                                </li>
-                            </ul>
+                        <div class="col-lg-8 col-sm-12  mt-2 mb-2 text-center ">
+                            Copyright © 2019 <a href="index.html" class="fs-14 text-white">rejoin</a>. Designed by <a class="fs-14 text-white">Mammadoff</a> All rights reserved.
                         </div>
                     </div>
                 </div>
@@ -451,15 +403,12 @@
             <div class="text-white p-0 border-top">
                 <div class="container">
                     <div class="p-2 text-center footer-links">
-                        <a href="#" class="btn btn-link">How It Works</a>
-                        <a href="#" class="btn btn-link">About Us</a>
-                        <a href="#" class="btn btn-link">Pricing</a>
-                        <a href="#" class="btn btn-link">Ads Categories</a>
-                        <a href="#" class="btn btn-link">Privacy Policy</a>
-                        <a href="#" class="btn btn-link">Terms Of Conditions</a>
-                        <a href="#" class="btn btn-link">Blog</a>
-                        <a href="#" class="btn btn-link">Contact Us</a>
-                        <a href="#" class="btn btn-link">Premium Ad</a>
+                        <a asp-controller="home" asp-action="index" class="btn btn-link">Ana səhifə</a>
+                        <a asp-controller="about" asp-action="index" class="btn btn-link">Haqqımızda</a>
+                        <a asp-controller="searchjob" asp-action="index" class="btn btn-link">İşlərin siyahısı</a>
+                        <a asp-controller="contactus" asp-action="index" class="btn btn-link">Əlaqə</a>
+                        <a asp-controller="account" asp-action="register" class="btn btn-link">Qeydiyyatdan keç</a>
+                        <a asp-controller="account" asp-action="login" class="btn btn-link">Daxil ol</a>
                     </div>
                 </div>
             </div>

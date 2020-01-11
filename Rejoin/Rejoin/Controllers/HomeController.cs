@@ -13,19 +13,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Rejoin.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly RejionDBContext _context;
         private readonly IAuth _auth;
-        public HomeController(IAuth auth, RejionDBContext context)
+        public HomeController(IAuth auth, RejionDBContext context):base(context)
         {
             _auth = auth;
             _context = context;
         }
         public IActionResult Index()
         {
-            ViewBag.Jobs = _context.Jobs.Include("Company").ToList();
-            ViewBag.Categories = _context.Categories.ToList();
+            ViewBag.LatestJobs = _context.Jobs.Include("Company").OrderByDescending(j=>j.CreatedAt).Take(12).ToList();
+            ViewBag.TopCandidates = _context.Candidates.OrderByDescending(c=>c.ExperienceTime).Take(12).ToList();
+
+            ViewBag.Categories = _context.Categories.Include("Jobs").ToList();
+            ViewBag.Users = _context.Users.ToList();
+            ViewBag.Candidates = _context.Candidates.ToList();
+            ViewBag.Companies = _context.Companies.ToList();
+            ViewBag.Jobs = _context.Jobs.ToList();
             return View();
         }
     }

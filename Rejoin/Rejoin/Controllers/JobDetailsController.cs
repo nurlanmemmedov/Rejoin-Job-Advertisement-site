@@ -7,10 +7,10 @@ using Rejoin.Models;
 
 namespace Rejoin.Controllers
 {
-    public class JobDetailsController : Controller
+    public class JobDetailsController : BaseController
     {
         private readonly RejionDBContext _context;
-        public JobDetailsController(RejionDBContext context)
+        public JobDetailsController(RejionDBContext context):base(context)
         {
             _context = context;
         }
@@ -20,7 +20,7 @@ namespace Rejoin.Controllers
             job.ViewCount++;
             _context.SaveChanges();
             ViewBag.Categories = _context.Categories.ToList();
-            ViewBag.All = _context.Jobs.ToList();
+            ViewBag.All = _context.Jobs.Where(j=>j.isActive == true).ToList();
             ViewBag.Job = job;
             ViewBag.RelatedJobs = _context.Jobs.Include("Company").Where(j => j.CategoryId == job.CategoryId && j.Id != job.Id).ToList();
             return View();

@@ -11,10 +11,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Rejoin.Controllers
 {
-    public class SearchJobController : Controller
+    public class SearchJobController : BaseController
     {
         private readonly RejionDBContext _context;
-        public SearchJobController(RejionDBContext context)
+        public SearchJobController(RejionDBContext context):base(context)
         {
             _context = context;
         }
@@ -28,41 +28,42 @@ namespace Rejoin.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(SearchViewModel model)
+        public IActionResult Index(SearchViewModel model, int? CategoryId)
         {
-            if (model.CategoryId == 0 && model.KeyWord == null && model.Location == null)
-            {
-                ViewBag.Jobs = _context.Jobs.Include("Company").Where(j=>j.isActive == true).OrderByDescending(j => j.CreatedAt).ToList(); 
-            }
-            else if (model.CategoryId == 0 && model.KeyWord == null && model.Location != null)
-            {
-                ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.Address.ToLower().Contains(model.Location.ToLower())).OrderByDescending(j => j.CreatedAt).ToList(); 
-            }
-            else if (model.CategoryId == 0 && model.KeyWord != null && model.Location == null)
-            {
-                ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.Title.ToLower().Contains(model.KeyWord.ToLower())).OrderByDescending(j => j.CreatedAt).ToList();
-            }
-            else if (model.CategoryId == 0 && model.KeyWord != null && model.Location != null)
-            {
-                ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.Title.Contains(model.KeyWord) && j.Address.Contains(model.Location)).OrderByDescending(j => j.CreatedAt).ToList();
-            }
-            else if (model.CategoryId > 0 && model.KeyWord == null && model.Location == null)
-            {
-                ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.CategoryId == model.CategoryId).OrderByDescending(j => j.CreatedAt).ToList(); 
+       
+                if (model.CategoryId == 0 && model.KeyWord == null && model.Location == null)
+                {
+                    ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true).OrderByDescending(j => j.CreatedAt).ToList();
+                }
+                else if (model.CategoryId == 0 && model.KeyWord == null && model.Location != null)
+                {
+                    ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.Address.ToLower().Contains(model.Location.ToLower())).OrderByDescending(j => j.CreatedAt).ToList();
+                }
+                else if (model.CategoryId == 0 && model.KeyWord != null && model.Location == null)
+                {
+                    ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.Title.ToLower().Contains(model.KeyWord.ToLower())).OrderByDescending(j => j.CreatedAt).ToList();
+                }
+                else if (model.CategoryId == 0 && model.KeyWord != null && model.Location != null)
+                {
+                    ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.Title.Contains(model.KeyWord) && j.Address.Contains(model.Location)).OrderByDescending(j => j.CreatedAt).ToList();
+                }
+                else if (model.CategoryId > 0 && model.KeyWord == null && model.Location == null)
+                {
+                    ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.CategoryId == model.CategoryId).OrderByDescending(j => j.CreatedAt).ToList();
 
-            }
-            else if (model.CategoryId > 0 && model.KeyWord != null && model.Location == null)
-            {
-                ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.CategoryId == model.CategoryId && j.Title.Contains(model.KeyWord)).OrderByDescending(j => j.CreatedAt).ToList(); 
-            }
-            else if (model.CategoryId > 0 && model.KeyWord == null && model.Location != null)
-            {
-                ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.CategoryId == model.CategoryId && j.Address.Contains(model.Location)).OrderByDescending(j => j.CreatedAt).ToList(); 
-            }
-            else if (model.CategoryId > 0 && model.KeyWord != null && model.Location != null)
-            {
-                ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.CategoryId == model.CategoryId && j.Address.Contains(model.Location) && j.Title.Contains(model.KeyWord)).OrderByDescending(j => j.CreatedAt).ToList(); 
-            }
+                }
+                else if (model.CategoryId > 0 && model.KeyWord != null && model.Location == null)
+                {
+                    ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.CategoryId == model.CategoryId && j.Title.Contains(model.KeyWord)).OrderByDescending(j => j.CreatedAt).ToList();
+                }
+                else if (model.CategoryId > 0 && model.KeyWord == null && model.Location != null)
+                {
+                    ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.CategoryId == model.CategoryId && j.Address.Contains(model.Location)).OrderByDescending(j => j.CreatedAt).ToList();
+                }
+                else if (model.CategoryId > 0 && model.KeyWord != null && model.Location != null)
+                {
+                    ViewBag.Jobs = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.CategoryId == model.CategoryId && j.Address.Contains(model.Location) && j.Title.Contains(model.KeyWord)).OrderByDescending(j => j.CreatedAt).ToList();
+                }
             ViewBag.Categories = _context.Categories.ToList();
             ViewBag.All = _context.Jobs.Include("Company").Where(j => j.isActive == true && j.isActive == true).OrderByDescending(j => j.CreatedAt).ToList();
             return View();

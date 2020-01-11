@@ -12,12 +12,12 @@ using Rejoin.ViewModels;
 
 namespace Rejoin.Controllers
 {
-    public class SubmitJobController : Controller
+    public class SubmitJobController : BaseController
     {
         private readonly RejionDBContext _context;
         private readonly IAuth _auth;
         private readonly IWebHostEnvironment _env;
-        public SubmitJobController(IAuth auth, RejionDBContext context, IWebHostEnvironment env)
+        public SubmitJobController(IAuth auth, RejionDBContext context, IWebHostEnvironment env):base(context)
         {
             _auth = auth;
             _env = env;

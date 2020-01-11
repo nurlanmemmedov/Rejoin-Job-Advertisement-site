@@ -11,10 +11,10 @@ using Rejoin.ViewModels;
 
 namespace Rejoin.Controllers
 {
-    public class AppliedCandidatesController : Controller
+    public class AppliedCandidatesController : BaseController
     {
         private readonly RejionDBContext _context;
-        public AppliedCandidatesController(RejionDBContext context)
+        public AppliedCandidatesController(RejionDBContext context):base(context)
         {
             _context = context;
         }

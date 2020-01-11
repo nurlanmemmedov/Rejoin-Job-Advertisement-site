@@ -10,11 +10,11 @@ using Rejoin.ViewModels;
 
 namespace Rejoin.Controllers
 {
-    public class CompanyJobsController : Controller
+    public class CompanyJobsController : BaseController
     {
         private readonly RejionDBContext _context;
         private readonly IAuth _auth;
-        public CompanyJobsController(IAuth auth, RejionDBContext context)
+        public CompanyJobsController(IAuth auth, RejionDBContext context):base(context)
         {
             _auth = auth;
             _context = context;

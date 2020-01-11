@@ -13,13 +13,13 @@ using System.IO;
 
 namespace Rejoin.Controllers
 {
-    public class ResumeController : Controller
+    public class ResumeController : BaseController
     {
         private readonly RejionDBContext _context;
         private readonly IAuth _auth;
         private readonly IWebHostEnvironment _env;
         private readonly IFileManager _fileManager;
-        public ResumeController(RejionDBContext context, IAuth auth, IWebHostEnvironment env, IFileManager fileManager)
+        public ResumeController(RejionDBContext context, IAuth auth, IWebHostEnvironment env, IFileManager fileManager):base(context)
         {
             _context = context;
             _auth = auth;
@@ -81,36 +81,41 @@ namespace Rejoin.Controllers
             _context.Candidates.Add(candidate);
             _context.SaveChanges();
 
-            for (var i = 0; i < model.Experiences.Count; i++)
+            if (model.Experiences != null)
             {
-
-                Experience experience = new Experience
+                for (var i = 0; i < model.Experiences.Count; i++)
                 {
-                    CompanyName = model.Experiences[i].CompanyName,
-                    StartedAt = model.Experiences[i].StartedAt,
-                    FinishedAt = model.Experiences[i].FinishedAt,
-                    CandidateId = candidate.Id,
-                    Position = model.Experiences[i].Position,
-                };
-                _context.Experiences.Add(experience);
-                _context.SaveChanges();
+
+                    Experience experience = new Experience
+                    {
+                        CompanyName = model.Experiences[i].CompanyName,
+                        StartedAt = model.Experiences[i].StartedAt,
+                        FinishedAt = model.Experiences[i].FinishedAt,
+                        CandidateId = candidate.Id,
+                        Position = model.Experiences[i].Position,
+                    };
+                    _context.Experiences.Add(experience);
+                    _context.SaveChanges();
+                }
             }
 
-            for (var i = 0; i < model.Educations.Count; i++)
+            if (model.Educations != null)
             {
-                Education education = new Education
+                for (var i = 0; i < model.Educations.Count; i++)
                 {
-                    SchoolName = model.Educations[i].SchoolName,
-                    StartedAt = model.Educations[i].StartedAt,
-                    FinishedAt = model.Educations[i].FinishedAt,
-                    CandidateId = candidate.Id,
-                    University = model.Educations[i].University,
-                    Qualification = model.Educations[i].Qualification
-                };
-                _context.Educations.Add(education);
-                _context.SaveChanges();
+                    Education education = new Education
+                    {
+                        SchoolName = model.Educations[i].SchoolName,
+                        StartedAt = model.Educations[i].StartedAt,
+                        FinishedAt = model.Educations[i].FinishedAt,
+                        CandidateId = candidate.Id,
+                        University = model.Educations[i].University,
+                        Qualification = model.Educations[i].Qualification
+                    };
+                    _context.Educations.Add(education);
+                    _context.SaveChanges();
+                }
             }
-
             return Json(new
             {
                 status = "OK",
@@ -126,7 +131,7 @@ namespace Rejoin.Controllers
         [HttpPost]
         public JsonResult EditResume(ResumeViewModel model)
         {
-            
+
 
             Candidate candidate = _context.Candidates.Find(_auth.User.Candidate.Id);
 
@@ -159,115 +164,136 @@ namespace Rejoin.Controllers
             candidate.PersonalSkill = model.PersonalSkill;
             _context.SaveChanges();
 
-
+            //Experiences of resume
             var experiences = _context.Experiences.Where(e => e.CandidateId == _auth.User.Candidate.Id).ToList();
-
-            if (model.Experiences.Count == experiences.Count)
+            if (model.Experiences != null)
             {
-                for (var j = 0; j < experiences.Count; j++)
+                if (model.Experiences.Count == experiences.Count)
                 {
-                    experiences[j].CompanyName = model.Experiences[j].CompanyName;
-                    experiences[j].StartedAt = model.Experiences[j].StartedAt;
-                    experiences[j].FinishedAt = model.Experiences[j].FinishedAt;
-                    experiences[j].CandidateId = candidate.Id;
-                    experiences[j].Position = model.Experiences[j].Position;
-                }
-            }
-            else if (model.Experiences.Count > experiences.Count)
-            {
-                for (var j = 0; j < experiences.Count; j++)
-                {
-                    experiences[j].CompanyName = model.Experiences[j].CompanyName;
-                    experiences[j].StartedAt = model.Experiences[j].StartedAt;
-                    experiences[j].FinishedAt = model.Experiences[j].FinishedAt;
-                    experiences[j].Position = model.Experiences[j].Position;
-                }
-                for (var k = experiences.Count; k < model.Experiences.Count; k++)
-                {
-                    Experience experience = new Experience
+                    for (var j = 0; j < experiences.Count; j++)
                     {
-                        CompanyName = model.Experiences[k].CompanyName,
-                        StartedAt = model.Experiences[k].StartedAt,
-                        FinishedAt = model.Experiences[k].FinishedAt,
-                        CandidateId = candidate.Id,
-                        Position = model.Experiences[k].Position
-                    };
-                    _context.Experiences.Add(experience);
+                        experiences[j].CompanyName = model.Experiences[j].CompanyName;
+                        experiences[j].StartedAt = model.Experiences[j].StartedAt;
+                        experiences[j].FinishedAt = model.Experiences[j].FinishedAt;
+                        experiences[j].CandidateId = candidate.Id;
+                        experiences[j].Position = model.Experiences[j].Position;
+                    }
+                }
+                else if (model.Experiences.Count > experiences.Count)
+                {
+                    for (var j = 0; j < experiences.Count; j++)
+                    {
+                        experiences[j].CompanyName = model.Experiences[j].CompanyName;
+                        experiences[j].StartedAt = model.Experiences[j].StartedAt;
+                        experiences[j].FinishedAt = model.Experiences[j].FinishedAt;
+                        experiences[j].Position = model.Experiences[j].Position;
+                    }
+                    for (var k = experiences.Count; k < model.Experiences.Count; k++)
+                    {
+                        Experience experience = new Experience
+                        {
+                            CompanyName = model.Experiences[k].CompanyName,
+                            StartedAt = model.Experiences[k].StartedAt,
+                            FinishedAt = model.Experiences[k].FinishedAt,
+                            CandidateId = candidate.Id,
+                            Position = model.Experiences[k].Position
+                        };
+                        _context.Experiences.Add(experience);
+                    }
+
+                }
+                else if (experiences.Count > model.Experiences.Count)
+                {
+
+                    for (var j = 0; j < model.Experiences.Count; j++)
+                    {
+                        experiences[j].CompanyName = model.Experiences[j].CompanyName;
+                        experiences[j].StartedAt = model.Experiences[j].StartedAt;
+                        experiences[j].FinishedAt = model.Experiences[j].FinishedAt;
+                        experiences[j].CandidateId = candidate.Id;
+                        experiences[j].Position = model.Experiences[j].Position;
+                    }
+                    for (var t = model.Experiences.Count; t < experiences.Count; t++)
+                    {
+                        _context.Experiences.Remove(experiences[t]);
+                    }
+
                 }
 
             }
-            else if (experiences.Count > model.Experiences.Count)
+            else if (model.Experiences == null)
             {
-                for (var j = 0; j < model.Experiences.Count; j++)
-                {
-                    experiences[j].CompanyName = model.Experiences[j].CompanyName;
-                    experiences[j].StartedAt = model.Experiences[j].StartedAt;
-                    experiences[j].FinishedAt = model.Experiences[j].FinishedAt;
-                    experiences[j].CandidateId = candidate.Id;
-                    experiences[j].Position = model.Experiences[j].Position;
-                }
-                for (var t = model.Experiences.Count; t < experiences.Count; t++)
+                for (var t = 0; t < experiences.Count; t++)
                 {
                     _context.Experiences.Remove(experiences[t]);
                 }
-
             }
 
+            //Educations of resume
             var educations = _context.Educations.Where(e => e.CandidateId == _auth.User.Candidate.Id).ToList();
-
-            if (model.Educations.Count == educations.Count)
+            if (model.Educations != null)
             {
-                for (var j = 0; j < educations.Count; j++)
+                if (model.Educations.Count == educations.Count)
                 {
-                    educations[j].SchoolName = model.Educations[j].SchoolName;
-                    educations[j].StartedAt = model.Educations[j].StartedAt;
-                    educations[j].FinishedAt = model.Educations[j].FinishedAt;
-                    educations[j].CandidateId = candidate.Id;
-                    educations[j].Qualification = model.Educations[j].Qualification;
-                    educations[j].University = model.Educations[j].University;
-                }
-            }
-            else if (model.Educations.Count > educations.Count)
-            {
-                for (var j = 0; j < educations.Count; j++)
-                {
-                    educations[j].SchoolName = model.Educations[j].SchoolName;
-                    educations[j].StartedAt = model.Educations[j].StartedAt;
-                    educations[j].FinishedAt = model.Educations[j].FinishedAt;
-                    educations[j].Qualification = model.Educations[j].Qualification;
-                    educations[j].University = model.Educations[j].University;
-                }
-                for (var k = educations.Count; k < model.Educations.Count; k++)
-                {
-                    Education education = new Education
+                    for (var j = 0; j < educations.Count; j++)
                     {
-                        SchoolName = model.Educations[k].SchoolName,
-                        StartedAt = model.Educations[k].StartedAt,
-                        FinishedAt = model.Educations[k].FinishedAt,
-                        CandidateId = candidate.Id,
-                        Qualification = model.Educations[k].Qualification,
-                        University = model.Educations[k].University,
-                    };
-                    _context.Add(education);
+                        educations[j].SchoolName = model.Educations[j].SchoolName;
+                        educations[j].StartedAt = model.Educations[j].StartedAt;
+                        educations[j].FinishedAt = model.Educations[j].FinishedAt;
+                        educations[j].CandidateId = candidate.Id;
+                        educations[j].Qualification = model.Educations[j].Qualification;
+                        educations[j].University = model.Educations[j].University;
+                    }
                 }
-
-            }
-            else if(educations.Count > model.Educations.Count)
-            {
-                for (var j = 0; j < model.Educations.Count; j++)
+                else if (model.Educations.Count > educations.Count)
                 {
-                    educations[j].SchoolName = model.Educations[j].SchoolName;
-                    educations[j].StartedAt = model.Educations[j].StartedAt;
-                    educations[j].FinishedAt = model.Educations[j].FinishedAt;
-                    educations[j].CandidateId = candidate.Id;
-                    educations[j].Qualification = model.Educations[j].Qualification;
-                    educations[j].University = model.Educations[j].University;
+                    for (var j = 0; j < educations.Count; j++)
+                    {
+                        educations[j].SchoolName = model.Educations[j].SchoolName;
+                        educations[j].StartedAt = model.Educations[j].StartedAt;
+                        educations[j].FinishedAt = model.Educations[j].FinishedAt;
+                        educations[j].Qualification = model.Educations[j].Qualification;
+                        educations[j].University = model.Educations[j].University;
+                    }
+                    for (var k = educations.Count; k < model.Educations.Count; k++)
+                    {
+                        Education education = new Education
+                        {
+                            SchoolName = model.Educations[k].SchoolName,
+                            StartedAt = model.Educations[k].StartedAt,
+                            FinishedAt = model.Educations[k].FinishedAt,
+                            CandidateId = candidate.Id,
+                            Qualification = model.Educations[k].Qualification,
+                            University = model.Educations[k].University,
+                        };
+                        _context.Add(education);
+                    }
+
                 }
-                for (var t = model.Educations.Count; t<educations.Count; t++)
+                else if (educations.Count > model.Educations.Count)
+                {
+                    for (var j = 0; j < model.Educations.Count; j++)
+                    {
+                        educations[j].SchoolName = model.Educations[j].SchoolName;
+                        educations[j].StartedAt = model.Educations[j].StartedAt;
+                        educations[j].FinishedAt = model.Educations[j].FinishedAt;
+                        educations[j].CandidateId = candidate.Id;
+                        educations[j].Qualification = model.Educations[j].Qualification;
+                        educations[j].University = model.Educations[j].University;
+                    }
+                    for (var t = model.Educations.Count; t < educations.Count; t++)
+                    {
+                        _context.Educations.Remove(educations[t]);
+                    }
+
+                }
+            }
+            else if (model.Educations == null)
+            {
+                for (var t = 0; t < educations.Count; t++)
                 {
                     _context.Educations.Remove(educations[t]);
                 }
-
             }
 
             _context.SaveChanges();

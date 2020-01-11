@@ -12,14 +12,14 @@ using Rejoin.ViewModels;
 
 namespace Rejoin.Controllers
 {
-    public class CompanyDashboardController : Controller
+    public class CompanyDashboardController : BaseController
     {
         private readonly RejionDBContext _context;
         private readonly IAuth _auth;
         private readonly IFileManager _fileManager;
         private readonly IWebHostEnvironment _env;
 
-        public CompanyDashboardController(IAuth auth, RejionDBContext context, IWebHostEnvironment env, IFileManager fileManager)
+        public CompanyDashboardController(IAuth auth, RejionDBContext context, IWebHostEnvironment env, IFileManager fileManager):base(context)
         {
             _auth = auth;
             _env = env;

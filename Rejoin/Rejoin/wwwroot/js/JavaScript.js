@@ -1,4 +1,20 @@
 ﻿$(document).ready(function () {
+ 
+    $(".toggle-jobs").click((e) => {
+        if ($(".toggle-jobs").hasClass("show-more-jobs")) {
+            $(".jobs-count").removeClass("d-none");
+            $(".toggle-jobs").html("Daha az göstər");
+            $(".toggle-jobs").addClass("show-less-jobs");
+            $(".toggle-jobs").removeClass("show-more-jobs");
+        } else if ($(".toggle-jobs").hasClass("show-less-jobs")) {
+            $(".jobs-count").addClass("d-none");
+            $(".toggle-jobs").html("Daha çox göstər");
+            $(".toggle-jobs").addClass("show-more-jobs");
+            $(".toggle-jobs").removeClass("show-less-jobs");
+        }
+    })
+
+
 
     removingExp();
     removingEdu();

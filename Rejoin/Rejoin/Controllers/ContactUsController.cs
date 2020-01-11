@@ -10,10 +10,10 @@ using Rejoin.Data;
 
 namespace Rejoin.Controllers
 {
-    public class ContactUsController : Controller
+    public class ContactUsController : BaseController
     {
         private readonly RejionDBContext _context;
-        public ContactUsController(RejionDBContext context)
+        public ContactUsController(RejionDBContext context):base(context)
         {
             _context = context;
         }

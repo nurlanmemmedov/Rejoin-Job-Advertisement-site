@@ -12,13 +12,13 @@ using Rejoin.ViewModels;
 
 namespace Rejoin.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly RejionDBContext _context;
 
         private readonly IAuth _auth;
 
-        public AccountController(RejionDBContext context, IAuth auth)
+        public AccountController(RejionDBContext context, IAuth auth) : base(context)
         {
             _context = context;
             _auth = auth;
