@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Rejoin.Data;
@@ -26,8 +24,16 @@ namespace Rejoin.Controllers
             _fileManager = fileManager;
             _context = context;
         }
+
+        //returns the view for dashboard of company
         public IActionResult Index()
         {
+            if (_auth.User == null || _auth.User.UserType == UserType.Employee)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+            }
+
+            //to show the breadcrumb of company dashboard
             BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
             {
                 Title = "Profilim",
@@ -40,10 +46,12 @@ namespace Rejoin.Controllers
             return View();
         }
 
+
+        //returns modal to create company profile if company doesnt have company profile
         [HttpPost]
         public JsonResult CreateCompany(Company company)
         {
-
+            //upload the picture to company profile
             if (company.Upload != null)
             {
                 try
@@ -53,6 +61,7 @@ namespace Rejoin.Controllers
                 }
                 catch(Exception e)
                 {
+                    //if upload is not image or is greater than 1 mb returns bad request
                     return Json(new
                     {
                         status = "OK",
@@ -62,6 +71,8 @@ namespace Rejoin.Controllers
                     }) ; 
                 }
             }
+
+
             company.UserId = _auth.User.Id;
             _context.Companies.Add(company);
             _context.SaveChanges();
@@ -76,6 +87,8 @@ namespace Rejoin.Controllers
 
         }
 
+
+        //creates the company profile
         [HttpPost]
         public IActionResult CreateCompanyProfil(CompanyViewModel model)
         {
@@ -107,6 +120,7 @@ namespace Rejoin.Controllers
                 return RedirectToAction("index", "companydashboard");
             }
 
+            //to show breadcrumb of companydashboard
             BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
             {
                 Title = "Profilim",
@@ -120,6 +134,8 @@ namespace Rejoin.Controllers
             return View("~/Views/CompanyDashboard/index.cshtml");
         }
 
+
+        //edit the company profile
         public IActionResult EditCompany(CompanyViewModel model)
         {
             Company company = _context.Companies.FirstOrDefault(c => c.UserId == _auth.User.Id);
@@ -135,10 +151,9 @@ namespace Rejoin.Controllers
 
                 }
             }
+
             if (ModelState.IsValid)
             {
-
-
                 company.Name = model.Name;
                 company.Email = model.Email;
                 company.Website = model.Website;
@@ -151,6 +166,7 @@ namespace Rejoin.Controllers
                 return RedirectToAction("index", "companydashboard");
             }
 
+            //to show the breadcrumb of companydashboard
             BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
             {
                 Title = "Profilim",

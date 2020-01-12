@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using Rejoin.Data;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Rejoin.Injections
 {
@@ -15,6 +13,7 @@ namespace Rejoin.Injections
         string Upload(IFormFile fileç, string allowedTypes = "image/png|image/jpeg|image/gif",
                                    int maxSize = 1024);
     }
+    //file manager for uploads
     public class FileManager : IFileManager
     {
         private readonly RejionDBContext _context;
@@ -29,7 +28,7 @@ namespace Rejoin.Injections
             _env = env;
         }
 
-
+        //path where images will upload
         public string UploadPath
         {
             get
@@ -38,6 +37,8 @@ namespace Rejoin.Injections
                 return UploadPath;
             }
         }
+
+        //uploading image
         public string Upload(IFormFile file, string allowedTypes = "image/png|image/jpeg|image/gif",
                                    int maxSize = 1024)
         {

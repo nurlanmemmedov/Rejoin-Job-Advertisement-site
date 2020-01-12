@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Rejoin.Models;
 
 namespace Rejoin.Data
@@ -14,6 +10,7 @@ namespace Rejoin.Data
 
         }
 
+        //creating tables in database
         public DbSet<User> Users { get; set; }
         public DbSet<Candidate> Candidates { get; set; }
         public DbSet<Category> Categories { get; set; }

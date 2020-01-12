@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Rejoin.ViewModels;
 using Rejoin.Models;
 using Rejoin.Injections;
 using Rejoin.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
-using System.IO;
 
 namespace Rejoin.Controllers
 {
@@ -19,7 +16,9 @@ namespace Rejoin.Controllers
         private readonly IAuth _auth;
         private readonly IWebHostEnvironment _env;
         private readonly IFileManager _fileManager;
-        public ResumeController(RejionDBContext context, IAuth auth, IWebHostEnvironment env, IFileManager fileManager):base(context)
+
+        //constructor of resumecontroller
+        public ResumeController(RejionDBContext context, IAuth auth, IWebHostEnvironment env, IFileManager fileManager) : base(context)
         {
             _context = context;
             _auth = auth;
@@ -27,28 +26,39 @@ namespace Rejoin.Controllers
             _fileManager = fileManager;
         }
 
+        //returns cv page
         public IActionResult Index()
         {
+            if (_auth.User == null)
+            {
+                return RedirectToAction("register", "account");
+            }
+
+            if (_auth.User.UserType == UserType.Company)
+            {
+                return View("~/Views/Shared/NotFound.cshtml");
+            }
+
+            //to show the breadcrumb of CV page
             BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
             {
-                Title = "CV-im",
+                Title = "CV",
                 Parents = new Dictionary<string, List<string>>()
                 {
                     { "Ana səhifə", new List<string>() { "home", "index" } },
                 }
             };
             ViewBag.BreadCrumb = breadCrumb;
-            if (_auth.User == null)
-            {
-                return RedirectToAction("register", "account");
-            }
             return View();
         }
 
+        //create resume for employees
         [HttpPost]
         public JsonResult CreateResume(ResumeViewModel model)
         {
             Candidate candidate = new Candidate();
+
+            //to upload the browsing image 
             if (model.Upload != null)
             {
                 try
@@ -68,7 +78,7 @@ namespace Rejoin.Controllers
                 }
             }
 
-
+            //information of resume
             candidate.Name = model.Name;
             candidate.Lastname = model.Lastname;
             candidate.Email = model.Email;
@@ -81,6 +91,7 @@ namespace Rejoin.Controllers
             _context.Candidates.Add(candidate);
             _context.SaveChanges();
 
+            //if experiences of resume not null create the experience model 
             if (model.Experiences != null)
             {
                 for (var i = 0; i < model.Experiences.Count; i++)
@@ -95,10 +106,10 @@ namespace Rejoin.Controllers
                         Position = model.Experiences[i].Position,
                     };
                     _context.Experiences.Add(experience);
-                    _context.SaveChanges();
                 }
             }
 
+            //if educations of resume not null create the education model 
             if (model.Educations != null)
             {
                 for (var i = 0; i < model.Educations.Count; i++)
@@ -113,9 +124,11 @@ namespace Rejoin.Controllers
                         Qualification = model.Educations[i].Qualification
                     };
                     _context.Educations.Add(education);
-                    _context.SaveChanges();
                 }
             }
+
+            _context.SaveChanges();
+
             return Json(new
             {
                 status = "OK",
@@ -164,8 +177,9 @@ namespace Rejoin.Controllers
             candidate.PersonalSkill = model.PersonalSkill;
             _context.SaveChanges();
 
-            //Experiences of resume
+            
             var experiences = _context.Experiences.Where(e => e.CandidateId == _auth.User.Candidate.Id).ToList();
+            //if experiences of resume not null create the experience model 
             if (model.Experiences != null)
             {
                 if (model.Experiences.Count == experiences.Count)
@@ -228,9 +242,9 @@ namespace Rejoin.Controllers
                     _context.Experiences.Remove(experiences[t]);
                 }
             }
-
-            //Educations of resume
+            
             var educations = _context.Educations.Where(e => e.CandidateId == _auth.User.Candidate.Id).ToList();
+            //if educations of resume not null create the education model 
             if (model.Educations != null)
             {
                 if (model.Educations.Count == educations.Count)

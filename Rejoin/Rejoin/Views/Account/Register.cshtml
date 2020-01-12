@@ -13,24 +13,24 @@
                         <form class="card-body" asp-controller="account" asp-action="registeruser" method="post">
                             <div class="user-type">
                                 <select asp-for="UserType" class="form-control custom-select select2-show-search" data-placeholder="choose type">
-                                    <option value="Employee">Employee</option>
-                                    <option value="Company">Company</option>
+                                    <option value="Employee">İşçi</option>
+                                    <option value="Company">Şirkət</option>
                                 </select>
                             </div>
                             <div class="name">
                                 <label>Ad Soyad</label>
-                                <input asp-for="Fullname" placeholder="Ad Soyad">
+                                <input asp-for="Fullname" placeholder="Ad Soyad" required>
                                 <span class="text-danger" asp-validation-for="Fullname"></span>
                             </div>
 
                             <div class="mail">
                                 <label>E-poçt</label>
-                                <input asp-for="Email" placeholder="E-poçt">
+                                <input asp-for="Email" type="email" placeholder="E-poçt" required>
                                 <span class="text-danger" asp-validation-for="Email"></span>
                             </div>
                             <div class="passwd">
                                 <label>Şifrə</label>
-                                <input asp-for="Password" placeholder="Şifrə">
+                                <input asp-for="Password" placeholder="Şifrə" required>
                                 <span class="text-danger" asp-validation-for="Password"></span>
                             </div>
                             <div class="submit">

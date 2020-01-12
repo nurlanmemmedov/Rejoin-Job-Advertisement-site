@@ -181,7 +181,7 @@
             <div class="container">
                 <a id="horizontal-navtoggle" class="animated-arrow"><span></span></a>
                 <span class="smllogo">
-                    <a href="index.html" class="d-flex">
+                    <a asp-controller="home" asp-action="index" class="d-flex">
                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="404.000000pt" height="361.000000pt" viewBox="0 0 404.000000 361.000000"
                              preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,361.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -206,7 +206,7 @@
         <div class="horizontal-main clearfix">
             <div class="horizontal-mainwrapper container clearfix">
                 <div class="desktoplogo">
-                    <a href="index.html" class="d-flex">
+                    <a asp-controller="home" asp-action="index" class="d-flex">
                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="404.000000pt" height="361.000000pt" viewBox="0 0 404.000000 361.000000"
                              preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,361.000000) scale(0.100000,-0.100000)" fill="#000000" stroke="none">
@@ -344,7 +344,7 @@
             <div class="footer-main">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-4 col-md-12">
+                        <div class="col-lg-3 col-md-12">
                             <h6>İş kateqoriyaları</h6>
                             <hr class="deep-purple  accent-2 mb-4 mt-0 d-inline-block mx-auto">
                             <ul class="list-unstyled mb-0">
@@ -358,17 +358,17 @@
                                 <li><a>Başqaları</a></li>
                             </ul>
                         </div>
-                        <div class="col-lg-4 col-md-12">
+                        <div class="col-lg-3 col-md-12">
                             <h6>İş tipləri Type</h6>
                             <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto">
                             <ul class="list-unstyled mb-0">
                                 <li><a>Evdən işlə</a></li>
-                                <li><a>Internship</a></li>
-                                <li><a>Part time</a></li>
-                                <li><a>Full time</a></li>
+                                <li><a>Təcrübəçi</a></li>
+                                <li><a>Yarım iş günü</a></li>
+                                <li><a>Tam iş günü</a></li>
                             </ul>
                         </div>
-                        <div class="col-lg-4 col-md-12">
+                        <div class="col-lg-3 col-md-12">
                             <h6>Əsas səhifələr</h6>
                             <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto">
                             <ul class="list-unstyled mb-0">
@@ -388,13 +388,27 @@
                                 </li>
                             </ul>
                         </div>
+                        <div class="col-lg-3 col-md-12">
+                            <h6>Bizimlə əlaqə</h6>
+                            <hr class="deep-purple accent-2 mb-4 mt-0 d-inline-block mx-auto">
+                            <ul class="list-unstyled mb-0">
+                                <li><a><i class="fa fa-envelope"></i> nurlanmammadov6262@gmail.com</a></li>
+                                <li>
+                                    <a><i class="fab fa-instagram"></i> nurlanmammadov</a>
+                                </li>
+                                <li><a><i class="fab fa-whatsapp"></i> +994 77 520 25 62</a></li>
+                                <li>
+                                    <a><i class="fab fa-facebook"></i> nurlanmemmedov</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="text-white-50 border-top p-0">
                 <div class="container">
                     <div class="row d-flex">
-                        <div class="col-lg-8 col-sm-12  mt-2 mb-2 text-center ">
+                        <div class="col-lg-12 col-sm-12  mt-2 mb-2 text-center ">
                             Copyright © 2019 <a href="index.html" class="fs-14 text-white">rejoin</a>. Designed by <a class="fs-14 text-white">Mammadoff</a> All rights reserved.
                         </div>
                     </div>
@@ -487,6 +501,7 @@
         <script src="~/plugins/notify/notify.min.js"></script>
         <script src="~/js/JavaScript.js">
         </script>
+
 </body>
 
 <!-- Mirrored from www.spruko.com/demo/rejoin/html/index4.html by HTTrack Website Copier/3.x [XR&CO'2014], Sun, 15 Dec 2019 09:31:08 GMT -->

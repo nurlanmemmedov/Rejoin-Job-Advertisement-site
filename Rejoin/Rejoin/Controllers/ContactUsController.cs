@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Rejoin.ViewModels;
 using Rejoin.Models;
@@ -13,12 +10,17 @@ namespace Rejoin.Controllers
     public class ContactUsController : BaseController
     {
         private readonly RejionDBContext _context;
+        
+        //constructor of contactuscontroller
         public ContactUsController(RejionDBContext context):base(context)
         {
             _context = context;
         }
+
+        //returns the conact page
         public IActionResult Index()
         {
+            //to show the breadcrumb of contact page
             BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
             {
                 Title = "Əlaqə",
@@ -31,6 +33,7 @@ namespace Rejoin.Controllers
             return View();
         }
 
+        //send message to ceo
         public IActionResult SendMessage(ContactViewModel model)
         {
             if (ModelState.IsValid)
@@ -45,6 +48,8 @@ namespace Rejoin.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("index","home");
             }
+
+            //to show the breadcrumb of home page after sending message
             BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
             {
                 Title = "Əlaqə",

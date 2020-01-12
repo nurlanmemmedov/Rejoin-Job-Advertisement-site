@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Rejoin.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Rejoin.Injections
 {
@@ -11,6 +8,8 @@ namespace Rejoin.Injections
     {
         string Time(DateTime createdAt);
     }
+
+    //dependency injection for showing relative time
     public class RelativeTime: IRelativeTime
     {
         private readonly RejionDBContext _context;

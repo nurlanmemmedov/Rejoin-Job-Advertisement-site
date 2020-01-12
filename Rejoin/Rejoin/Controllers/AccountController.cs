@@ -18,6 +18,8 @@ namespace Rejoin.Controllers
 
         private readonly IAuth _auth;
 
+
+        //constructor of account controller
         public AccountController(RejionDBContext context, IAuth auth) : base(context)
         {
             _context = context;
@@ -25,8 +27,11 @@ namespace Rejoin.Controllers
         }
 
 
+        //returns login page
         public IActionResult Login()
         {
+
+            //show breadcrumb of login page
             BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
             {
                 Title = "Daxil ol",
@@ -39,6 +44,8 @@ namespace Rejoin.Controllers
             return View();
         }
 
+
+        //to Login user 
         [HttpPost]
         public IActionResult LoginUser(LoginViewModel Login)
         {
@@ -50,8 +57,17 @@ namespace Rejoin.Controllers
 
                 if (user != null)
                 {
+
                     if (Crypto.VerifyHashedPassword(user.Password, Login.Password))
                     {
+                        if (_auth.User != null)
+                        {
+                            User loggedUser = _context.Users.Find(_auth.User.Id);
+                            loggedUser.Token = null;
+                            _context.SaveChanges();
+                            Response.Cookies.Delete("token");
+                        }
+
                         user.Token = Guid.NewGuid().ToString();
                         _context.SaveChanges();
 
@@ -61,12 +77,15 @@ namespace Rejoin.Controllers
                             HttpOnly = true
                         });
 
+                        //redirect to homepage
                         return RedirectToAction("index", "home");
                     }
                 }
 
                 ModelState.AddModelError("Password", "e-poçt və ya şifrə yanlışdır");
             }
+
+            //returns  breadcrumb of Login page
             BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
             {
                 Title = "Daxil ol",
@@ -81,8 +100,11 @@ namespace Rejoin.Controllers
         }
 
 
+        //returns register page
         public IActionResult Register()
         {
+
+            //show breadcrumb of register page
             BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
             {
                 Title = "Qeydiyyatdan keç",
@@ -95,6 +117,8 @@ namespace Rejoin.Controllers
             return View();
         }
 
+
+        //to register user
         [HttpPost]
         public IActionResult RegisterUser(RegisterViewModel Register)
         {
@@ -103,6 +127,14 @@ namespace Rejoin.Controllers
             {
                 if (!_context.Users.Any(u => u.Email == Register.Email))
                 {
+                    if (_auth.User != null)
+                    {
+                        User loggedUser = _context.Users.Find(_auth.User.Id);
+                        loggedUser.Token = null;
+                        _context.SaveChanges();
+                        Response.Cookies.Delete("token");
+                    }
+
                     var user = new User
                     {
                         Fullname = Register.Fullname,
@@ -119,11 +151,14 @@ namespace Rejoin.Controllers
                     });
 
                     _context.Users.Add(user);
+
                     _context.SaveChanges();
                     return RedirectToAction("index", "home");
                 }
                 ModelState.AddModelError("Email", "Bu e-poçt artıq qeydiyyatdan keçib");
             }
+            
+            //show breadcrumb register page
             BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
             {
                 Title = "Qeydiyyatdan keç",
@@ -138,15 +173,20 @@ namespace Rejoin.Controllers
 
         }
 
+
+        //to logout user
         [TypeFilter(typeof(CheckAuth))]
         public IActionResult Logout()
         {
-            User user = _context.Users.Find(_auth.User.Id);
-            user.Token = null;
-            _context.SaveChanges();
+            if (_auth.User != null)
+            {
+                User loggedUser = _context.Users.Find(_auth.User.Id);
+                loggedUser.Token = null;
+                _context.SaveChanges();
+                Response.Cookies.Delete("token");
+            }
 
-            Response.Cookies.Delete("token");
-
+            //redirect to login page
             return RedirectToAction("login" ,"account");
         }
     }

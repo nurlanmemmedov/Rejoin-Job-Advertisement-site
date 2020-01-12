@@ -17,8 +17,10 @@ namespace Rejoin.Controllers
             _context = context;
         }
 
+        //returns about page
         public IActionResult Index()
         {
+            //to show breadcrumb of about page
             BreadCrumbViewModel breadCrumb = new BreadCrumbViewModel
             {
                 Title = "Haqqımızda",
@@ -28,6 +30,8 @@ namespace Rejoin.Controllers
                     }
             };
             ViewBag.BreadCrumb = breadCrumb;
+            
+            //data for statistics
             ViewBag.Users = _context.Users.ToList();
             ViewBag.Candidates = _context.Candidates.ToList();
             ViewBag.Companies = _context.Companies.ToList();

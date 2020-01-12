@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
- 
+
+    //show more jobs or less jobs when click button
     $(".toggle-jobs").click((e) => {
         if ($(".toggle-jobs").hasClass("show-more-jobs")) {
             $(".jobs-count").removeClass("d-none");
@@ -14,14 +15,15 @@
         }
     })
 
-
-
+    //remove the 'experience card' item
     removingExp();
+
+    //remove the 'education card' item
     removingEdu();
+
+    //when click button create resume for user
     $(document).on("click", ".finish-resume", function (e) {
-
         e.preventDefault();
-
         var educations = new Array();
         $(".card-edu").each((index, item) => {
             educations.push({
@@ -32,7 +34,6 @@
                 University: $(item).find('select[name="resume-edu-uni"]').val(),
             })
         })
-
 
         var experiences = new Array();
         $(".card-exp").each((index, item) => {
@@ -104,10 +105,9 @@
         })
     })
 
+    //when click button edit user's resume
     $(document).on("click", ".edit-resume", function (e) {
-
         e.preventDefault();
-
         var educations = new Array();
         $(".card-edu").each((index, item) => {
             educations.push({
@@ -192,23 +192,9 @@
         })
     })
 
-    $(".post-job").click(function (e) {
-        $.ajax({
-            url: "/SubmitJob/Index",
-            type: "get",
-            dataType: "html",
-
-            success: function (response) {
-                $("#companyModal").html(response)
-                $('#companyModal').modal('show');
-            }
-        })
-
-    })
-
+    //show a modal for applying job
     $(".btn-apply").click(function (e) {
         e.preventDefault();
-
         let FormUrl = $(this).attr("href");
         $.ajax({
             url: FormUrl,
@@ -222,50 +208,7 @@
         })
     })
 
-    $(document).on("click", ".create-company", function (e) {
-        e.preventDefault();
-        var files = $("input[name=companyphoto]")[0].files;
-        var formdata = new FormData();
-        formdata.append("Name", $("input[name=companyname]").val());
-        formdata.append("Email", $("input[name=companyemail]").val());
-        formdata.append("Phone", $("input[name=companyphone]").val());
-        formdata.append("Location", $("input[name=companyaddress]").val());
-        formdata.append("Website", $("input[name=companywebsite]").val());
-        formdata.append("Info", $("textarea[name=companyinfo]").val());
-        if (files.length > 0) {
-            formdata.append("Upload", files[0], files[0].name);
-        }
-
-        $.ajax({
-            url: "/CompanyDashboard/CreateCompany",
-            type: "post",
-            dataType: "json",
-            data: formdata,
-            processData: false,
-            contentType: false,
-            beforeSend: function () {
-                $("#global-loader").show();
-            },
-
-            success: function (response) {
-                if (response.statusCode === 500) {
-                    $.notify("Məlumatları düzgün daxil etdiyinizdən əmin olun", { timeOut: 1000 });
-                } else {
-                    $.notify('Şirkət profili yaradıldı artıq iş elanı verə bilərsiniz', "success", { timeOut: 900 });
-                    location.reload()
-                }
-
-            },
-            error: function (error) {
-                $.notify("Məlumatları düzgün daxil etdiyinizdən əmin olun", { timeOut: 1000 });
-            },
-            complete: function () {
-                $("#global-loader").hide();
-            }
-        })
-    })
-
-
+    //apply job, when click button
     $(document).on("click", ".apply-job", function (e) {
         var Applydata = new FormData();
         Applydata.append("WhyYou", $("textarea[name=why-you]").val())
@@ -295,7 +238,63 @@
         })
     })
 
+    //show a modal for creating company if company profile of user is null
+    $(".post-job").click(function (e) {
+        $.ajax({
+            url: "/SubmitJob/Index",
+            type: "get",
+            dataType: "html",
 
+            success: function (response) {
+                $("#companyModal").html(response)
+                $('#companyModal').modal('show');
+            }
+        })
+
+    })
+
+    //when click button on modal, create company profile 
+    $(document).on("click", ".create-company", function (e) {
+        e.preventDefault();
+        var files = $("input[name=companyphoto]")[0].files;
+        var formdata = new FormData();
+        formdata.append("Name", $("input[name=companyname]").val());
+        formdata.append("Email", $("input[name=companyemail]").val());
+        formdata.append("Phone", $("input[name=companyphone]").val());
+        formdata.append("Location", $("input[name=companyaddress]").val());
+        formdata.append("Website", $("input[name=companywebsite]").val());
+        formdata.append("Info", $("textarea[name=companyinfo]").val());
+        if (files.length > 0) {
+            formdata.append("Upload", files[0], files[0].name);
+        }
+        $.ajax({
+            url: "/CompanyDashboard/CreateCompany",
+            type: "post",
+            dataType: "json",
+            data: formdata,
+            processData: false,
+            contentType: false,
+            beforeSend: function () {
+                $("#global-loader").show();
+            },
+            success: function (response) {
+                if (response.statusCode === 500) {
+                    $.notify("Məlumatları düzgün daxil etdiyinizdən əmin olun", { timeOut: 1000 });
+                } else {
+                    $.notify('Şirkət profili yaradıldı artıq iş elanı verə bilərsiniz', "success", { timeOut: 900 });
+                    location.reload()
+                }
+            },
+            error: function (error) {
+                $.notify("Məlumatları düzgün daxil etdiyinizdən əmin olun", { timeOut: 1000 });
+            },
+            complete: function () {
+                $("#global-loader").hide();
+            }
+        })
+    })
+
+    //add one another education card, when click button
     $(".add-another-edu").click((e) => {
 
         $(".add-another-edu").parent().before(`     <div class="card card-edu">
@@ -303,7 +302,7 @@
                             <h3 class="card-title">Təhsili</h3>
 
                             <div class="card-options">
-                                <a class="btn btn-light btn-sm remove-edu" href="#"><i class="fas fa-minus-circle"></i>Sil</a>
+                                <a class="btn btn-light btn-sm remove-edu" ><i class="fas fa-minus-circle"></i>Sil</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -321,7 +320,6 @@
                             <div class="form-group">
                                 <label class="form-label text-dark">Universitet</label>
                                 <select name="resume-edu-uni" class="form-control custom-select select2-show-search" data-placeholder="Universitet seç">
-                                    <option value="Universitet">Universitet</option>
                                     <option value="Bakı Dövlət Universiteti">Bakı Dövlət Universiteti</option>
                                     <option value="Azərbaycan Dövlət Neft və Sənaye Universiteti">Azərbaycan Dövlət Neft və Sənaye Universiteti</option>
                                     <option value="Azərbaycan Dövlət İqtisad Universiteti">Azərbaycan Dövlət İqtisad Universiteti</option>
@@ -336,7 +334,6 @@
                                     <div class="col-6">
                                         <label class="form-label text-dark">Başlama tarixi</label>
                                         <select name="resume-edu-since" class="form-control custom-select select2-show-search" data-placeholder="Başlama tarixi seç">
-                                            <option value="0">Başlama tarixi</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
@@ -372,7 +369,6 @@
                                     <div class="col-6">
                                         <label class="form-label text-dark">Bitiş tarixi</label>
                                         <select name="resume-edu-till" class="form-control custom-select select2-show-search" data-placeholder="Bitiş tarixi seç">
-                                            <option value="0">Bitiş tarixi</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
@@ -413,15 +409,14 @@
         removingEdu();
     })
 
-
-
+    //add one another experience card , when click button
     $(".add-another-exp").click((e) => {
         $(".add-another-exp").parent().before(` <div class="card card-exp">
                         <div class="card-header ">
                             <h3 class="card-title">İş təcrübəsi</h3>
 
                             <div class="card-options">
-                                <a class="btn btn-light btn-sm remove-exp" href="#"><i class="fa fa-plus"></i> Sil</a>
+                                <a class="btn btn-light btn-sm remove-exp"><i class="fa fa-plus"></i> Sil</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -440,7 +435,6 @@
                                     <div class="col-6">
                                         <label class="form-label text-dark">Başlama tarixi</label>
                                         <select name="resume-exp-since" class="form-control custom-select select2-show-search" data-placeholder="Başlama tarixi seç">
-                                            <option value="0">Başlama tarixi</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
@@ -476,7 +470,6 @@
                                     <div class="col-6">
                                         <label class="form-label text-dark">Bitiş tarixi</label>
                                         <select name="resume-exp-till" class="form-control custom-select select2-show-search" data-placeholder="Bitiş tarixi seç">
-                                            <option value="0">Bitiş tarixi</option>
                                             <option value="2019">2019</option>
                                             <option value="2018">2018</option>
                                             <option value="2017">2017</option>
@@ -516,8 +509,7 @@
         removingExp()
     })
 
-
-
+    //remove the 'Education card' item
     function removingEdu() {
         $(".remove-edu").each((index, item) => {
             $(item).click((e) => {
@@ -525,6 +517,8 @@
             })
         })
     }
+
+    //remove the 'experience card' item
     function removingExp() {
         $(".remove-exp").each((index, item) => {
             $(item).click((e) => {
@@ -532,7 +526,4 @@
             })
         })
     }
-
-
-
 });
