@@ -32,7 +32,7 @@ namespace Rejoin.Controllers
         {
             if (CategoryId != null)
             {
-                if (!_context.Categories.Any(j => j.Id == CategoryId))
+                if (!_context.Categories.Any(j => j.Id == CategoryId || CategoryId == 0))
                 {
                     return View("~/Views/Shared/NotFound.cshtml");
                 }

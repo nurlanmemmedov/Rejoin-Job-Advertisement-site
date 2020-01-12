@@ -25,7 +25,7 @@ namespace Rejoin.Controllers
             ViewBag.TopCandidates = _context.Candidates.OrderByDescending(c=>c.ExperienceTime).Take(12).ToList();
 
             //to shows data in statistic part
-            ViewBag.Categories = _context.Categories.Include("Jobs").ToList();
+            ViewBag.Categories = _context.Categories.Include(c=>c.Jobs).ToList();
             ViewBag.Users = _context.Users.ToList();
             ViewBag.Candidates = _context.Candidates.ToList();
             ViewBag.Companies = _context.Companies.ToList();

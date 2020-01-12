@@ -29,7 +29,7 @@
                             <p class="d-none d-md-block">səhifəmizdəki işlərdən özün üçün ən uyğunlarını gör</p>
                         </div>
                         <div class="search-background bg-transparent">
-                            <form class="form row no-gutters " method="post" enctype="multipart/form-data" asp-controller="searchjob" asp-action="index">
+                            <form class="form row no-gutters " method="get" enctype="multipart/form-data" asp-controller="searchjob" asp-action="index">
                                 <div class="form-group  col-xl-4 col-lg-3 col-md-12 mb-0 bg-white ">
                                     <input asp-for="KeyWord" type="text" class="form-control input-lg br-tr-md-0 br-br-md-0" id="text4" placeholder="İş adı yaz">
                                 </div>
@@ -49,7 +49,7 @@
                                     </select>
                                 </div>
                                 <div class="col-xl-2 col-lg-3 col-md-12 mb-0">
-                                    <button class="btn btn-lg btn-block btn-secondary br-tl-md-0 br-bl-md-0"><i class="fa fa-search mr-1"></i>Axtarış et</button>
+                                    <button class="btn btn-lg btn-block btn-secondary br-tl-md-0 br-bl-md-0" type="submit"><i class="fa fa-search mr-1"></i>Axtarış et</button>
                                 </div>
                             </form>
                         </div>
