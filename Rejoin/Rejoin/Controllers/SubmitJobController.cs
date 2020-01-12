@@ -105,7 +105,7 @@ namespace Rejoin.Controllers
                     MaxSalary = jobViewModel.MaxSalary,
                     MaxExperience = jobViewModel.MaxExperience,
                     MinExperience = jobViewModel.MinExperience,
-                    CategoryId = 1,
+                    CategoryId = jobViewModel.CategoryId,
                     CompanyId = _auth.User.Company.Id,
                     isActive = true
                 };
